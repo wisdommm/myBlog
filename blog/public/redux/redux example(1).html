@@ -1,0 +1,163 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Wisdommm</title>
+  <meta name="author" content="Wisdommm">
+  
+  <meta name="description" content="programmer,front to end">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+  <meta property="og:site_name" content="Wisdommm"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  <link href="/favicon.png" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Wisdommm" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">Wisdommm</a></h1>
+  <h2><a href="/">Welcome to my blog</a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div></header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="page">
+  
+  <div class="post-content">
+    <header>
+      
+      
+  
+    <h1 class="title"></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h1 id="redux-example-1"><a href="#redux-example-1" class="headerlink" title="redux example(1)"></a>redux example(1)</h1><p>最近在学习redux，看了不少相关的资料，发现这个<a href="http://cn.redux.js.org/docs/introduction/Examples.html" target="_blank" rel="external">官方教程</a>的一些例子还是很不错的，由浅入深各个档次都有，所以我稍微看了下，准备有时间的话将示例都自己弄懂，然后分别写篇详细的解读出来，由于是临时起意，所以今天先写第一篇吧。</p>
+<h2 id="counter-vanilla"><a href="#counter-vanilla" class="headerlink" title="counter-vanilla"></a>counter-vanilla</h2><p>这是redux中的第一个示例，也就是说是最简单的一个例子，不多说了，先看看代码吧。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div></pre></td><td class="code"><pre><div class="line">&lt;!DOCTYPE html&gt;</div><div class="line">&lt;html&gt;</div><div class="line">  &lt;head&gt;</div><div class="line">    &lt;title&gt;Redux basic example&lt;/title&gt;</div><div class="line">    &lt;script src=&quot;https://npmcdn.com/redux@latest/dist/redux.min.js&quot;&gt;&lt;/script&gt;</div><div class="line">  &lt;/head&gt;</div><div class="line">  &lt;body&gt;</div><div class="line">    &lt;div&gt;</div><div class="line">      &lt;p&gt;</div><div class="line">        Clicked: &lt;span id=&quot;value&quot;&gt;0&lt;/span&gt; times</div><div class="line">        &lt;button id=&quot;increment&quot;&gt;+&lt;/button&gt;</div><div class="line">        &lt;button id=&quot;decrement&quot;&gt;-&lt;/button&gt;</div><div class="line">        &lt;button id=&quot;incrementIfOdd&quot;&gt;Increment if odd&lt;/button&gt;</div><div class="line">        &lt;button id=&quot;incrementAsync&quot;&gt;Increment async&lt;/button&gt;</div><div class="line">      &lt;/p&gt;</div><div class="line">    &lt;/div&gt;</div><div class="line">    &lt;script&gt;</div><div class="line">      function counter(state, action) &#123;</div><div class="line">        if (typeof state === &apos;undefined&apos;) &#123;</div><div class="line">          return 0</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        switch (action.type) &#123;</div><div class="line">          case &apos;INCREMENT&apos;:</div><div class="line">            return state + 1</div><div class="line">          case &apos;DECREMENT&apos;:</div><div class="line">            return state - 1</div><div class="line">          default:</div><div class="line">            return state</div><div class="line">        &#125;</div><div class="line">      &#125;</div><div class="line"></div><div class="line">      var store = Redux.createStore(counter)</div><div class="line">      var valueEl = document.getElementById(&apos;value&apos;)</div><div class="line">      function render() &#123;</div><div class="line">        valueEl.innerHTML = store.getState().toString()</div><div class="line">      &#125;</div><div class="line"></div><div class="line">      render()</div><div class="line">      store.subscribe(render)</div><div class="line"></div><div class="line">      document.getElementById(&apos;increment&apos;)</div><div class="line">        .addEventListener(&apos;click&apos;, function () &#123;</div><div class="line">          store.dispatch(&#123; type: &apos;INCREMENT&apos; &#125;)</div><div class="line">        &#125;)</div><div class="line"></div><div class="line">      document.getElementById(&apos;decrement&apos;)</div><div class="line">        .addEventListener(&apos;click&apos;, function () &#123;</div><div class="line">          store.dispatch(&#123; type: &apos;DECREMENT&apos; &#125;)</div><div class="line">        &#125;)</div><div class="line"></div><div class="line">      document.getElementById(&apos;incrementIfOdd&apos;)</div><div class="line">        .addEventListener(&apos;click&apos;, function () &#123;</div><div class="line">          if (store.getState() % 2 !== 0) &#123;</div><div class="line">            store.dispatch(&#123; type: &apos;INCREMENT&apos; &#125;)</div><div class="line">          &#125;</div><div class="line">        &#125;)</div><div class="line"></div><div class="line">      document.getElementById(&apos;incrementAsync&apos;)</div><div class="line">        .addEventListener(&apos;click&apos;, function () &#123;</div><div class="line">          setTimeout(function () &#123;</div><div class="line">            store.dispatch(&#123; type: &apos;INCREMENT&apos; &#125;)</div><div class="line">          &#125;, 1000)</div><div class="line">        &#125;)</div><div class="line">    &lt;/script&gt;</div><div class="line">  &lt;/body&gt;</div><div class="line">&lt;/html&gt;</div></pre></td></tr></table></figure>
+<p>如上面代码所示，一共也就几十行，而且就这一个文件，毕竟是最基础最简单的一个示例，所以也没有什么文件结构和包依赖，以及到node服务器等，，唯一的一个依赖也通过了script标签引入。<br>不废话了，下面开始讲解一下代码吧。<br><br>dom结构就很简单吧，主要就是一个span标签包裹一个数字，然后就是几个button按钮，点击按钮的时候会让span标签里的数字增一、减一、奇数加一变为偶数、异步加一（也就是加个定时器延迟）。<br><br>下面来看script标签里的代码，也就是实现逻辑和功能的主要代码。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">function counter(state, action) &#123;</div><div class="line">	if (typeof state === &apos;undefined&apos;) &#123;</div><div class="line">		return 0</div><div class="line">	&#125;</div><div class="line">	switch (action.type) &#123;</div><div class="line">		case &apos;INCREMENT&apos;:</div><div class="line">			return state + 1</div><div class="line">		case &apos;DECREMENT&apos;:</div><div class="line">        	return state - 1</div><div class="line">       	default:</div><div class="line">        	return state</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这段代码主要实现的是reducer，它主要接收两个参数，一个是state，另一个是action，state指代的是react中的state（状态），也就是这里span标签中的数字，action是一个对象，通过action，reducer就知道该做什么，比如这段代码就是通过判断action.type，来对state进行操作。<br><br>这里有一个值得注意的点，那就是给state设置一个return的默认值，一般来说就写成<strong>function counter(state = initialState, action)</strong>，es6的写法，意思在忘了传state的时候给state传入一个默认值。<br><br>var store = Redux.createStore(counter)<br><br>上面这句代码，主要实现的是用createStore方法，创建store，而传入的参数counter我上面已经说过了，是一个reducer，所以store的创建实际上是这样的：var store = createStore(reducer)。<br><br><strong>整个应用，只能有一个store！</strong>可是，reducer却可以有多个，这样问题就来了，由于创建store的时候需要传入reducer，而store只能有一个，但是reducer却可以有多个，那怎么办？<a href="https://github.com/reactjs/react-redux" target="_blank" rel="external">]react-redux</a>中又一个管理reducer的方法，叫做<strong>combineReducers</strong>，它能把所有的reducer集中整合为一个reducers，其使用方法是：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">var reducers = combineReducers(&#123;</div><div class="line">  reducers1,</div><div class="line">  reducers2...</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+<p>关于react-redux的具体细节后面再说。<br></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">var valueEl = document.getElementById(&apos;value&apos;)</div><div class="line">function render() &#123;</div><div class="line">	valueEl.innerHTML = store.getState().toString()</div><div class="line">&#125;</div><div class="line">render()</div><div class="line">store.subscribe(render)</div></pre></td></tr></table></figure>
+<p>这段代码就主要就是执行render函数了，store.getState() 函数，它将会返回state。如果是常规react的render函数的话，是将一个dom节点挂载到root element下面去，而在这个示例中，只要将状态挂载到对应的节点上去就可以了。最后一行代码是注册状态监听器，在这里指当store里面的state发生改变时，触发render回调函数<br></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">document.getElementById(&apos;increment&apos;).addEventListener(&apos;click&apos;, function () &#123;</div><div class="line">          store.dispatch(&#123; type: &apos;INCREMENT&apos; &#125;)</div><div class="line">        &#125;)</div><div class="line">document.getElementById(&apos;decrement&apos;).addEventListener(&apos;click&apos;, function () &#123;</div><div class="line">          store.dispatch(&#123; type: &apos;DECREMENT&apos; &#125;)</div><div class="line">        &#125;)</div><div class="line">document.getElementById(&apos;incrementIfOdd&apos;).addEventListener(&apos;click&apos;, function () &#123;</div><div class="line">          if (store.getState() % 2 !== 0) &#123;</div><div class="line">            store.dispatch(&#123; type: &apos;INCREMENT&apos; &#125;)</div><div class="line">          &#125;</div><div class="line">        &#125;)</div><div class="line">document.getElementById(&apos;incrementAsync&apos;).addEventListener(&apos;click&apos;, function () &#123;</div><div class="line">          setTimeout(function () &#123;</div><div class="line">            store.dispatch(&#123; type: &apos;INCREMENT&apos; &#125;)</div><div class="line">          &#125;, 1000)</div><div class="line">        &#125;)</div></pre></td></tr></table></figure>
+<p>这段代码主要是给下面的各个按钮绑定事件，这里需要做的是分发action，通过<strong>store.dispatch(action)</strong>这个方法，把action传递给reducer，而reducer中已经定义好了具体的函数，会根据接收到的action来判断对state进行什么操作。<br><br>好了，第一个示例到此就基本结束了，下面我再好好地整理一下redux的具体流程：<br><br>1，通过createStore方法创建store，传入reducer参数，<strong>且一个应用只能有一个store。</strong>store常用的方法有：getState方法，用来获取state；dispatch方法用来分发action，subscribe方法用来注册监听器执行回调函数。<br><br>2，创建好store后，通过dispatch方法来分发action给reducer，action是一个对象。<br><br>3，reducer接收到了state（state可传可不传，但是要在reducer中写上没有传state时的情况判断），action后，会根据action里的type属性来对state进行对应的操作。<br><br><strong>我描绘一下redux的流程图，大致这样的：const store = createStore(reducer) –&gt; store.dispatch(action) –&gt; reducer(state, action) –&gt; 根据state渲染页面</strong><br><br><br><br><br><br></p>
+<p>auther: Wisdommm</p><br><p>date: 2016-07-23</p>
+
+
+      
+    </div>
+    <footer>
+      
+        
+        
+        
+  <div class="addthis addthis_toolbox addthis_default_style">
+    
+      <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+    
+    
+      <a class="addthis_button_tweet"></a>
+    
+    
+      <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+    
+    
+      <a class="addthis_button_pinterest_pinit" pi:pinit:layout="horizontal"></a>
+    
+    <a class="addthis_counter addthis_pill_style"></a>
+  </div>
+  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js"></script>
+
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+<section id="comment">
+  <h1 class="title">Comments</h1>
+
+  
+      <div id="fb-root"></div>
+<script>
+  (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=123456789012345";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+</script>
+
+<div class="fb-comments" data-href="http://wisdommm.github.io/redux/redux example(1).html" data-num-posts="5" data-width="840" data-colorscheme="light"></div>
+      
+  
+</section>
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="Search">
+    <input type="hidden" name="q" value="site:wisdommm.github.io">
+  </form>
+</div>
+
+  
+
+  
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2016 Wisdommm
+  
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+</body>
+</html>

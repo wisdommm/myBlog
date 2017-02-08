@@ -1,0 +1,161 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Wisdommm</title>
+  <meta name="author" content="Wisdommm">
+  
+  <meta name="description" content="programmer,front to end">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+  <meta property="og:site_name" content="Wisdommm"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  <link href="/favicon.png" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Wisdommm" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">Wisdommm</a></h1>
+  <h2><a href="/">Welcome to my blog</a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div></header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2016-07-28T06:33:08.000Z"><a href="/2016/07/28/react demo(巧姐)/">2016-07-28</a></time>
+      
+      
+  
+    <h1 class="title"></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h2 id="redux-example"><a href="#redux-example" class="headerlink" title="redux example"></a>redux example</h2><p>前几天巧姐做了一个redux入门的分享，她写的这个demo我觉得很好，也不复杂，我感觉比redux官网上的示例还要清晰一点，所以我把她的demo要了过来，想简单来分析一下。<br><br>我先上图吧。<br><img src="http://oatasl78l.bkt.clouddn.com/redux%20ex1.png" alt=""><br>图1<br><img src="http://oatasl78l.bkt.clouddn.com/redux%20ex2.png" alt=""><br>图2<br><img src="http://oatasl78l.bkt.clouddn.com/redux%20ex3.png" alt=""><br>图3<br><img src="http://oatasl78l.bkt.clouddn.com/redux%20ex4.png" alt=""><br>图4<br><img src="http://oatasl78l.bkt.clouddn.com/redux%20ex5.png" alt=""><br>图5<br><img src="http://oatasl78l.bkt.clouddn.com/redux%20ex6.png" alt=""><br>图6<br><img src="http://oatasl78l.bkt.clouddn.com/redux%20ex7.png" alt=""><br>图7<br><img src="http://oatasl78l.bkt.clouddn.com/redux%20ex8.png" alt=""><br>图8<br><br>好吧，这图截的也是够大的，将就看看吧。。。由图1可以看到，页面一共分为四部分：左，中上，中下，右，也就是氛围四个组件：Left，Top，Center，Right。接下来我说一下交互，如图2所示；我在左边的输入框中输入东西，然后点击增加，可以看到，刚刚新增的数据立马在右边下面部分显示了出来，展示的是刚才新增的数据和一个删除按钮，如图3所示；若你点击展示的数据，那么在右边，也就是编辑组件中会出现一个输入框和编辑按钮，你可以在这里对刚刚点击的数据进行修改然后保存，如图4，图5所示；保存过后就可以看到中间的显示模块对数据进行了更新，如图6所示；接下来是中间上方的保存模块，你点击保存按钮，这个模块同样也能取到当前的数据，这里就用一个弹窗代替好了，如图7所示；最后就是删除按钮，点击后删掉当前这一行的数据，如图8所示。<br><br>好累，说了这么多，口都干了。其实吧，一两句话就可以说完的：在这四个组件中，每个组件都可以取到state，并且可以对state进行操作。说完了，是不是很简单啊。。。<br><br>我们先来看看index.js吧，也就是入口文件。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">var App = React.createClass(&#123;</div><div class="line">    render: function()&#123;</div><div class="line">        return (</div><div class="line">            &lt;div className=&quot;row&quot;&gt;</div><div class="line">                &lt;div className=&quot;col-sm-4&quot; style=&#123;&#123; textAlign: &apos;center&apos; &#125;&#125;&gt;</div><div class="line">                    &lt;LeftComponent /&gt;</div><div class="line">                &lt;/div&gt;</div><div class="line">                &lt;div className=&quot;col-sm-4&quot; style=&#123;&#123; borderRight: &apos;1px solid #999&apos;, minHeight: &apos;600px&apos;, textAlign: &apos;center&apos; &#125;&#125;&gt;</div><div class="line">                    &lt;TopComponent/&gt;</div><div class="line">                    &lt;CenterComponent/&gt;</div><div class="line">                &lt;/div&gt;</div><div class="line">                &lt;div className=&quot;col-sm-4&quot; style=&#123;&#123; textAlign: &apos;center&apos; &#125;&#125;&gt;</div><div class="line">                    &lt;RightComponent /&gt;</div><div class="line">                &lt;/div&gt;</div><div class="line">            &lt;/div&gt;            </div><div class="line">            );</div></pre></td></tr></table></figure>
+<p>很简单吧，就是分别放了四个Component组件而已，我们也不用管这些组件是父子关系还是兄弟关系，因为redux不用考虑这些。然后我们去看看action吧。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line">// action </div><div class="line">module.exports = &#123;</div><div class="line">	addModelAction: function(name)&#123;</div><div class="line">	    return &#123;</div><div class="line">	        type: &apos;ADD_MODEL&apos;,</div><div class="line">	        name: name</div><div class="line">	    &#125;</div><div class="line">	&#125;,</div><div class="line">	editModelAction: function(index, name) &#123;</div><div class="line">		return &#123;</div><div class="line">			type: &apos;EDIT_MODEL&apos;,</div><div class="line">			index: index,</div><div class="line">			name: name</div><div class="line">		&#125;</div><div class="line">	&#125;,</div><div class="line">	deleteModelAction: function(index) &#123;</div><div class="line">		return &#123;</div><div class="line">			type: &apos;DELETE_MODEL&apos;,</div><div class="line">			index: index</div><div class="line">		&#125;</div><div class="line">	&#125;,</div><div class="line">	activeModelAction: function(index) &#123;</div><div class="line">		return &#123;</div><div class="line">			type: &apos;ACTIVE_MODEL&apos;,</div><div class="line">			index: index</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<p>在action.js这个文件里，我们写了四个action函数，每个函数都返回一个对象作为action，是不是很简单，每个action函数中返回的对象里type都是定义好了的，然后根据传入的参数来配置其他返回参数；然后再来看看reducer。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line">// reducers</div><div class="line">var modelReducer = function(state, action)&#123;</div><div class="line">    switch(action.type)&#123;</div><div class="line">        case &apos;ADD_MODEL&apos;:</div><div class="line">            state.items.push(&#123;</div><div class="line">                name: action.name</div><div class="line">            &#125;);</div><div class="line">            return state;</div><div class="line">            break;</div><div class="line">        case &apos;DELETE_MODEL&apos;:</div><div class="line">        	state.items.splice(action.index, 1);</div><div class="line">            return state;</div><div class="line">            break;</div><div class="line">        case &apos;EDIT_MODEL&apos;:</div><div class="line">        	state.items[action.index].name = action.name;</div><div class="line">            return state;</div><div class="line">            break;</div><div class="line">        case &apos;ACTIVE_MODEL&apos;:</div><div class="line">            state.activeIndex =  action.index; </div><div class="line">            return state;</div><div class="line">            break;</div><div class="line">        default:</div><div class="line">            return state;</div><div class="line">    &#125;</div><div class="line">&#125;;</div><div class="line"></div><div class="line">module.exports = modelReducer;</div></pre></td></tr></table></figure>
+<p>这个也不难，我们都知道reducer需要传入两个参数：state和action，通过action里的type来对state进行相应的操作，最后return state。<br><br>好了，reducer和action都看了，redux三要素现在来看看store。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">import &#123; createStore &#125; from &apos;redux&apos;</div><div class="line">import modelReducer from &apos;./reducer&apos;</div><div class="line">var store = createStore(modelReducer, &#123;items: [], activeIndex: -1 &#125;);</div><div class="line">module.exports = store;</div></pre></td></tr></table></figure>
+<p>对的，一共就这几行，store=createStore(modelReducer, {items: [], activeIndex: -1 })，第一个参数是reducer，必需的，另一个是state初始化的值，非必需，若不传则默认为undefined。<br><br>其实到这里，这个示例就已经到了尾声了；剩下的就是这四个组件的内部布局，还有就是给按钮绑定事件，当点击的时候用dispatch分发一个对应的action函数给reducer，这些我在之前也已经写过了，所以这里就不再赘述了。</p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+        
+  <div class="addthis addthis_toolbox addthis_default_style">
+    
+      <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+    
+    
+      <a class="addthis_button_tweet"></a>
+    
+    
+      <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+    
+    
+      <a class="addthis_button_pinterest_pinit" pi:pinit:layout="horizontal"></a>
+    
+    <a class="addthis_counter addthis_pill_style"></a>
+  </div>
+  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js"></script>
+
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+<section id="comment">
+  <h1 class="title">Kommentare</h1>
+
+  
+      <div id="fb-root"></div>
+<script>
+  (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=123456789012345";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+</script>
+
+<div class="fb-comments" data-href="http://wisdommm.github.io/2016/07/28/react demo(巧姐)/index.html" data-num-posts="5" data-width="840" data-colorscheme="light"></div>
+      
+  
+</section>
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="Suche">
+    <input type="hidden" name="q" value="site:wisdommm.github.io">
+  </form>
+</div>
+
+  
+
+  
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2016 Wisdommm
+  
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+</body>
+</html>

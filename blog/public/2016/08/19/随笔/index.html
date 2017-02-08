@@ -1,0 +1,160 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Wisdommm</title>
+  <meta name="author" content="Wisdommm">
+  
+  <meta name="description" content="programmer,front to end">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+  <meta property="og:site_name" content="Wisdommm"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  <link href="/favicon.png" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Wisdommm" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">Wisdommm</a></h1>
+  <h2><a href="/">Welcome to my blog</a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div></header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2016-08-19T13:42:59.000Z"><a href="/2016/08/19/随笔/">2016-08-19</a></time>
+      
+      
+  
+    <h1 class="title"></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h1 id="hexo博客增加搜索功能"><a href="#hexo博客增加搜索功能" class="headerlink" title="hexo博客增加搜索功能"></a>hexo博客增加搜索功能</h1><p>最近在用在某个项目上增加一个搜索框，后端用node＋mongodb实现，本来以为挺简单的，就用node爬一下页面title和href，然后放进mongodb中，再通过前端发请求传数据过来查找，然后node再在mongodb中查找，将数据返回前端。</p>
+<p>这是理想情况下的做法，可是现实往往充满了曲折,下面我来简单介绍下这个项目，然后说一下问题吧。</p>
+<ol>
+<li>这是个内网项目，所以爬虫爬不进去，好在有一个目录页，将所有页面的title和href整理了起来，不过读取这个文件也不是简单的事，因为这个是类似于json格式的文件，但是却没有任何的符号，全是汉字，而我们存储的时候是需要分层次的，这样利于查找，采用node的FS模块可以很容易地读取到文件的内容，但是仅仅是读取，直接存储的话会导致没有层次感，所以我就把这个文件复制了一份出来，通过人工维护的方式将其变为json格式，然后就很好操作了，不过需要人工维护与更新，不算是最好的办法，但是那个文件之前也是人工维护的（虽然我不知道是谁维护，否则可以叫他一起维护下）。</li>
+<li>这是个hexo博客系统，纯静态展示的，所有页面均是通过通过hexo的框架，执行hexo g命令的时候，会自动将md文件解析成html（css），然后再通过执行hexo server命令，开一个hexo的服务器，把所有的页面通过服务端渲染到浏览器；因此，我增加的这个搜索框的功能，除了需要自己写服务器和数据库外，还必须把这个项目单独部署，因为hexo的源码上并没有针对服务器的扩展方法（这一点是@南烛帮我一起看的，毕竟我之前对hexo的了解只是会用而已，并没有在它的源码上进行深入研究），因此，这就成为了两个项目，然后把这两个项目部署在同一台服务器上，再通过配置nginx服务，将搜索框从前端发来的请求映射到node服务器监听的那个端口，这样就形成了前后端数据的交互，这里出现了一个比较奇怪的问题，我在我自己电脑上发送请求时，请求能够成功发出去，可就是接收不到返回的内容，然后我从另一台电脑通过花瓶代理请求到我本地来测试接口，却发现是正常的，最后发现是两个项目之间的请求跨域了。</li>
+<li>解决跨域，可以选择将项目部署在服务器，然后再测试，不过这就比较麻烦了，修改bug比较蛋疼，或者使用代理，将请求代理到另一个域来，这样修改bug也比较简单，现在开始发请求了，发现查找结果是没有数据，没关系，我刚刚只是随便输入的一个词，现在我输入一个数据库里存在的词重新发送请求，不过问题就出来了，还是没有数据，怎么可能啊，数据库里确实有这个数据啊，怎么会查不到，于是我换了几个数据库里存在的词，再反复查找，结果大多都是不存在，唯一存在的一个是一个英文单词，然后我就查看请求，发现地址没错，参数呢？参数怎么自动给我转码了，我就好奇了，然后我再去后台将这个获取到的请求参数，对比了一下接收到各种参数的情况，发现汉字会自动转码，数字和英文单词会保持不变，但是当查询的字符串中间出现空格的时候，会自动变为加号来填充空格，所以，只有无空格的数字或英语字母才可以直接查找到结果，否则的话都需要人工再进行一次转码，将其转过来，唉，毕竟第一次写服务器，这些都需要靠自己独自摸索。</li>
+<li>接下来是mongodb的事情。之前使用百度搜索还是谷歌搜索，我都没发现什么大的问题（可能是我搜索的问题太傻了），这次查询mongodb和mongoose的相关资料，发现百度搜索出来的都是以一些博客，百度知道的回答为主，且各个博客之间相互抄袭也是够无聊的，仅仅只是做到了制造而不是创造。然后我就去谷歌采用英文搜索，stackoverflow，官方网站等都是排在很前面的（不知道百度为什么把人家官网排在很后面），算了，不吐槽了。mongodb这种非关系型轻量级数据库，使用起来是很方便的，增删查改的api都是比较简单的，根据所示范的例子动手稍微写一下就会用了，不过对于第一次使用的我来说，还是遇到了一些问题：存储的时候，mongodb会自动给你加上下划线id，我估计是为了区分存储空间，可是这就会存在一个问题，当我存储了一条数据过后，再储存一条相同的数据进去，是可以存储进去的，因为它们的下划线id不同，这显然不对啊，我否则我一查找，却找到很多条数据，仔细一看却发现这么多条数据都是一样的，不是很搞笑吗，所以我选择了给每条数据加上一个index作为唯一标志符，然后再在每次启动的时候，去读取文件存储进数据库里，存进去之前会先去数据库里通过这个index唯一标志符查找一遍，如果查询结果为空，我才会把这条数据存进去，否则就不存。其实吧，每次存储的时候会人为的自动查找，相当于遍历了一遍数据库，如果是在正常的稍微大一点的项目来说，这是十分十分十分影响性能的，由于我这里是个很小的项目，所以才可以进行这种方式查询；其次是mongo查找的时候，默认的方式是精确匹配，不支持模糊查询，这怎么办呢，难道需要我在查询的时候再遍历一遍数据库，使用indexOf来查询？我感到很可笑，因为你这么傻的方法在实际中是肯定行不通的，再说了，就算可以，那么大小写的模糊查询怎么办？难道要我判断下有没有英文字母然后分别用用大写和小写都来遍历一下？这个时候就可以使用正则了，将查询的字符串改变为正则表达式，这样的话在数据库里它会自动的去匹配所有适合的结果。</li>
+</ol>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+        
+  <div class="addthis addthis_toolbox addthis_default_style">
+    
+      <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+    
+    
+      <a class="addthis_button_tweet"></a>
+    
+    
+      <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+    
+    
+      <a class="addthis_button_pinterest_pinit" pi:pinit:layout="horizontal"></a>
+    
+    <a class="addthis_counter addthis_pill_style"></a>
+  </div>
+  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js"></script>
+
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+<section id="comment">
+  <h1 class="title">Kommentare</h1>
+
+  
+      <div id="fb-root"></div>
+<script>
+  (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=123456789012345";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+</script>
+
+<div class="fb-comments" data-href="http://wisdommm.github.io/2016/08/19/随笔/index.html" data-num-posts="5" data-width="840" data-colorscheme="light"></div>
+      
+  
+</section>
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="Suche">
+    <input type="hidden" name="q" value="site:wisdommm.github.io">
+  </form>
+</div>
+
+  
+
+  
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2016 Wisdommm
+  
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+</body>
+</html>

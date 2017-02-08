@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <link rel="dns-prefetch" href="http://wisdommm.github.io">
+  <title>从源码看react生命周期 | Wisdommm</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="React的主要思想，就是通过构建可复用的组件来构建页面，而每一个组件，就是一个有限的状态机，通过状态控制组件不同的渲染，从而得到不同的界面效果。每个组件都有生命周期，它规定了组件的一些自带方法需要在哪个阶段进行执行以及输出对应的结果。
+有限状态机，表示有限个状态，以及在这些状态之间的数据转移和动作方法的执行的行为模型，一般通过状态、事件、转换和动作来描述有限状态机。例如页面上的都个东西有显示和隐">
+<meta property="og:type" content="article">
+<meta property="og:title" content="从源码看react生命周期">
+<meta property="og:url" content="http://wisdommm.github.io/2016/11/08/react生命周期源码解读/index.html">
+<meta property="og:site_name" content="Wisdommm">
+<meta property="og:description" content="React的主要思想，就是通过构建可复用的组件来构建页面，而每一个组件，就是一个有限的状态机，通过状态控制组件不同的渲染，从而得到不同的界面效果。每个组件都有生命周期，它规定了组件的一些自带方法需要在哪个阶段进行执行以及输出对应的结果。
+有限状态机，表示有限个状态，以及在这些状态之间的数据转移和动作方法的执行的行为模型，一般通过状态、事件、转换和动作来描述有限状态机。例如页面上的都个东西有显示和隐">
+<meta property="og:image" content="http://oatasl78l.bkt.clouddn.com/react%20cycle1.png">
+<meta property="og:image" content="http://oatasl78l.bkt.clouddn.com/react%20cycle2.jpg">
+<meta property="og:image" content="http://oatasl78l.bkt.clouddn.com/mountComponent.jpeg">
+<meta property="og:image" content="http://oatasl78l.bkt.clouddn.com/upCom.jpeg">
+<meta property="og:image" content="http://oatasl78l.bkt.clouddn.com/sta.jpeg">
+<meta property="og:updated_time" content="2017-01-24T09:09:19.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="从源码看react生命周期">
+<meta name="twitter:description" content="React的主要思想，就是通过构建可复用的组件来构建页面，而每一个组件，就是一个有限的状态机，通过状态控制组件不同的渲染，从而得到不同的界面效果。每个组件都有生命周期，它规定了组件的一些自带方法需要在哪个阶段进行执行以及输出对应的结果。
+有限状态机，表示有限个状态，以及在这些状态之间的数据转移和动作方法的执行的行为模型，一般通过状态、事件、转换和动作来描述有限状态机。例如页面上的都个东西有显示和隐">
+<meta name="twitter:image" content="http://oatasl78l.bkt.clouddn.com/react%20cycle1.png">
+  
+    <link rel="alternative" href="/atom.xml" title="Wisdommm" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" type="text/css" href="/./main.2d7529.css">
+  <style type="text/css">
+  
+    #container.show {
+      background: #22C3AA;
+    }
+  </style>
+  
+
+  
+
+</head>
+
+<body>
+  <div id="container" q-class="show:isCtnShow">
+    <canvas id="anm-canvas" class="anm-canvas"></canvas>
+    <div class="left-col" q-class="show:isShow">
+      
+<div class="overlay" style="background: #000"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			<img src="https://img3.doubanio.com/icon/ul69267103-5.jpg" class="js-avatar">
+		</a>
+		<hgroup>
+		  <h1 class="header-author"><a href="/">Wisdommm</a></h1>
+		</hgroup>
+		
+		<p class="header-subtitle">Welcome to my blog</p>
+		
+
+		<nav class="header-menu">
+			<ul>
+			
+				<li><a href="/">主页</a></li>
+	        
+				<li><a href="/tags/随笔/">随笔</a></li>
+	        
+			</ul>
+		</nav>
+		<nav class="header-smart-menu">
+    		
+    			
+    			<a q-on="click: openSlider(e, 'innerArchive')" href="javascript:void(0)">所有文章</a>
+    			
+            
+    			
+    			<a q-on="click: openSlider(e, 'friends')" href="javascript:void(0)">友链</a>
+    			
+            
+    			
+    			<a q-on="click: openSlider(e, 'aboutme')" href="javascript:void(0)">关于我</a>
+    			
+            
+		</nav>
+		<nav class="header-nav">
+			<div class="social">
+				
+					<a class="github" target="_blank" href="/github.com/wisdommm" title="github"><i class="icon-github"></i></a>
+		        
+					<a class="weibo" target="_blank" href="http://weibo.com/2021829827/profile?rightmod=1&wvr=6&mod=personinfo" title="weibo"><i class="icon-weibo"></i></a>
+		        
+					<a class="zhihu" target="_blank" href="https://www.zhihu.com/people/wisdommm/activities" title="zhihu"><i class="icon-zhihu"></i></a>
+		        
+					<a class="jianshu" target="_blank" href="http://www.jianshu.com/users/c929ad93253d/timeline" title="jianshu"><i class="icon-jianshu"></i></a>
+		        
+					<a class="mail" target="_blank" href="mailto:13107724281@163.com" title="mail"><i class="icon-mail"></i></a>
+		        
+			</div>
+		</nav>
+	</header>		
+</div>
+
+    </div>
+    <div class="mid-col" q-class="show:isShow,hide:isShow|isFalse">
+      
+<nav id="mobile-nav">
+  	<div class="overlay js-overlay" style="background: #000"></div>
+	<div class="btnctn js-mobile-btnctn">
+  		<div class="slider-trigger list" q-on="click: openSlider(e)"><i class="icon icon-sort"></i></div>
+	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img src="https://img3.doubanio.com/icon/ul69267103-5.jpg" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author js-header-author">Wisdommm</h1>
+			</hgroup>
+			
+			<p class="header-subtitle"><i class="icon icon-quo-left"></i>Welcome to my blog<i class="icon icon-quo-right"></i></p>
+			
+			
+			
+				
+			
+				
+			
+			
+			
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="/github.com/wisdommm" title="github"><i class="icon-github"></i></a>
+			        
+						<a class="weibo" target="_blank" href="http://weibo.com/2021829827/profile?rightmod=1&wvr=6&mod=personinfo" title="weibo"><i class="icon-weibo"></i></a>
+			        
+						<a class="zhihu" target="_blank" href="https://www.zhihu.com/people/wisdommm/activities" title="zhihu"><i class="icon-zhihu"></i></a>
+			        
+						<a class="jianshu" target="_blank" href="http://www.jianshu.com/users/c929ad93253d/timeline" title="jianshu"><i class="icon-jianshu"></i></a>
+			        
+						<a class="mail" target="_blank" href="mailto:13107724281@163.com" title="mail"><i class="icon-mail"></i></a>
+			        
+				</div>
+			</nav>
+
+			<nav class="header-menu js-header-menu">
+				<ul style="width: 50%">
+				
+				
+					<li style="width: 50%"><a href="/">主页</a></li>
+		        
+					<li style="width: 50%"><a href="/tags/随笔/">随笔</a></li>
+		        
+				</ul>
+			</nav>
+		</header>				
+	</div>
+	<div class="mobile-mask" style="display:none" q-show="isShow"></div>
+</nav>
+
+      <div id="wrapper" class="body-wrap">
+        <div class="menu-l">
+          <div class="canvas-wrap">
+            <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
+          </div>
+          <div id="js-content" class="content-ll">
+            <article id="post-react生命周期源码解读" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      从源码看react生命周期
+    </h1>
+  
+
+        
+        <a href="/2016/11/08/react生命周期源码解读/" class="archive-article-date">
+  	<time datetime="2016-11-08T04:22:04.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-11-08</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>React的主要思想，就是通过构建可复用的组件来构建页面，而每一个组件，就是一个有限的状态机，通过状态控制组件不同的渲染，从而得到不同的界面效果。每个组件都有生命周期，它规定了组件的一些自带方法需要在哪个阶段进行执行以及输出对应的结果。</p>
+<p>有限状态机，表示有限个状态，以及在这些状态之间的数据转移和动作方法的执行的行为模型，一般通过状态、事件、转换和动作来描述有限状态机。例如页面上的都个东西有显示和隐藏两种情况，那么一般情况下我们会设计两个方法：show()和hide()来实现显示与隐藏的切换，而react只需要设置某一个状态为true或false，就可以实现这个组件的隐藏和显示转换了。<br>同时，react还引入了组件的生命周期这个概念，通过它就可以实现组件的状态机控制，从而达到“生命周期－状态－组件”的和谐画面。</p>
+<h4 id="生命周期"><a href="#生命周期" class="headerlink" title="生命周期"></a>生命周期</h4><p>之前一篇博客就已经说到了一下生命周期，我在这里再赘述一下吧，react组件自带的一些函数方法，比如getDefaultProps、getInitialState等，会在什么时候执行。</p>
+<ul>
+<li><p>当首次装载组件时，按顺序执行 getDefaultProps、getInitialState、componentWillMount、render 和 componentDidMount；</p>
+</li>
+<li><p>当卸载组件时，执行 componentWillUnmount；</p>
+</li>
+<li><p>当重新装载组件时，此时按顺序执行 getInitialState、componentWillMount、render 和 componentDidMount，但并不执行 getDefaultProps；</p>
+</li>
+<li><p>当再次渲染组件时，组件接受到更新状态，此时按顺序执行 componentWillReceiveProps、shouldComponentUpdate、componentWillUpdate、render 和 componentDidUpdate.</p>
+</li>
+</ul>
+<p>然后具体的状态、属性改变，会触发什么方法，可以参考如下两张图，由于这篇博客重点不在于此，所以就不细细讲解了。<br><br><img src="http://oatasl78l.bkt.clouddn.com/react%20cycle1.png" alt=""><br><br><img src="http://oatasl78l.bkt.clouddn.com/react%20cycle2.jpg" alt=""><br></p>
+<p>疑问：</p>
+<ul>
+<li>为什么react会按照这样的方式来，这样的顺序来执行生命周期？</li>
+<li>为什么react多次render时，会执行生命周期的不同阶段。</li>
+<li>为什么getDefaultProps只执行了一次？</li>
+</ul>
+<a id="more"></a>
+<h4 id="react生命周期详解"><a href="#react生命周期详解" class="headerlink" title="react生命周期详解"></a>react生命周期详解</h4><p>react组件的生命周期，主要通过三种状态来管理，分别是<strong>MOUNTING、RECEIVE_PROPS、UNMOUNTING</strong>，而其他的方法，例如getDefaultProps、getInitialState，还包括自己定义的一些方法等，都是通过这三个状态来管理的，这三个状态会负责通知对应的组件当前所处的状态，应该执行生命周期中的哪个步骤，比如是否可以更新state，是否能调用自定义函数等。在这三种状态中，MOUNTING指的是加载组件，RECEIVE_PROPS指的是更新组件，UNMOUNTING指的是卸载组件，而每种情况，比如说加载组件（mountComponent），都会有两种方法，will和did，will指的是之前，比如说加载之前，更新之前，而did指的是之后，表示加载之后，更新之后。</p>
+<h4 id="creatClass创建组件"><a href="#creatClass创建组件" class="headerlink" title="creatClass创建组件"></a>creatClass创建组件</h4><p>这是最react组件中的入口方法，负责管理生命周期中的getDefaultProps。getDefaultProps方法在react生命周期中只执行一次，那就是在首次加载组件初始化的时候执行。通过creatClass创建组件，利用原型继承ReactCompositeBase父类，然后按顺序合并mixins，设置初始化defaultProps，创建ReactElement元素，具体信息看看下面的源码。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div></pre></td><td class="code"><pre><div class="line">// ReactCompositeComponent 的基类</div><div class="line">var ReactCompositeComponentBase = function() &#123;&#125;;</div><div class="line"></div><div class="line">	// 将 Mixin 合并到 ReactCompositeComponentBase 的原型上</div><div class="line">	assign(</div><div class="line">	  ReactCompositeComponentBase.prototype,</div><div class="line">	  ReactComponent.Mixin,</div><div class="line">	  ReactOwner.Mixin,</div><div class="line">	  ReactPropTransferer.Mixin,</div><div class="line">	  ReactCompositeComponentMixin</div><div class="line">	);</div><div class="line"></div><div class="line">var ReactCompositeComponent = &#123;</div><div class="line">  LifeCycle: CompositeLifeCycle,</div><div class="line">  Base: ReactCompositeComponentBase,</div><div class="line"></div><div class="line">  // 创建组件</div><div class="line">  createClass: function(spec) &#123;</div><div class="line">    // 构造函数</div><div class="line">    var Constructor = function(props, context) &#123;</div><div class="line">      this.props = props;</div><div class="line">      this.context = context;</div><div class="line">      this.state = null;</div><div class="line">      var initialState = this.getInitialState ? this.getInitialState() : null;</div><div class="line">      this.state = initialState;</div><div class="line">    &#125;;</div><div class="line"></div><div class="line">    // 原型继承父类</div><div class="line">    Constructor.prototype = new ReactCompositeComponentBase();</div><div class="line">    Constructor.prototype.constructor = Constructor;</div><div class="line"></div><div class="line">    // 合并 mixins</div><div class="line">    injectedMixins.forEach(</div><div class="line">      mixSpecIntoComponent.bind(null, Constructor)</div><div class="line">    );</div><div class="line">    mixSpecIntoComponent(Constructor, spec);</div><div class="line"></div><div class="line">    // mixins 合并后装载 defaultProps (React整个生命周期中 getDefaultProps 只执行一次)</div><div class="line">    if (Constructor.getDefaultProps) &#123;</div><div class="line">      Constructor.defaultProps = Constructor.getDefaultProps();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    for (var methodName in ReactCompositeComponentInterface) &#123;</div><div class="line">      if (!Constructor.prototype[methodName]) &#123;</div><div class="line">        Constructor.prototype[methodName] = null;</div><div class="line">      &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    return ReactElement.createFactory(Constructor);</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>所以这就解释了，为什么getDefaultProps会在react组件中很早的就被调用，且只被调用一次，因为getDefaultProps是通过Constructor来进行管理的，所以是在整个生命周期中最先开始执行。</p>
+<h4 id="状态一：MOUNTING"><a href="#状态一：MOUNTING" class="headerlink" title="状态一：MOUNTING"></a>状态一：MOUNTING</h4><p>mountComponent负责管理生命周期中的getInitialState、componentWillMount、render、componentDidMount方法。</p>
+<p>mountComponent主要做了以下一些事。</p>
+<p>首先通过mountComponent装载组件，此时将状态改为MOUNTING，通过geiInitalState获取初始化的state，初始化更新队列为null。</p>
+<p>然后会判断componentWillMount是否存在，如果存在，则执行componentWillMount，若此时使用了setState方法，则不会出发re-render，而是会合并更新队列，和初始化的render一起执行。</p>
+<p>到此时，已经完成了MOUNTING的工作，将更新状态改为NULL，如果后面再使用setState方法，则会更改更新状态，然后出发render函数重新渲染。</p>
+<p>mountComponent本质上是通过递归的方法来渲染的内容，所以如果一个组件中包含了另外的子组件的话，怎会发现，父组件中的componentWillMount总是会在子组件中的componentWillMount之前调用，而父组件的componentDidMount总是会在子组件的componentDidMount后面调用。</p>
+<p>最后当初始化渲染完成后，若存在componentDidMount，则出触发。</p>
+<p>这段流程的源码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div></pre></td><td class="code"><pre><div class="line">// 装载组件</div><div class="line">mountComponent: function(rootID, transaction, mountDepth) &#123;</div><div class="line">  // 当前状态为 MOUNTING</div><div class="line">  this._compositeLifeCycleState = CompositeLifeCycle.MOUNTING;</div><div class="line"></div><div class="line">  // 当前元素对应的上下文</div><div class="line">  this.context = this._processContext(this._currentElement._context);</div><div class="line"></div><div class="line">  // 当前元素对应的 props</div><div class="line">  this.props = this._processProps(this.props);</div><div class="line"></div><div class="line">  // 获取初始化 state</div><div class="line">  this.state = this.getInitialState();</div><div class="line"></div><div class="line">  // 初始化更新队列</div><div class="line">  this._pendingState = null;</div><div class="line">  this._pendingForceUpdate = false;</div><div class="line"></div><div class="line">  // componentWillMount 调用setstate，不会触发rerender而是自动提前合并</div><div class="line">  if (this.componentWillMount) &#123;</div><div class="line">    this.componentWillMount();</div><div class="line">    if (this._pendingState) &#123;</div><div class="line">      this.state = this._pendingState;</div><div class="line">      this._pendingState = null;</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  // 得到 _currentElement 对应的 component 类实例</div><div class="line">  this._renderedComponent = instantiateReactComponent(</div><div class="line">    this._renderValidatedComponent(),</div><div class="line">    this._currentElement.type</div><div class="line">  );</div><div class="line"></div><div class="line">  // 完成 MOUNTING，更新 state</div><div class="line">  this._compositeLifeCycleState = null;</div><div class="line"></div><div class="line">  // render 递归渲染</div><div class="line">  var markup = this._renderedComponent.mountComponent(</div><div class="line">    rootID,</div><div class="line">    transaction,</div><div class="line">    mountDepth + 1</div><div class="line">  );</div><div class="line"></div><div class="line">  // 如果存在 this.componentDidMount，则渲染完成后触发</div><div class="line">  if (this.componentDidMount) &#123;</div><div class="line">    transaction.getReactMountReady().enqueue(this.componentDidMount, this);</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  return markup;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>详细流程图如下：<br><img src="http://oatasl78l.bkt.clouddn.com/mountComponent.jpeg" alt=""></p>
+<h4 id="状态二：RECEIVE-PROPS"><a href="#状态二：RECEIVE-PROPS" class="headerlink" title="状态二：RECEIVE_PROPS"></a>状态二：RECEIVE_PROPS</h4><p>updateComponent负责管理react生命周期中的componentWillReceiveProps、shouldComponentUpdate、componentWillUpadte、render、compoentDidUpdate等方法。</p>
+<p>在有组件更新时，react会通过updateComponent来更新组件，如果前后的元素不一致，则说明需要进行组件更新，此时会将状态改为RECEIVE_PROPS。</p>
+<p>在进行组件更新的时候，react首先会检查有没有componentWillReceiveProps，如果有，则执行此函数，且componentWillReceiveProps函数中调用setState是不会重复触发render函数的，而是会进行render合并，到这个时刻，RECEIVE_PROPS的工作就已经做完了，然后将状态改为NULL，同时state也将进行更新操作，此时调用this.state，可以获得更新后的state。</p>
+<p>然后会调用shouldComponentUpdate来作为最后的判断，判断组件是否更新，return true则会更新，否则不更新；之前已经说过了，react里的组件是通过递归来更新渲染的，而由于递归的特性，所以父组件的componentWillUpdate会在子组件componentWillUpdate之前执行，父组件的componentDidUpdate会在子组件componentDidUpdate之后执行。注意：禁止在shouldComponentUpdate和componentWillUpdate中调用setState，会造成循环调用，直至耗光浏览器内存后崩溃。</p>
+<p>updateComponent的具体流程图如下：<br><img src="http://oatasl78l.bkt.clouddn.com/upCom.jpeg" alt=""></p>
+<p>下面是具体源码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div></pre></td><td class="code"><pre><div class="line">// 更新组件</div><div class="line">updateComponent: function(transaction, prevParentElement, nextParentElement) &#123;</div><div class="line">  var prevContext = this.context;</div><div class="line">  var prevProps = this.props;</div><div class="line">  var nextContext = prevContext;</div><div class="line">  var nextProps = prevProps;</div><div class="line"></div><div class="line">  if (prevParentElement !== nextParentElement) &#123;</div><div class="line">    nextContext = this._processContext(nextParentElement._context);</div><div class="line">    nextProps = this._processProps(nextParentElement.props);</div><div class="line">    // 当前状态为 RECEIVING_PROPS</div><div class="line">    this._compositeLifeCycleState = CompositeLifeCycle.RECEIVING_PROPS;</div><div class="line"></div><div class="line">    // 如果存在 componentWillReceiveProps，则执行</div><div class="line">    if (this.componentWillReceiveProps) &#123;</div><div class="line">      this.componentWillReceiveProps(nextProps, nextContext);</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  // 设置状态为 null，更新 state</div><div class="line">  this._compositeLifeCycleState = null;</div><div class="line">  var nextState = this._pendingState || this.state;</div><div class="line">  this._pendingState = null;</div><div class="line">  var shouldUpdate =</div><div class="line">    this._pendingForceUpdate ||</div><div class="line">    !this.shouldComponentUpdate ||</div><div class="line">    this.shouldComponentUpdate(nextProps, nextState, nextContext);</div><div class="line">  if (!shouldUpdate) &#123;</div><div class="line">    // 如果确定组件不更新，仍然要设置 props 和 state</div><div class="line">    this._currentElement = nextParentElement;</div><div class="line">    this.props = nextProps;</div><div class="line">    this.state = nextState;</div><div class="line">    this.context = nextContext;</div><div class="line">    this._owner = nextParentElement._owner;</div><div class="line">    return;</div><div class="line">  &#125;</div><div class="line">  this._pendingForceUpdate = false;</div><div class="line"></div><div class="line">  ......</div><div class="line"></div><div class="line">  // 如果存在 componentWillUpdate，则触发</div><div class="line">  if (this.componentWillUpdate) &#123;</div><div class="line">    this.componentWillUpdate(nextProps, nextState, nextContext);</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  // render 递归渲染</div><div class="line">  var nextMarkup = this._renderedComponent.mountComponent(</div><div class="line">    thisID,</div><div class="line">    transaction,</div><div class="line">    this._mountDepth + 1</div><div class="line">  );</div><div class="line"></div><div class="line">  // 如果存在 componentDidUpdate，则触发</div><div class="line">  if (this.componentDidUpdate) &#123;</div><div class="line">    transaction.getReactMountReady().enqueue(</div><div class="line">      this.componentDidUpdate.bind(this, prevProps, prevState, prevContext),</div><div class="line">      this</div><div class="line">    );</div><div class="line">  &#125;</div><div class="line">&#125;,</div></pre></td></tr></table></figure>
+<h4 id="状态三：UNMOUNTING"><a href="#状态三：UNMOUNTING" class="headerlink" title="状态三：UNMOUNTING"></a>状态三：UNMOUNTING</h4><p>unmountComponent 负责管理生命周期中的 componentWillUnmount。</p>
+<p>首先将状态设置为 UNMOUNTING，若存在 componentWillUnmount，则执行；如果此时在 componentWillUnmount 中调用 setState，是不会触发 reRender。更新状态为 NULL，完成组件卸载操作。</p>
+<p>具体代码如下所示：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">// 卸载组件</div><div class="line">unmountComponent: function() &#123;</div><div class="line">  // 设置状态为 UNMOUNTING</div><div class="line">  this._compositeLifeCycleState = CompositeLifeCycle.UNMOUNTING;</div><div class="line"></div><div class="line">  // 如果存在 componentWillUnmount，则触发</div><div class="line">  if (this.componentWillUnmount) &#123;</div><div class="line">    this.componentWillUnmount();</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  // 更新状态为 null</div><div class="line">  this._compositeLifeCycleState = null;</div><div class="line">  this._renderedComponent.unmountComponent();</div><div class="line">  this._renderedComponent = null;</div><div class="line"></div><div class="line">  ReactComponent.Mixin.unmountComponent.call(this);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="setState更新机制"><a href="#setState更新机制" class="headerlink" title="setState更新机制"></a>setState更新机制</h4><p>说起setState，想必用过react的都会知道吧，不过setState的更新机制，你真的知道吗？</p>
+<p>当你调用setState的时候，会对state以及_pendingState更新队列进行合并操作，但是，真正更新state的幕后黑手其实是replaceState。replaceState会先判断当前状态是否是MOUNTING，如果不是，则会立即调用ReactUpdates.enqueueUpdate来执行更新。</p>
+<p>当状态不为MOUNTING和RECEIVEPROPS的时候，performUpdateIfNecessary 会获取 _pendingElement、_pendingState、_pendingForceUpdate，并调用 updateComponent 进行组件更新。</p>
+<p>如果在 shouldComponentUpdate 或 componentWillUpdate 中调用 setState，此时的状态已经从 RECEIVING_PROPS -&gt; NULL，则 performUpdateIfNecessary 就会调用 updateComponent 进行组件更新，但 updateComponent 又会调用 shouldComponentUpdate 和 componentWillUpdate，因此造成循环调用，使得浏览器内存占满后崩溃。产生如下图的这种死循环：</p>
+<p><img src="http://oatasl78l.bkt.clouddn.com/sta.jpeg" alt=""></p>
+<p>setState具体源码如下所示：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div></pre></td><td class="code"><pre><div class="line">// 更新 state</div><div class="line">setState: function(partialState, callback) &#123;</div><div class="line">  // 合并 _pendingState</div><div class="line">  this.replaceState(</div><div class="line">    assign(&#123;&#125;, this._pendingState || this.state, partialState),</div><div class="line">    callback</div><div class="line">  );</div><div class="line">&#125;,</div><div class="line"></div><div class="line">// 更新 state</div><div class="line">replaceState: function(completeState, callback) &#123;</div><div class="line">  validateLifeCycleOnReplaceState(this);</div><div class="line"></div><div class="line">  // 更新队列</div><div class="line">  this._pendingState = completeState;</div><div class="line"></div><div class="line">  // 判断状态是否为 MOUNTING，如果不是，即可执行更新</div><div class="line">  if (this._compositeLifeCycleState !== CompositeLifeCycle.MOUNTING) &#123;</div><div class="line">    ReactUpdates.enqueueUpdate(this, callback);</div><div class="line">  &#125;</div><div class="line">&#125;,</div><div class="line"></div><div class="line">// 如果存在 _pendingElement、_pendingState、_pendingForceUpdate，则更新组件</div><div class="line">performUpdateIfNecessary: function(transaction) &#123;</div><div class="line">  var compositeLifeCycleState = this._compositeLifeCycleState;</div><div class="line"></div><div class="line">  // 当状态为 MOUNTING 或 RECEIVING_PROPS时，则不更新</div><div class="line">  if (compositeLifeCycleState === CompositeLifeCycle.MOUNTING ||</div><div class="line">      compositeLifeCycleState === CompositeLifeCycle.RECEIVING_PROPS) &#123;</div><div class="line">    return;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  var prevElement = this._currentElement;</div><div class="line">  var nextElement = prevElement;</div><div class="line">  if (this._pendingElement != null) &#123;</div><div class="line">    nextElement = this._pendingElement;</div><div class="line">    this._pendingElement = null;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  // 调用 updateComponent</div><div class="line">  this.updateComponent(</div><div class="line">    transaction,</div><div class="line">    prevElement,</div><div class="line">    nextElement</div><div class="line">  );</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>总结：</p>
+<ul>
+<li><p>React 通过三种状态：MOUNTING、RECEIVE_PROPS、UNMOUNTING，管理整个生命周期的执行顺序；</p>
+</li>
+<li><p>setState 会先进行 _pendingState 更新队列的合并操作，不会立刻 reRender，因此是异步操作，且通过判断状态（MOUNTING、RECEIVE_PROPS）来控制 reRender 的时机；</p>
+</li>
+<li><p>不建议在 getDefaultProps、getInitialState、shouldComponentUpdate、componentWillUpdate、render 和 componentWillUnmount 中调用 setState，特别注意：不能在 shouldComponentUpdate 和 componentWillUpdate 中调用 setState，会导致循环调用。</p>
+</li>
+</ul>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你的爱！<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="http://oatasl78l.bkt.clouddn.com/alipay.png">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="http://oatasl78l.bkt.clouddn.com/wx.png">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://wisdommm.github.io/2016/11/08/react生命周期源码解读/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+  
+<nav id="article-nav">
+  
+    <a href="/2016/12/04/react无状态组件和高阶组件/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          react——无状态组件和高阶组件
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/10/10/promise/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">promise 详解</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+
+
+
+
+  
+  <div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="react生命周期源码解读" data-title="从源码看react生命周期" data-url="http://wisdommm.github.io/2016/11/08/react生命周期源码解读/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"wisdommm"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+  
+
+
+
+
+          </div>
+        </div>
+      </div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2017 Wisdommm
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    <script>
+	var yiliaConfig = {
+		mathjax: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: true,
+		root: "/",
+		innerArchive: true,
+		showTags: true
+	}
+</script>
+
+<script>!function(t){function n(r){if(e[r])return e[r].exports;var o=e[r]={exports:{},id:r,loaded:!1};return t[r].call(o.exports,o,o.exports,n),o.loaded=!0,o.exports}var e={};return n.m=t,n.c=e,n.p="./",n(0)}([function(t,n,e){"use strict";function r(t){return t&&t.__esModule?t:{default:t}}function o(t,n){var e=/\/|index.html/g;return t.replace(e,"")===n.replace(e,"")}function i(){for(var t=document.querySelectorAll(".js-header-menu li a"),n=window.location.pathname,e=0,r=t.length;e<r;e++){var i=t[e];o(n,i.getAttribute("href"))&&(0,d.default)(i,"active")}}function u(t){for(var n=t.offsetLeft,e=t.offsetParent;null!==e;)n+=e.offsetLeft,e=e.offsetParent;return n}function f(t){for(var n=t.offsetTop,e=t.offsetParent;null!==e;)n+=e.offsetTop,e=e.offsetParent;return n}function c(t,n,e,r,o){var i=u(t),c=f(t)-n;if(c-e<=o){var a=t.$newDom;a||(a=t.cloneNode(!0),(0,h.default)(t,a),t.$newDom=a,a.style.position="fixed",a.style.top=(e||c)+"px",a.style.left=i+"px",a.style.zIndex=r||2,a.style.width="100%",a.style.color="#fff"),a.style.visibility="visible",t.style.visibility="hidden"}else{t.style.visibility="visible";var s=t.$newDom;s&&(s.style.visibility="hidden")}}function a(){var t=document.querySelector(".js-overlay"),n=document.querySelector(".js-header-menu");c(t,document.body.scrollTop,-63,2,0),c(n,document.body.scrollTop,1,3,0)}function s(){document.querySelector("#container").addEventListener("scroll",function(t){a()}),window.addEventListener("scroll",function(t){a()}),a()}function l(){x.default.versions.mobile&&window.screen.width<800&&(i(),s())}var p=e(71),d=r(p),v=e(72),y=(r(v),e(84)),h=r(y),b=e(69),x=r(b),m=e(75),g=r(m),w=e(70);l(),(0,w.addLoadEvent)(function(){g.default.init()}),t.exports={}},function(t,n){var e=t.exports="undefined"!=typeof window&&window.Math==Math?window:"undefined"!=typeof self&&self.Math==Math?self:Function("return this")();"number"==typeof __g&&(__g=e)},function(t,n){var e={}.hasOwnProperty;t.exports=function(t,n){return e.call(t,n)}},function(t,n,e){var r=e(49),o=e(15);t.exports=function(t){return r(o(t))}},function(t,n,e){t.exports=!e(8)(function(){return 7!=Object.defineProperty({},"a",{get:function(){return 7}}).a})},function(t,n,e){var r=e(6),o=e(12);t.exports=e(4)?function(t,n,e){return r.f(t,n,o(1,e))}:function(t,n,e){return t[n]=e,t}},function(t,n,e){var r=e(10),o=e(30),i=e(24),u=Object.defineProperty;n.f=e(4)?Object.defineProperty:function(t,n,e){if(r(t),n=i(n,!0),r(e),o)try{return u(t,n,e)}catch(t){}if("get"in e||"set"in e)throw TypeError("Accessors not supported!");return"value"in e&&(t[n]=e.value),t}},function(t,n,e){var r=e(22)("wks"),o=e(13),i=e(1).Symbol,u="function"==typeof i,f=t.exports=function(t){return r[t]||(r[t]=u&&i[t]||(u?i:o)("Symbol."+t))};f.store=r},function(t,n){t.exports=function(t){try{return!!t()}catch(t){return!0}}},function(t,n,e){var r=e(35),o=e(16);t.exports=Object.keys||function(t){return r(t,o)}},function(t,n,e){var r=e(11);t.exports=function(t){if(!r(t))throw TypeError(t+" is not an object!");return t}},function(t,n){t.exports=function(t){return"object"==typeof t?null!==t:"function"==typeof t}},function(t,n){t.exports=function(t,n){return{enumerable:!(1&t),configurable:!(2&t),writable:!(4&t),value:n}}},function(t,n){var e=0,r=Math.random();t.exports=function(t){return"Symbol(".concat(void 0===t?"":t,")_",(++e+r).toString(36))}},function(t,n){var e=t.exports={version:"2.4.0"};"number"==typeof __e&&(__e=e)},function(t,n){t.exports=function(t){if(void 0==t)throw TypeError("Can't call method on  "+t);return t}},function(t,n){t.exports="constructor,hasOwnProperty,isPrototypeOf,propertyIsEnumerable,toLocaleString,toString,valueOf".split(",")},function(t,n){t.exports={}},function(t,n){t.exports=!0},function(t,n){n.f={}.propertyIsEnumerable},function(t,n,e){var r=e(6).f,o=e(2),i=e(7)("toStringTag");t.exports=function(t,n,e){t&&!o(t=e?t:t.prototype,i)&&r(t,i,{configurable:!0,value:n})}},function(t,n,e){var r=e(22)("keys"),o=e(13);t.exports=function(t){return r[t]||(r[t]=o(t))}},function(t,n,e){var r=e(1),o="__core-js_shared__",i=r[o]||(r[o]={});t.exports=function(t){return i[t]||(i[t]={})}},function(t,n){var e=Math.ceil,r=Math.floor;t.exports=function(t){return isNaN(t=+t)?0:(t>0?r:e)(t)}},function(t,n,e){var r=e(11);t.exports=function(t,n){if(!r(t))return t;var e,o;if(n&&"function"==typeof(e=t.toString)&&!r(o=e.call(t)))return o;if("function"==typeof(e=t.valueOf)&&!r(o=e.call(t)))return o;if(!n&&"function"==typeof(e=t.toString)&&!r(o=e.call(t)))return o;throw TypeError("Can't convert object to primitive value")}},function(t,n,e){var r=e(1),o=e(14),i=e(18),u=e(26),f=e(6).f;t.exports=function(t){var n=o.Symbol||(o.Symbol=i?{}:r.Symbol||{});"_"==t.charAt(0)||t in n||f(n,t,{value:u.f(t)})}},function(t,n,e){n.f=e(7)},function(t,n,e){var r=e(1),o=e(14),i=e(46),u=e(5),f="prototype",c=function(t,n,e){var a,s,l,p=t&c.F,d=t&c.G,v=t&c.S,y=t&c.P,h=t&c.B,b=t&c.W,x=d?o:o[n]||(o[n]={}),m=x[f],g=d?r:v?r[n]:(r[n]||{})[f];d&&(e=n);for(a in e)s=!p&&g&&void 0!==g[a],s&&a in x||(l=s?g[a]:e[a],x[a]=d&&"function"!=typeof g[a]?e[a]:h&&s?i(l,r):b&&g[a]==l?function(t){var n=function(n,e,r){if(this instanceof t){switch(arguments.length){case 0:return new t;case 1:return new t(n);case 2:return new t(n,e)}return new t(n,e,r)}return t.apply(this,arguments)};return n[f]=t[f],n}(l):y&&"function"==typeof l?i(Function.call,l):l,y&&((x.virtual||(x.virtual={}))[a]=l,t&c.R&&m&&!m[a]&&u(m,a,l)))};c.F=1,c.G=2,c.S=4,c.P=8,c.B=16,c.W=32,c.U=64,c.R=128,t.exports=c},function(t,n){var e={}.toString;t.exports=function(t){return e.call(t).slice(8,-1)}},function(t,n,e){var r=e(11),o=e(1).document,i=r(o)&&r(o.createElement);t.exports=function(t){return i?o.createElement(t):{}}},function(t,n,e){t.exports=!e(4)&&!e(8)(function(){return 7!=Object.defineProperty(e(29)("div"),"a",{get:function(){return 7}}).a})},function(t,n,e){"use strict";var r=e(18),o=e(27),i=e(36),u=e(5),f=e(2),c=e(17),a=e(51),s=e(20),l=e(58),p=e(7)("iterator"),d=!([].keys&&"next"in[].keys()),v="@@iterator",y="keys",h="values",b=function(){return this};t.exports=function(t,n,e,x,m,g,w){a(e,n,x);var O,S,_,j=function(t){if(!d&&t in A)return A[t];switch(t){case y:return function(){return new e(this,t)};case h:return function(){return new e(this,t)}}return function(){return new e(this,t)}},P=n+" Iterator",E=m==h,M=!1,A=t.prototype,T=A[p]||A[v]||m&&A[m],L=T||j(m),N=m?E?j("entries"):L:void 0,C="Array"==n?A.entries||T:T;if(C&&(_=l(C.call(new t)),_!==Object.prototype&&(s(_,P,!0),r||f(_,p)||u(_,p,b))),E&&T&&T.name!==h&&(M=!0,L=function(){return T.call(this)}),r&&!w||!d&&!M&&A[p]||u(A,p,L),c[n]=L,c[P]=b,m)if(O={values:E?L:j(h),keys:g?L:j(y),entries:N},w)for(S in O)S in A||i(A,S,O[S]);else o(o.P+o.F*(d||M),n,O);return O}},function(t,n,e){var r=e(10),o=e(55),i=e(16),u=e(21)("IE_PROTO"),f=function(){},c="prototype",a=function(){var t,n=e(29)("iframe"),r=i.length,o="<",u=">";for(n.style.display="none",e(48).appendChild(n),n.src="javascript:",t=n.contentWindow.document,t.open(),t.write(o+"script"+u+"document.F=Object"+o+"/script"+u),t.close(),a=t.F;r--;)delete a[c][i[r]];return a()};t.exports=Object.create||function(t,n){var e;return null!==t?(f[c]=r(t),e=new f,f[c]=null,e[u]=t):e=a(),void 0===n?e:o(e,n)}},function(t,n,e){var r=e(35),o=e(16).concat("length","prototype");n.f=Object.getOwnPropertyNames||function(t){return r(t,o)}},function(t,n){n.f=Object.getOwnPropertySymbols},function(t,n,e){var r=e(2),o=e(3),i=e(45)(!1),u=e(21)("IE_PROTO");t.exports=function(t,n){var e,f=o(t),c=0,a=[];for(e in f)e!=u&&r(f,e)&&a.push(e);for(;n.length>c;)r(f,e=n[c++])&&(~i(a,e)||a.push(e));return a}},function(t,n,e){t.exports=e(5)},function(t,n,e){var r=e(15);t.exports=function(t){return Object(r(t))}},function(t,n,e){t.exports={default:e(41),__esModule:!0}},function(t,n,e){t.exports={default:e(42),__esModule:!0}},function(t,n,e){"use strict";function r(t){return t&&t.__esModule?t:{default:t}}n.__esModule=!0;var o=e(39),i=r(o),u=e(38),f=r(u),c="function"==typeof f.default&&"symbol"==typeof i.default?function(t){return typeof t}:function(t){return t&&"function"==typeof f.default&&t.constructor===f.default&&t!==f.default.prototype?"symbol":typeof t};n.default="function"==typeof f.default&&"symbol"===c(i.default)?function(t){return"undefined"==typeof t?"undefined":c(t)}:function(t){return t&&"function"==typeof f.default&&t.constructor===f.default&&t!==f.default.prototype?"symbol":"undefined"==typeof t?"undefined":c(t)}},function(t,n,e){e(65),e(63),e(66),e(67),t.exports=e(14).Symbol},function(t,n,e){e(64),e(68),t.exports=e(26).f("iterator")},function(t,n){t.exports=function(t){if("function"!=typeof t)throw TypeError(t+" is not a function!");return t}},function(t,n){t.exports=function(){}},function(t,n,e){var r=e(3),o=e(61),i=e(60);t.exports=function(t){return function(n,e,u){var f,c=r(n),a=o(c.length),s=i(u,a);if(t&&e!=e){for(;a>s;)if(f=c[s++],f!=f)return!0}else for(;a>s;s++)if((t||s in c)&&c[s]===e)return t||s||0;return!t&&-1}}},function(t,n,e){var r=e(43);t.exports=function(t,n,e){if(r(t),void 0===n)return t;switch(e){case 1:return function(e){return t.call(n,e)};case 2:return function(e,r){return t.call(n,e,r)};case 3:return function(e,r,o){return t.call(n,e,r,o)}}return function(){return t.apply(n,arguments)}}},function(t,n,e){var r=e(9),o=e(34),i=e(19);t.exports=function(t){var n=r(t),e=o.f;if(e)for(var u,f=e(t),c=i.f,a=0;f.length>a;)c.call(t,u=f[a++])&&n.push(u);return n}},function(t,n,e){t.exports=e(1).document&&document.documentElement},function(t,n,e){var r=e(28);t.exports=Object("z").propertyIsEnumerable(0)?Object:function(t){return"String"==r(t)?t.split(""):Object(t)}},function(t,n,e){var r=e(28);t.exports=Array.isArray||function(t){return"Array"==r(t)}},function(t,n,e){"use strict";var r=e(32),o=e(12),i=e(20),u={};e(5)(u,e(7)("iterator"),function(){return this}),t.exports=function(t,n,e){t.prototype=r(u,{next:o(1,e)}),i(t,n+" Iterator")}},function(t,n){t.exports=function(t,n){return{value:n,done:!!t}}},function(t,n,e){var r=e(9),o=e(3);t.exports=function(t,n){for(var e,i=o(t),u=r(i),f=u.length,c=0;f>c;)if(i[e=u[c++]]===n)return e}},function(t,n,e){var r=e(13)("meta"),o=e(11),i=e(2),u=e(6).f,f=0,c=Object.isExtensible||function(){return!0},a=!e(8)(function(){return c(Object.preventExtensions({}))}),s=function(t){u(t,r,{value:{i:"O"+ ++f,w:{}}})},l=function(t,n){if(!o(t))return"symbol"==typeof t?t:("string"==typeof t?"S":"P")+t;if(!i(t,r)){if(!c(t))return"F";if(!n)return"E";s(t)}return t[r].i},p=function(t,n){if(!i(t,r)){if(!c(t))return!0;if(!n)return!1;s(t)}return t[r].w},d=function(t){return a&&v.NEED&&c(t)&&!i(t,r)&&s(t),t},v=t.exports={KEY:r,NEED:!1,fastKey:l,getWeak:p,onFreeze:d}},function(t,n,e){var r=e(6),o=e(10),i=e(9);t.exports=e(4)?Object.defineProperties:function(t,n){o(t);for(var e,u=i(n),f=u.length,c=0;f>c;)r.f(t,e=u[c++],n[e]);return t}},function(t,n,e){var r=e(19),o=e(12),i=e(3),u=e(24),f=e(2),c=e(30),a=Object.getOwnPropertyDescriptor;n.f=e(4)?a:function(t,n){if(t=i(t),n=u(n,!0),c)try{return a(t,n)}catch(t){}if(f(t,n))return o(!r.f.call(t,n),t[n])}},function(t,n,e){var r=e(3),o=e(33).f,i={}.toString,u="object"==typeof window&&window&&Object.getOwnPropertyNames?Object.getOwnPropertyNames(window):[],f=function(t){try{return o(t)}catch(t){return u.slice()}};t.exports.f=function(t){return u&&"[object Window]"==i.call(t)?f(t):o(r(t))}},function(t,n,e){var r=e(2),o=e(37),i=e(21)("IE_PROTO"),u=Object.prototype;t.exports=Object.getPrototypeOf||function(t){return t=o(t),r(t,i)?t[i]:"function"==typeof t.constructor&&t instanceof t.constructor?t.constructor.prototype:t instanceof Object?u:null}},function(t,n,e){var r=e(23),o=e(15);t.exports=function(t){return function(n,e){var i,u,f=String(o(n)),c=r(e),a=f.length;return c<0||c>=a?t?"":void 0:(i=f.charCodeAt(c),i<55296||i>56319||c+1===a||(u=f.charCodeAt(c+1))<56320||u>57343?t?f.charAt(c):i:t?f.slice(c,c+2):(i-55296<<10)+(u-56320)+65536)}}},function(t,n,e){var r=e(23),o=Math.max,i=Math.min;t.exports=function(t,n){return t=r(t),t<0?o(t+n,0):i(t,n)}},function(t,n,e){var r=e(23),o=Math.min;t.exports=function(t){return t>0?o(r(t),9007199254740991):0}},function(t,n,e){"use strict";var r=e(44),o=e(52),i=e(17),u=e(3);t.exports=e(31)(Array,"Array",function(t,n){this._t=u(t),this._i=0,this._k=n},function(){var t=this._t,n=this._k,e=this._i++;return!t||e>=t.length?(this._t=void 0,o(1)):"keys"==n?o(0,e):"values"==n?o(0,t[e]):o(0,[e,t[e]])},"values"),i.Arguments=i.Array,r("keys"),r("values"),r("entries")},function(t,n){},function(t,n,e){"use strict";var r=e(59)(!0);e(31)(String,"String",function(t){this._t=String(t),this._i=0},function(){var t,n=this._t,e=this._i;return e>=n.length?{value:void 0,done:!0}:(t=r(n,e),this._i+=t.length,{value:t,done:!1})})},function(t,n,e){"use strict";var r=e(1),o=e(2),i=e(4),u=e(27),f=e(36),c=e(54).KEY,a=e(8),s=e(22),l=e(20),p=e(13),d=e(7),v=e(26),y=e(25),h=e(53),b=e(47),x=e(50),m=e(10),g=e(3),w=e(24),O=e(12),S=e(32),_=e(57),j=e(56),P=e(6),E=e(9),M=j.f,A=P.f,T=_.f,L=r.Symbol,N=r.JSON,C=N&&N.stringify,k="prototype",F=d("_hidden"),q=d("toPrimitive"),I={}.propertyIsEnumerable,B=s("symbol-registry"),D=s("symbols"),W=s("op-symbols"),H=Object[k],K="function"==typeof L,R=r.QObject,J=!R||!R[k]||!R[k].findChild,U=i&&a(function(){return 7!=S(A({},"a",{get:function(){return A(this,"a",{value:7}).a}})).a})?function(t,n,e){var r=M(H,n);r&&delete H[n],A(t,n,e),r&&t!==H&&A(H,n,r)}:A,G=function(t){var n=D[t]=S(L[k]);return n._k=t,n},$=K&&"symbol"==typeof L.iterator?function(t){return"symbol"==typeof t}:function(t){return t instanceof L},z=function(t,n,e){return t===H&&z(W,n,e),m(t),n=w(n,!0),m(e),o(D,n)?(e.enumerable?(o(t,F)&&t[F][n]&&(t[F][n]=!1),e=S(e,{enumerable:O(0,!1)})):(o(t,F)||A(t,F,O(1,{})),t[F][n]=!0),U(t,n,e)):A(t,n,e)},Y=function(t,n){m(t);for(var e,r=b(n=g(n)),o=0,i=r.length;i>o;)z(t,e=r[o++],n[e]);return t},Q=function(t,n){return void 0===n?S(t):Y(S(t),n)},X=function(t){var n=I.call(this,t=w(t,!0));return!(this===H&&o(D,t)&&!o(W,t))&&(!(n||!o(this,t)||!o(D,t)||o(this,F)&&this[F][t])||n)},V=function(t,n){if(t=g(t),n=w(n,!0),t!==H||!o(D,n)||o(W,n)){var e=M(t,n);return!e||!o(D,n)||o(t,F)&&t[F][n]||(e.enumerable=!0),e}},Z=function(t){for(var n,e=T(g(t)),r=[],i=0;e.length>i;)o(D,n=e[i++])||n==F||n==c||r.push(n);return r},tt=function(t){for(var n,e=t===H,r=T(e?W:g(t)),i=[],u=0;r.length>u;)!o(D,n=r[u++])||e&&!o(H,n)||i.push(D[n]);return i};K||(L=function(){if(this instanceof L)throw TypeError("Symbol is not a constructor!");var t=p(arguments.length>0?arguments[0]:void 0),n=function(e){this===H&&n.call(W,e),o(this,F)&&o(this[F],t)&&(this[F][t]=!1),U(this,t,O(1,e))};return i&&J&&U(H,t,{configurable:!0,set:n}),G(t)},f(L[k],"toString",function(){return this._k}),j.f=V,P.f=z,e(33).f=_.f=Z,e(19).f=X,e(34).f=tt,i&&!e(18)&&f(H,"propertyIsEnumerable",X,!0),v.f=function(t){return G(d(t))}),u(u.G+u.W+u.F*!K,{Symbol:L});for(var nt="hasInstance,isConcatSpreadable,iterator,match,replace,search,species,split,toPrimitive,toStringTag,unscopables".split(","),et=0;nt.length>et;)d(nt[et++]);for(var nt=E(d.store),et=0;nt.length>et;)y(nt[et++]);u(u.S+u.F*!K,"Symbol",{for:function(t){return o(B,t+="")?B[t]:B[t]=L(t)},keyFor:function(t){if($(t))return h(B,t);throw TypeError(t+" is not a symbol!")},useSetter:function(){J=!0},useSimple:function(){J=!1}}),u(u.S+u.F*!K,"Object",{create:Q,defineProperty:z,defineProperties:Y,getOwnPropertyDescriptor:V,getOwnPropertyNames:Z,getOwnPropertySymbols:tt}),N&&u(u.S+u.F*(!K||a(function(){var t=L();return"[null]"!=C([t])||"{}"!=C({a:t})||"{}"!=C(Object(t))})),"JSON",{stringify:function(t){if(void 0!==t&&!$(t)){for(var n,e,r=[t],o=1;arguments.length>o;)r.push(arguments[o++]);return n=r[1],"function"==typeof n&&(e=n),!e&&x(n)||(n=function(t,n){if(e&&(n=e.call(this,t,n)),!$(n))return n}),r[1]=n,C.apply(N,r)}}}),L[k][q]||e(5)(L[k],q,L[k].valueOf),l(L,"Symbol"),l(Math,"Math",!0),l(r.JSON,"JSON",!0)},function(t,n,e){e(25)("asyncIterator")},function(t,n,e){e(25)("observable")},function(t,n,e){e(62);for(var r=e(1),o=e(5),i=e(17),u=e(7)("toStringTag"),f=["NodeList","DOMTokenList","MediaList","StyleSheetList","CSSRuleList"],c=0;c<5;c++){var a=f[c],s=r[a],l=s&&s.prototype;l&&!l[u]&&o(l,u,a),i[a]=i.Array}},function(t,n){"use strict";var e={versions:function(){var t=window.navigator.userAgent;return{trident:t.indexOf("Trident")>-1,presto:t.indexOf("Presto")>-1,webKit:t.indexOf("AppleWebKit")>-1,gecko:t.indexOf("Gecko")>-1&&t.indexOf("KHTML")==-1,mobile:!!t.match(/AppleWebKit.*Mobile.*/),ios:!!t.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/),android:t.indexOf("Android")>-1||t.indexOf("Linux")>-1,iPhone:t.indexOf("iPhone")>-1||t.indexOf("Mac")>-1,iPad:t.indexOf("iPad")>-1,webApp:t.indexOf("Safari")==-1,weixin:t.indexOf("MicroMessenger")==-1}}()};t.exports=e},function(t,n,e){"use strict";function r(t){return t&&t.__esModule?t:{default:t}}var o=e(40),i=r(o),u=function(){function t(t,n,e){return n||e?String.fromCharCode(n||e):o[t]||t}function n(t){return l[t]}var e=/&quot;|&lt;|&gt;|&amp;|&nbsp;|&apos;|&#(\d+);|&#(\d+)/g,r=/['<> "&]/g,o={"&quot;":'"',"&lt;":"<","&gt;":">","&amp;":"&","&nbsp;":" "},f=/\u00a0/g,c=/<br\s*\/?>/gi,a=/\r?\n/g,s=/\s/g,l={};for(var p in o)l[o[p]]=p;return o["&apos;"]="'",l["'"]="&#39;",{encode:function(t){return t?(""+t).replace(r,n).replace(a,"<br/>").replace(s,"&nbsp;"):""},decode:function(n){return n?(""+n).replace(c,"\n").replace(e,t).replace(f," "):""},encodeBase16:function(t){if(!t)return t;t+="";for(var n=[],e=0,r=t.length;r>e;e++)n.push(t.charCodeAt(e).toString(16).toUpperCase());return n.join("")},encodeBase16forJSON:function(t){if(!t)return t;t=t.replace(/[\u4E00-\u9FBF]/gi,function(t){return escape(t).replace("%u","\\u")});for(var n=[],e=0,r=t.length;r>e;e++)n.push(t.charCodeAt(e).toString(16).toUpperCase());return n.join("")},decodeBase16:function(t){if(!t)return t;t+="";for(var n=[],e=0,r=t.length;r>e;e+=2)n.push(String.fromCharCode("0x"+t.slice(e,e+2)));return n.join("")},encodeObject:function(t){if(t instanceof Array)for(var n=0,e=t.length;e>n;n++)t[n]=u.encodeObject(t[n]);else if("object"==("undefined"==typeof t?"undefined":(0,i.default)(t)))for(var r in t)t[r]=u.encodeObject(t[r]);else if("string"==typeof t)return u.encode(t);return t},loadScript:function(t){var n=document.createElement("script");document.getElementsByTagName("body")[0].appendChild(n),n.setAttribute("src",t)},addLoadEvent:function(t){var n=window.onload;"function"!=typeof window.onload?window.onload=t:window.onload=function(){n(),t()}}}}();t.exports=u},function(t,n){function e(t,n){t.classList?t.classList.add(n):t.className+=" "+n}t.exports=e},function(t,n){function e(t,n){if(t.classList)t.classList.remove(n);else{var e=new RegExp("(^|\\b)"+n.split(" ").join("|")+"(\\b|$)","gi");t.className=t.className.replace(e," ")}}t.exports=e},,,function(t,n){"use strict";function e(){var t=document.querySelector("#page-nav");if(t&&!document.querySelector("#page-nav .extend.prev")&&(t.innerHTML='<a class="extend prev disabled" rel="prev">&laquo; Prev</a>'+t.innerHTML),t&&!document.querySelector("#page-nav .extend.next")&&(t.innerHTML=t.innerHTML+'<a class="extend next disabled" rel="next">Next &raquo;</a>'),yiliaConfig&&yiliaConfig.open_in_new){var n=document.querySelectorAll(".article-entry a:not(.article-more-a)");n.forEach(function(t){t.setAttribute("target","_blank")})}var e=document.querySelector("#js-aboutme");e&&0!==e.length&&(e.innerHTML=e.innerText)}t.exports={init:e}},,,,,,,,,function(t,n){function e(t,n){if("string"==typeof n)return t.insertAdjacentHTML("afterend",n);var e=t.nextSibling;return e?t.parentNode.insertBefore(n,e):t.parentNode.appendChild(n)}t.exports=e}])</script><script src="/./main.2d7529.js"></script><script>!function(){var e=function(e){var t=document.createElement("script");document.getElementsByTagName("body")[0].appendChild(t),t.setAttribute("src",e)};e("/slider.885efe.js")}()</script>
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+    
+<div class="tools-col" q-class="show:isShow,hide:isShow|isFalse" q-on="click:stop(e)">
+  <div class="tools-nav header-menu">
+    
+    
+      
+      
+      
+    
+      
+      
+      
+    
+      
+      
+      
+    
+    
+
+    <ul style="width: 70%">
+    
+    
+      
+      <li style="width: 33.333333333333336%" q-on="click: openSlider(e, 'innerArchive')"><a href="javascript:void(0)" q-class="active:innerArchive">所有文章</a></li>
+      
+        
+      
+      <li style="width: 33.333333333333336%" q-on="click: openSlider(e, 'friends')"><a href="javascript:void(0)" q-class="active:friends">友链</a></li>
+      
+        
+      
+      <li style="width: 33.333333333333336%" q-on="click: openSlider(e, 'aboutme')"><a href="javascript:void(0)" q-class="active:aboutme">关于我</a></li>
+      
+        
+    </ul>
+  </div>
+  <div class="tools-wrap">
+    
+    	<section class="tools-section tools-section-all" q-show="innerArchive">
+        <div class="search-wrap">
+          <input class="search-ipt" q-model="search" type="text" placeholder="find something…">
+          <i class="icon-search icon" q-show="search|isEmptyStr"></i>
+          <i class="icon-close icon" q-show="search|isNotEmptyStr" q-on="click:clearChose(e)"></i>
+        </div>
+        <div class="widget tagcloud search-tag">
+          <p class="search-tag-wording">tag:</p>
+          <label class="search-switch">
+            <input type="checkbox" q-on="click:toggleTag(e)" q-attr="checked:showTags">
+          </label>
+          <ul class="article-tag-list" q-show="showTags">
+            
+            <div class="clearfix"></div>
+          </ul>
+        </div>
+        <ul class="search-ul">
+          <p q-show="jsonFail" style="padding: 20px; font-size: 12px;">
+            缺失模块。<br/>1、在博客根目录（注意不是yilia根目录）执行以下命令：<br/> npm i hexo-generator-json-content --save<br/><br/>
+            2、在根目录_config.yml里添加配置：
+<pre style="font-size: 12px;" q-show="jsonFail">
+  jsonContent:
+    meta: false
+    pages: false
+    posts:
+      title: true
+      date: true
+      path: true
+      text: true
+      raw: false
+      content: false
+      slug: false
+      updated: false
+      comments: false
+      link: false
+      permalink: false
+      excerpt: false
+      categories: false
+      tags: true
+</pre>
+          </p>
+          <li class="search-li" q-repeat="items" q-show="isShow">
+            <a q-attr="href:path|urlformat" class="search-title"><i class="icon-quo-left icon"></i><span q-text="title"></span></a>
+            <p class="search-time">
+              <i class="icon-calendar icon"></i>
+              <span q-text="date|dateformat"></span>
+            </p>
+            <p class="search-tag">
+              <i class="icon-price-tags icon"></i>
+              <span q-repeat="tags" q-on="click:choseTag(e, name)" q-text="name|tagformat"></span>
+            </p>
+          </li>
+        </ul>
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-friends" q-show="friends">
+  		
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-me" q-show="aboutme">
+  	  	
+  	  		<div class="aboutme-wrap" id="js-aboutme">对技术要有崇高且坚持的追求。</div>
+  	  	
+    	</section>
+    
+  </div>
+  
+</div>
+    <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+  </div>
+</body>
+</html>
