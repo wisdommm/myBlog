@@ -6,23 +6,34 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://wisdommm.github.io">
-  <title>react——无状态组件和高阶组件 | Wisdommm</title>
+  <title>ES6中的暂时性死区（TDZ） | Wisdommm</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="无状态组件先来说说无状态组件吧，顾名思义，无状态组件就是指的没有状态的组件，众所周知在react中，状态指的就是state，而没有state，会有什么好处和坏处呢？
-react中所有的数据，都是通过state和props来保存的，state主要是组件内部的数据交流，可以进行各种读写操作，而props主要是组件间的数据交流，一般针对props仅仅执行只读，不会做额外的操作。所以话说回来，无状态组件，">
+  <meta name="description" content="起因故事要从阮一峰老师的一条微博开始说起。。。
+
+这条微博下面有很多的评论，有的厉害的人一眼就指出了这是由于TDZ的原因，并不是什么V8的bug，TDZ是什么？下面我们就来慢慢揭开这层面纱。
+变量提升先从最简单的变量提升说起。
+12345678console.log(a);var a = 123;// 这里会输出undefined，原因是上面这段代码和下面的这段代码是等价的var a;consol">
 <meta property="og:type" content="article">
-<meta property="og:title" content="react——无状态组件和高阶组件">
-<meta property="og:url" content="http://wisdommm.github.io/2016/12/04/react无状态组件和高阶组件/index.html">
+<meta property="og:title" content="ES6中的暂时性死区（TDZ）">
+<meta property="og:url" content="http://wisdommm.github.io/2017/02/10/ES6 TDZ/index.html">
 <meta property="og:site_name" content="Wisdommm">
-<meta property="og:description" content="无状态组件先来说说无状态组件吧，顾名思义，无状态组件就是指的没有状态的组件，众所周知在react中，状态指的就是state，而没有state，会有什么好处和坏处呢？
-react中所有的数据，都是通过state和props来保存的，state主要是组件内部的数据交流，可以进行各种读写操作，而props主要是组件间的数据交流，一般针对props仅仅执行只读，不会做额外的操作。所以话说回来，无状态组件，">
-<meta property="og:image" content="http://oatasl78l.bkt.clouddn.com/%E9%AB%98%E9%98%B6%E7%BB%84%E4%BB%B6.png">
-<meta property="og:updated_time" content="2017-01-24T09:09:29.000Z">
+<meta property="og:description" content="起因故事要从阮一峰老师的一条微博开始说起。。。
+
+这条微博下面有很多的评论，有的厉害的人一眼就指出了这是由于TDZ的原因，并不是什么V8的bug，TDZ是什么？下面我们就来慢慢揭开这层面纱。
+变量提升先从最简单的变量提升说起。
+12345678console.log(a);var a = 123;// 这里会输出undefined，原因是上面这段代码和下面的这段代码是等价的var a;consol">
+<meta property="og:image" content="http://oatasl78l.bkt.clouddn.com/tdz.jpeg">
+<meta property="og:image" content="http://oatasl78l.bkt.clouddn.com/2728034159022278457.jpg">
+<meta property="og:image" content="http://oatasl78l.bkt.clouddn.com/let.png">
+<meta property="og:updated_time" content="2017-02-10T10:24:06.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="react——无状态组件和高阶组件">
-<meta name="twitter:description" content="无状态组件先来说说无状态组件吧，顾名思义，无状态组件就是指的没有状态的组件，众所周知在react中，状态指的就是state，而没有state，会有什么好处和坏处呢？
-react中所有的数据，都是通过state和props来保存的，state主要是组件内部的数据交流，可以进行各种读写操作，而props主要是组件间的数据交流，一般针对props仅仅执行只读，不会做额外的操作。所以话说回来，无状态组件，">
-<meta name="twitter:image" content="http://oatasl78l.bkt.clouddn.com/%E9%AB%98%E9%98%B6%E7%BB%84%E4%BB%B6.png">
+<meta name="twitter:title" content="ES6中的暂时性死区（TDZ）">
+<meta name="twitter:description" content="起因故事要从阮一峰老师的一条微博开始说起。。。
+
+这条微博下面有很多的评论，有的厉害的人一眼就指出了这是由于TDZ的原因，并不是什么V8的bug，TDZ是什么？下面我们就来慢慢揭开这层面纱。
+变量提升先从最简单的变量提升说起。
+12345678console.log(a);var a = 123;// 这里会输出undefined，原因是上面这段代码和下面的这段代码是等价的var a;consol">
+<meta name="twitter:image" content="http://oatasl78l.bkt.clouddn.com/tdz.jpeg">
   
     <link rel="alternative" href="/atom.xml" title="Wisdommm" type="application/atom+xml">
   
@@ -166,55 +177,45 @@ react中所有的数据，都是通过state和props来保存的，state主要是
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-react无状态组件和高阶组件" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-ES6 TDZ" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      react——无状态组件和高阶组件
+      ES6中的暂时性死区（TDZ）
     </h1>
   
 
         
-        <a href="/2016/12/04/react无状态组件和高阶组件/" class="archive-article-date">
-  	<time datetime="2016-12-04T08:25:05.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-12-04</time>
+        <a href="/2017/02/10/ES6 TDZ/" class="archive-article-date">
+  	<time datetime="2017-02-10T06:54:50.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-02-10</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h4 id="无状态组件"><a href="#无状态组件" class="headerlink" title="无状态组件"></a>无状态组件</h4><p>先来说说无状态组件吧，顾名思义，无状态组件就是指的没有状态的组件，众所周知在react中，状态指的就是state，而没有state，会有什么好处和坏处呢？</p>
-<p>react中所有的数据，都是通过state和props来保存的，state主要是组件内部的数据交流，可以进行各种读写操作，而props主要是组件间的数据交流，一般针对props仅仅执行只读，不会做额外的操作。所以话说回来，无状态组件，没有state，那么内部的逻辑必将大大减少，编写react组件的方便性也将大大提高。</p>
-<p>下面是一个简单的无状态组件：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">function Hello(props&#123;</div><div class="line">  return &lt;div&gt;Hello&#123;props.name&#125;&lt;/div&gt;</div><div class="line">&#125;</div><div class="line">ReactDOM.render(&lt;Hello name=&quot;world&quot; /&gt;, mountNode)</div><div class="line"></div><div class="line">// 最后一句也可以这么写</div><div class="line">ReactDOM.render(Hello(&#123;&quot;name&quot;:&quot;world&quot;&#125;), mountNode)</div></pre></td></tr></table></figure>
-<p>通过这个简单的示例可以看到，原本需要写的<code>react</code>类定义（<code>React.createClass</code>或者<code>class Component extends React.Component</code>）来创建自己组件的定义，但是由于这仅仅是一个无状态组件（无状态函数），<code>react</code>在渲染的时候也省掉了奖<code>react</code>组件类实例化的过程。</p>
-<p>所以对于一些纯静态展示的功能模块，可以考虑作为无状态组件，而无状态组件用来实现服务端渲染也是比较方便的，只要避免去获取dom节点就可以了。</p>
-<a id="more"></a>
-<h4 id="无状态组件的生命周期方法"><a href="#无状态组件的生命周期方法" class="headerlink" title="无状态组件的生命周期方法"></a>无状态组件的生命周期方法</h4><p>我们可以看到，无状态组件就剩了一个<code>render</code>方法，因此也就没有实现组件的生命周期方法，例如<code>componentDidMount</code>, <code>componentWillUnmount</code>等。那应该怎么办呢？这个时候就用到了高阶组件。</p>
-<h4 id="高阶组件"><a href="#高阶组件" class="headerlink" title="高阶组件"></a>高阶组件</h4><p>高阶组件是什么？通过函数，向现有的组件类添加逻辑，就叫做高阶组件。</p>
-<p>之前上面已经说了，无状态组件是没有<code>state</code>的，所以里面基本也就没有什么逻辑，可是如果我现在需要添加逻辑了，且又想继续使用这个无状态组件，怎么办呢？那就可以使用高阶组件。</p>
-<p>先来看看这个示例：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">function noId() &#123;</div><div class="line">  return function(Comp) &#123;</div><div class="line">    return class NoID extends Component &#123;</div><div class="line">      render() &#123;</div><div class="line">        const &#123;id, ...others&#125; = this.props;</div><div class="line">        return (</div><div class="line">          &lt;Comp &#123;...others&#125;/&gt;</div><div class="line">        )</div><div class="line">      &#125;</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">const WithoutID = noId()(Comp);</div></pre></td></tr></table></figure>
-<p>这个例子向我们展示了高阶组件的工作方式，通过函数和闭包等方法，改变已有组件的行为，示例里面改变了id属性。</p>
-<p>之所以称之为高阶组件，是因为在react中，这种嵌套的逻辑关系会反映到组件树上，层层嵌套就像高阶函数的function in function一样，如下图所示：</p>
-<p><img src="http://oatasl78l.bkt.clouddn.com/%E9%AB%98%E9%98%B6%E7%BB%84%E4%BB%B6.png" alt=""><br><br>从上图可以看出组件树虽然嵌套了许多层，但是实际渲染的无状态组件中的dom结构并没有发生改变，所以我们可以放心地使用高阶组件，哪怕重复使用，也不必担心影响输出的dom结构。而借助函数的表现能力，高阶组件的用途几乎是无穷尽的。</p>
-<h4 id="适配器"><a href="#适配器" class="headerlink" title="适配器"></a>适配器</h4><p>有时候你需要替换一些已有的组件，而新组件接受的参数和原组件并不完全一样.</p>
-<p>你可以考虑修改所有原组件的代码来保证传入正确的参数——so bad。</p>
-<p>你也可以通过使用高阶组件，把新组件做一层封装：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">class ListAdapter extends Component &#123;</div><div class="line">    mapProps(props) &#123;</div><div class="line">        return &#123;/* new props */&#125;</div><div class="line">    &#125;</div><div class="line">    render() &#123;</div><div class="line">        return &lt;NewList &#123;...mapProps(this.props)&#125; /&gt;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>如果有十个组件需要适配呢？当然，每个组件写十遍也不是不行，不过，高阶组件或许会给你一个更好的答案：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">function mapProps(mapFn) &#123;</div><div class="line">    return function(Comp) &#123;</div><div class="line">        return class extends Component &#123;</div><div class="line">            render() &#123;</div><div class="line">                return &lt;Comp &#123;...mapFn(this.props)&#125;/&gt;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125; </div><div class="line">&#125;</div><div class="line"></div><div class="line">const ListAdapter = mapProps(mapPropsForNewList)(NewList);</div></pre></td></tr></table></figure>
-<p>借助高阶组件，关注点被分离得足够彻底，你不需要考虑组件的渲染，你只需要考虑属性的map就够了。</p>
-<h4 id="处理副作用"><a href="#处理副作用" class="headerlink" title="处理副作用"></a>处理副作用</h4><p>在组件中，往往有很多的状态和副作用要处理，最常见的情况就是异步了。</p>
-<p>假设我们需要异步加载一个用户列表，通常的代码会是这样的：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">class UserList extends Component &#123;</div><div class="line">  constructor(props) &#123;</div><div class="line">    super();</div><div class="line">    this.state = &#123;</div><div class="line">      list: []</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">  componentDidMount() &#123;</div><div class="line">    loadUsers()</div><div class="line">      .then(data=&gt; </div><div class="line">        this.setState(&#123;list: data.userList&#125;)</div><div class="line">      )</div><div class="line">  &#125;</div><div class="line">  render() &#123;</div><div class="line">    return (</div><div class="line">      &lt;List list=&#123;this.state.list&#125; /&gt;</div><div class="line">    )</div><div class="line">  &#125;</div><div class="line">  /* other bussiness logics */</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>在实际情况中，以上代码往往还会和其他一些业务函数混杂在一起，如果再来一个或多个其他的列表呢，不仅代码会重复，大量有状态和副作用的组件也使得组件难以测试。或许你会考虑使用一些数据管理工具，比如flux或redux，是的，当然可以，可是这就像大炮打蚊子，杀鸡用牛刀。所以回到这个问题上来，我们只是想做一个异步的列表，仅此而已。</p>
-<p>使用高阶函数试试：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line">function connectPromise(&#123;promiseLoader, mapResultToProps&#125;) &#123;</div><div class="line">  return Comp=&gt; &#123;</div><div class="line">    return class AsyncComponent extends Component &#123;</div><div class="line">      constructor(props) &#123;</div><div class="line">        super();</div><div class="line">        this.state = &#123;</div><div class="line">          result: undefined</div><div class="line">        &#125;</div><div class="line">      &#125;</div><div class="line">      componentDidMount() &#123;</div><div class="line">        promiseLoader()</div><div class="line">          .then(result=&gt; this.setState(&#123;result&#125;))</div><div class="line">      &#125;</div><div class="line">      render() &#123;</div><div class="line">        return (</div><div class="line">          &lt;Comp &#123;...mapResultToProps(props)&#125; &#123;...this.props&#125;/&gt;</div><div class="line">        )</div><div class="line">      &#125;</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line">const UserList = connectPromise(&#123;</div><div class="line">    promiseLoader: loadUsers,</div><div class="line">    mapResultToProps: result=&gt; (&#123;list: result.userList&#125;)</div><div class="line">&#125;)(List); //List can be a pure component</div></pre></td></tr></table></figure>
-<p>可以看到，这样不仅大量减少了重复的代码，还把散落在各处的异步逻辑封装进了可以单独管理和测试的函数中，在实际业务场景中，只需要按照“纯组件＋配置”就可以实现相同的功能，而无论是纯组件还是配置，都是对单元测试友好的，至少比异步组件友好多了吧。</p>
+        <h3 id="起因"><a href="#起因" class="headerlink" title="起因"></a>起因</h3><p>故事要从阮一峰老师的一条微博开始说起。。。</p>
+<p><img src="http://oatasl78l.bkt.clouddn.com/tdz.jpeg" alt=""></p>
+<p>这条微博下面有很多的评论，有的厉害的人一眼就指出了这是由于TDZ的原因，并不是什么V8的bug，TDZ是什么？下面我们就来慢慢揭开这层面纱。</p>
+<h3 id="变量提升"><a href="#变量提升" class="headerlink" title="变量提升"></a>变量提升</h3><p>先从最简单的变量提升说起。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">console.log(a);</div><div class="line">var a = 123;</div><div class="line"></div><div class="line">// 这里会输出undefined，原因是上面这段代码和下面的这段代码是等价的</div><div class="line"></div><div class="line">var a;</div><div class="line">console.log(a);</div><div class="line">a = 123;</div></pre></td></tr></table></figure>
+<p>在ES6中，除了var关键字意外，还多了let和const关键字，有什么差异呢？</p>
+<p>先说const吧，const的意思是定义静态常量，是不可变的，所以我们可以先来开脑洞想想，当const遇上变量提升，会发生什么？</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">console.log(a);</div><div class="line">const a = 123;</div><div class="line"></div><div class="line">// 如果const的变量提升存在，则上面代码应该和下面代码等价</div><div class="line"></div><div class="line">const a;</div><div class="line">console.log(a);</div><div class="line">a = 123;</div></pre></td></tr></table></figure>
+<p>想必大家都发现问题了吧，很明显，前面说了const是定义的静态常量，是不可变的，假设上面的代码是对的，那么最开始a应该是undefined，可是后面却被再次赋值成了123，和const定义的静态常量不可改变相违背，所以这里就有问题，所以const没有变量提升？至少现在看起来，const是不应该有变量提升的。</p>
+<p>然后再来看看let关键字，和上面一样，当let遇见变量提升，又会怎样呢？老规矩，上代码吧。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">console.log(a);</div><div class="line">let a = 123;</div><div class="line"></div><div class="line">// 如果let的变量提升存在，则上面代码应该和下面代码等价</div><div class="line"></div><div class="line">let a;</div><div class="line">console.log(a);</div><div class="line">a = 123;</div></pre></td></tr></table></figure>
+<p>这段代码，至少看起来是没有问题的，不是吗？可是实际有问题没有，还是要放进浏览器中运行一下才知道，所以我们把这段代码放进chrome里看看。</p>
+<p>可惜，似乎很不幸。。。</p>
+<p><img src="http://oatasl78l.bkt.clouddn.com/2728034159022278457.jpg" alt=""></p>
+<p>所以照现在看来，const和let都是没有变量提升的，对吧。</p>
+<p>然后我们来看下面一段代码。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">let e = 12;</div><div class="line">function foo()&#123;</div><div class="line">console.log(e);</div><div class="line">let e = 123;</div><div class="line">&#125;</div><div class="line">foo();</div><div class="line">// 如果说let真的没有变量提升的话，那么这里应该打印出12，OK？实际上如何呢，还是把代码放进浏览器中运行看看吧。</div></pre></td></tr></table></figure>
+<p><img src="http://oatasl78l.bkt.clouddn.com/let.png" alt=""></p>
+<p>怎么会是这样呢？</p>
 
       
 
@@ -304,7 +305,7 @@ react中所有的数据，都是通过state和props来保存的，state主要是
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="http://s.jiathis.com/qrcode.php?url=http://wisdommm.github.io/2016/12/04/react无状态组件和高阶组件/" alt="微信分享二维码">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://wisdommm.github.io/2017/02/10/ES6 TDZ/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -318,18 +319,9 @@ react中所有的数据，都是通过state和props来保存的，state主要是
   
 <nav id="article-nav">
   
-    <a href="/2016/12/18/D2总结（1）/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          D2总结（Fusion Design）
-        
-      </div>
-    </a>
   
-  
-    <a href="/2016/11/08/react生命周期源码解读/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">从源码看react生命周期</div>
+    <a href="/2017/01/16/redux源码解读/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">redux源码解读</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -343,7 +335,7 @@ react中所有的数据，都是通过state和props来保存的，state主要是
   
   <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="react无状态组件和高阶组件" data-title="react——无状态组件和高阶组件" data-url="http://wisdommm.github.io/2016/12/04/react无状态组件和高阶组件/"></div>
+	<div class="ds-thread" data-thread-key="ES6 TDZ" data-title="ES6中的暂时性死区（TDZ）" data-url="http://wisdommm.github.io/2017/02/10/ES6 TDZ/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">
