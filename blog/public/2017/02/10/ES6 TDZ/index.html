@@ -10,29 +10,23 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="起因故事要从阮一峰老师的一条微博开始说起。。。
 
-这条微博下面有很多的评论，有的厉害的人一眼就指出了这是由于TDZ的原因，并不是什么V8的bug，TDZ是什么？下面我们就来慢慢揭开这层面纱。
-变量提升先从最简单的变量提升说起。
-12345678console.log(a);var a = 123;// 这里会输出undefined，原因是上面这段代码和下面的这段代码是等价的var a;consol">
+这条微博下面有很多的评论，有的厉害的人一眼就指出了这是由于TDZ的原因，并不是什么V8的bug，TDZ是什么？下面我们就来慢慢揭开这层面纱。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="ES6中的暂时性死区（TDZ）">
 <meta property="og:url" content="http://wisdommm.github.io/2017/02/10/ES6 TDZ/index.html">
 <meta property="og:site_name" content="Wisdommm">
 <meta property="og:description" content="起因故事要从阮一峰老师的一条微博开始说起。。。
 
-这条微博下面有很多的评论，有的厉害的人一眼就指出了这是由于TDZ的原因，并不是什么V8的bug，TDZ是什么？下面我们就来慢慢揭开这层面纱。
-变量提升先从最简单的变量提升说起。
-12345678console.log(a);var a = 123;// 这里会输出undefined，原因是上面这段代码和下面的这段代码是等价的var a;consol">
+这条微博下面有很多的评论，有的厉害的人一眼就指出了这是由于TDZ的原因，并不是什么V8的bug，TDZ是什么？下面我们就来慢慢揭开这层面纱。">
 <meta property="og:image" content="http://oatasl78l.bkt.clouddn.com/tdz.jpeg">
 <meta property="og:image" content="http://oatasl78l.bkt.clouddn.com/2728034159022278457.jpg">
 <meta property="og:image" content="http://oatasl78l.bkt.clouddn.com/let.png">
-<meta property="og:updated_time" content="2017-02-10T10:24:06.000Z">
+<meta property="og:updated_time" content="2017-02-14T02:16:02.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ES6中的暂时性死区（TDZ）">
 <meta name="twitter:description" content="起因故事要从阮一峰老师的一条微博开始说起。。。
 
-这条微博下面有很多的评论，有的厉害的人一眼就指出了这是由于TDZ的原因，并不是什么V8的bug，TDZ是什么？下面我们就来慢慢揭开这层面纱。
-变量提升先从最简单的变量提升说起。
-12345678console.log(a);var a = 123;// 这里会输出undefined，原因是上面这段代码和下面的这段代码是等价的var a;consol">
+这条微博下面有很多的评论，有的厉害的人一眼就指出了这是由于TDZ的原因，并不是什么V8的bug，TDZ是什么？下面我们就来慢慢揭开这层面纱。">
 <meta name="twitter:image" content="http://oatasl78l.bkt.clouddn.com/tdz.jpeg">
   
     <link rel="alternative" href="/atom.xml" title="Wisdommm" type="application/atom+xml">
@@ -68,7 +62,7 @@
 		  <h1 class="header-author"><a href="/">Wisdommm</a></h1>
 		</hgroup>
 		
-		<p class="header-subtitle">再牛逼的梦想也敌不过傻逼一样的坚持。</p>
+		<p class="header-subtitle">知行合一</p>
 		
 
 		<nav class="header-menu">
@@ -130,7 +124,7 @@
 			  <h1 class="header-author js-header-author">Wisdommm</h1>
 			</hgroup>
 			
-			<p class="header-subtitle"><i class="icon icon-quo-left"></i>再牛逼的梦想也敌不过傻逼一样的坚持。<i class="icon icon-quo-right"></i></p>
+			<p class="header-subtitle"><i class="icon icon-quo-left"></i>知行合一<i class="icon icon-quo-right"></i></p>
 			
 			
 			
@@ -200,6 +194,7 @@
         <h3 id="起因"><a href="#起因" class="headerlink" title="起因"></a>起因</h3><p>故事要从阮一峰老师的一条微博开始说起。。。</p>
 <p><img src="http://oatasl78l.bkt.clouddn.com/tdz.jpeg" alt=""></p>
 <p>这条微博下面有很多的评论，有的厉害的人一眼就指出了这是由于TDZ的原因，并不是什么V8的bug，TDZ是什么？下面我们就来慢慢揭开这层面纱。</p>
+<a id="more"></a>
 <h3 id="变量提升"><a href="#变量提升" class="headerlink" title="变量提升"></a>变量提升</h3><p>先从最简单的变量提升说起。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">console.log(a);</div><div class="line">var a = 123;</div><div class="line"></div><div class="line">// 这里会输出undefined，原因是上面这段代码和下面的这段代码是等价的</div><div class="line"></div><div class="line">var a;</div><div class="line">console.log(a);</div><div class="line">a = 123;</div></pre></td></tr></table></figure>
 <p>在ES6中，除了var关键字意外，还多了let和const关键字，有什么差异呢？</p>
@@ -215,7 +210,8 @@
 <p>然后我们来看下面一段代码。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">let e = 12;</div><div class="line">function foo()&#123;</div><div class="line">console.log(e);</div><div class="line">let e = 123;</div><div class="line">&#125;</div><div class="line">foo();</div><div class="line">// 如果说let真的没有变量提升的话，那么这里应该打印出12，OK？实际上如何呢，还是把代码放进浏览器中运行看看吧。</div></pre></td></tr></table></figure>
 <p><img src="http://oatasl78l.bkt.clouddn.com/let.png" alt=""></p>
-<p>怎么会是这样呢？</p>
+<p>怎么会是这样呢，不是说好的没有变量提升吗，怎么会报错啊？下面我们来细细分析。</p>
+<h3 id="let-const-详解"><a href="#let-const-详解" class="headerlink" title="let const 详解"></a>let const 详解</h3><p>在ES6中，最常见的TDZ就是在let/const的使用上，</p>
 
       
 
@@ -515,7 +511,7 @@ MathJax.Hub.Queue(function() {
     
     	<section class="tools-section tools-section-me" q-show="aboutme">
   	  	
-  	  		<div class="aboutme-wrap" id="js-aboutme">sometimes ever, sometimes never</div>
+  	  		<div class="aboutme-wrap" id="js-aboutme">再牛逼的梦想也敌不过傻逼一样的坚持</div>
   	  	
     	</section>
     
