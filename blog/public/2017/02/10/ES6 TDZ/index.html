@@ -19,9 +19,9 @@
 
 这条微博下面有很多的评论，有的厉害的人一眼就指出了这是由于TDZ的原因，并不是什么V8的bug，TDZ是什么？下面我们就来慢慢揭开这层面纱。">
 <meta property="og:image" content="http://oatasl78l.bkt.clouddn.com/tdz.jpeg">
-<meta property="og:image" content="http://oatasl78l.bkt.clouddn.com/2728034159022278457.jpg">
+<meta property="og:image" content="http://oatasl78l.bkt.clouddn.com/aaa.png">
 <meta property="og:image" content="http://oatasl78l.bkt.clouddn.com/let.png">
-<meta property="og:updated_time" content="2017-02-19T10:07:52.000Z">
+<meta property="og:updated_time" content="2017-02-21T02:31:53.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ES6中的暂时性死区（TDZ）">
 <meta name="twitter:description" content="起因故事要从阮一峰老师的一条微博开始说起。。。
@@ -205,7 +205,7 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">console.log(a);</div><div class="line">let a = 123;</div><div class="line"></div><div class="line">// 如果let的变量提升存在，则上面代码应该和下面代码等价</div><div class="line"></div><div class="line">let a;</div><div class="line">console.log(a);</div><div class="line">a = 123;</div></pre></td></tr></table></figure>
 <p>这段代码，至少看起来是没有问题的，不是吗？可是实际有问题没有，还是要放进浏览器中运行一下才知道，所以我们把这段代码放进chrome里看看。</p>
 <p>可惜，似乎很不幸。。。</p>
-<p><img src="http://oatasl78l.bkt.clouddn.com/2728034159022278457.jpg" alt=""></p>
+<p><img src="http://oatasl78l.bkt.clouddn.com/aaa.png" alt=""></p>
 <p>所以照现在看来，const和let都是没有变量提升的，对吧。</p>
 <p>然后我们来看下面一段代码。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">let e = 12;</div><div class="line">(function()&#123;</div><div class="line">console.log(e);</div><div class="line">let e = 123;</div><div class="line">&#125;)()</div><div class="line">// 如果说let真的没有变量提升的话，那么这里应该打印出12，OK？实际上如何呢，还是把代码放进浏览器中运行看看吧。</div></pre></td></tr></table></figure>

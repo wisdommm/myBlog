@@ -60,7 +60,7 @@ a = 123;
 
 可惜，似乎很不幸。。。
 
-![](http://oatasl78l.bkt.clouddn.com/2728034159022278457.jpg)
+![](http://oatasl78l.bkt.clouddn.com/aaa.png)
 
 所以照现在看来，const和let都是没有变量提升的，对吧。
 
