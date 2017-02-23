@@ -201,6 +201,8 @@ TDZ期间的错误，全部是运行阶段才会发生的错误，因为它需�
 
 可是，在浏览器上的运行效能来看，大多数情况下，[let效能比var强](http://stackoverflow.com/questions/21467642/is-there-a-performance-difference-between-let-and-var)，且会有块级作用域的概念，这会减少因为局部变量／全局变量所引起的问题，而且let对变量有了更高的要求与标准，比如不允许未定义就使用；不允许重复定义等。。。
 
+最后，附上一篇我做分享时做的展示文稿吧，https://pan.baidu.com/s/1hsl1SVi。。。
+
 
 
 
