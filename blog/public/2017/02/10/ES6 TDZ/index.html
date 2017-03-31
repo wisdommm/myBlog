@@ -21,7 +21,7 @@
 <meta property="og:image" content="http://oatasl78l.bkt.clouddn.com/tdz.jpeg">
 <meta property="og:image" content="http://oatasl78l.bkt.clouddn.com/aaa.png">
 <meta property="og:image" content="http://oatasl78l.bkt.clouddn.com/let.png">
-<meta property="og:updated_time" content="2017-02-21T02:31:53.000Z">
+<meta property="og:updated_time" content="2017-03-20T11:55:30.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ES6中的暂时性死区（TDZ）">
 <meta name="twitter:description" content="起因故事要从阮一峰老师的一条微博开始说起。。。
@@ -38,7 +38,7 @@
   <style type="text/css">
   
     #container.show {
-      background: #22C3AA;
+      background: #55e0d1;
     }
   </style>
   
@@ -52,7 +52,7 @@
     <canvas id="anm-canvas" class="anm-canvas"></canvas>
     <div class="left-col" q-class="show:isShow">
       
-<div class="overlay" style="background: #000"></div>
+<div class="overlay" style="background: #55e0d1"></div>
 <div class="intrude-less">
 	<header id="header" class="inner">
 		<a href="/" class="profilepic">
@@ -111,7 +111,7 @@
     <div class="mid-col" q-class="show:isShow,hide:isShow|isFalse">
       
 <nav id="mobile-nav">
-  	<div class="overlay js-overlay" style="background: #000"></div>
+  	<div class="overlay js-overlay" style="background: #55e0d1"></div>
 	<div class="btnctn js-mobile-btnctn">
   		<div class="slider-trigger list" q-on="click: openSlider(e)"><i class="icon icon-sort"></i></div>
 	</div>
@@ -244,6 +244,7 @@
 <h4 id="TDZ期间抛出的错误是运行阶段的错误"><a href="#TDZ期间抛出的错误是运行阶段的错误" class="headerlink" title="TDZ期间抛出的错误是运行阶段的错误"></a>TDZ期间抛出的错误是运行阶段的错误</h4><p>TDZ期间的错误，全部是运行阶段才会发生的错误，因为它需要变量／常量初始化的过程，在这个过程中，才会创建出TDZ，且真正运行到那里，调用到函数运行里面的代码时，才会TDZ相关的错误才会被抛出。</p>
 <h4 id="不用let-const-？"><a href="#不用let-const-？" class="headerlink" title="不用let/const ？"></a>不用let/const ？</h4><p>其实没错，只要你声明变量的时候，不管局部还是全部，全部使用var，那么你就根本不用关心TDZ。</p>
 <p>可是，在浏览器上的运行效能来看，大多数情况下，<a href="http://stackoverflow.com/questions/21467642/is-there-a-performance-difference-between-let-and-var" target="_blank" rel="external">let效能比var强</a>，且会有块级作用域的概念，这会减少因为局部变量／全局变量所引起的问题，而且let对变量有了更高的要求与标准，比如不允许未定义就使用；不允许重复定义等。。。</p>
+<p>最后，附上一篇我做分享时做的展示文稿吧，<a href="https://pan.baidu.com/s/1hsl1SVi。。。" target="_blank" rel="external">https://pan.baidu.com/s/1hsl1SVi。。。</a></p>
 
       
 
@@ -346,6 +347,15 @@
 
   
 <nav id="article-nav">
+  
+    <a href="/2017/03/20/fastClick/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          fastClick 基本解读
+        
+      </div>
+    </a>
   
   
     <a href="/2017/01/16/redux源码解读/" id="article-nav-older" class="article-nav-link-wrap">

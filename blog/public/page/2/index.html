@@ -27,7 +27,7 @@
   <style type="text/css">
   
     #container.show {
-      background: #22C3AA;
+      background: #55e0d1;
     }
   </style>
   
@@ -41,7 +41,7 @@
     <canvas id="anm-canvas" class="anm-canvas"></canvas>
     <div class="left-col" q-class="show:isShow">
       
-<div class="overlay" style="background: #000"></div>
+<div class="overlay" style="background: #55e0d1"></div>
 <div class="intrude-less">
 	<header id="header" class="inner">
 		<a href="/" class="profilepic">
@@ -100,7 +100,7 @@
     <div class="mid-col" q-class="show:isShow,hide:isShow|isFalse">
       
 <nav id="mobile-nav">
-  	<div class="overlay js-overlay" style="background: #000"></div>
+  	<div class="overlay js-overlay" style="background: #55e0d1"></div>
 	<div class="btnctn js-mobile-btnctn">
   		<div class="slider-trigger list" q-on="click: openSlider(e)"><i class="icon icon-sort"></i></div>
 	</div>
@@ -161,6 +161,215 @@
           </div>
           <div id="js-content" class="content-ll">
             
+  
+    <article id="post-javascript异步编程（续）" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/09/20/javascript异步编程（续）/">javascript异步编程（续）</a>
+    </h1>
+  
+
+        
+        <a href="/2016/09/20/javascript异步编程（续）/" class="archive-article-date">
+  	<time datetime="2016-09-20T11:49:07.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-09-20</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>之前那篇文章讲解了javascript异步式编程的几个方法，比如有回调函数，promise，发布／订阅模式，generator函数等，每一种方式，在其广泛使用的时期，都是很完善的一种方式，不过由于时代的进步，技术的发展，缺点总会暴露出来，更好更完善的方法也会被创造出来。</p>
+<p>这篇文章，我就想来说说<code>async</code>函数。</p>
+<p>ES7意见征集稿中提供了<code>async</code>函数，这是什么？其实可以用一句话来概括，<code>async</code>函数就是Generator函数的语法糖。</p>
+<p>我们从Generator函数开始，代码如下。</p>
+        
+          <a class="article-more-a" href="/2016/09/20/javascript异步编程（续）/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+  
+    <article id="post-javascript异步编程" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/09/09/javascript异步编程/">javascript异步编程</a>
+    </h1>
+  
+
+        
+        <a href="/2016/09/09/javascript异步编程/" class="archive-article-date">
+  	<time datetime="2016-09-09T12:29:36.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-09-09</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>最近nodejs看得有点多，感觉满脑子都是文件处理，异步编程，buffer等，发现学node学多了，前端用到的javascript也会更加豁然开朗，特别是廖雪峰和阮一峰老师的博客，给了我不小的帮助。我想从nodejs开始说起，毕竟这才是编程的核心，现在发现前端用的js只是熟练运用onclick事件等，自己以前还是只接触到了皮毛啊。</p>
+<p>回到主题，据传当初Ryan Dahl选择js来作为后台语言时，主要就是看重了js的单线程，同步运行，适合一些高并发的场景，这就从侧面说明了js这门语言的特性：同步，单线程。那么可以多线程异步编程吗？答案当然是肯定，那么，js异步编程有哪几种方法，这几种方法各自的优缺点又如何呢？</p>
+<p>说到这里，我又想解释一下同步与异步，第一次听到这两个词语，就要得追溯到大学的操作系统课堂了，OS的运行机制（运行模式）分为<strong>同步（Synchronous）</strong>和<strong>异步（Asynchronous）</strong>。</p>
+<p>“同步模式”就是上一段的模式，后一个任务等待前一个任务结束，然后再执行，程序的执行顺序与任务的排列顺序是一致的、同步的；”异步模式”则完全不同，每一个任务有一个或多个回调函数（callback），前一个任务结束后，不是执行后一个任务，而是执行回调函数，后一个任务则是不等前一个任务结束就执行，所以程序的执行顺序与任务的排列顺序是不一致的、异步的。”异步模式”非常重要。在浏览器端，耗时很长的操作都应该异步执行，避免浏览器失去响应，最好的例子就是Ajax操作。在服务器端，”异步模式”甚至是唯一的模式，因为执行环境是单线程的，如果允许同步执行所有http请求，服务器性能会急剧下降，很快就会失去响应。</p>
+<p>所以针对js的异步编程方法，我准备讲解如下几个方法：</p>
+        
+          <a class="article-more-a" href="/2016/09/09/javascript异步编程/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+  
+    <article id="post-vue.js 组件入门（一）" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/09/05/vue.js 组件入门（一）/">vue.js 组件快速入门（一）</a>
+    </h1>
+  
+
+        
+        <a href="/2016/09/05/vue.js 组件入门（一）/" class="archive-article-date">
+  	<time datetime="2016-09-05T09:24:12.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-09-05</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>前几天读了一篇好文章，<a href="http://www.cnblogs.com/keepfool/p/5625583.html">vue组件化</a>，这篇算是我自己提炼出来的的归纳与总结吧。</p>
+<p>在前端开发中，以前我们会把常用的公共的方法（函数）提取出来，整合为一个库，最有名的当属jQ了吧，然后到了react出现，这些类库主要都是针对view层进行的操作与封装，我们又可以把view层面上的一些东西抽出来进行封装和整理，比如一个table，一个button，一个div等，也可以像曾经提取函数一样抽出来，写成公用的，在需要使用的地方直接引入就可以了，当然，也可以根据你实际运用的需要进行适当的自定义配置，而这些被抽出来共用的table，button，div这些，就叫做组件。</p>
+<p>上面是我自己瞎扯的，原文作者讲得比较繁琐，所以我就用自己的语言来概述了一下，虽然这篇文章是我转载的，不过我也参考了其它的文章／博客，知识点的相似度接近80%，但是语言基本上都是我自己重新组织的，所以加了很多自己的想法和思考，下面我们开始进入正题。</p>
+        
+          <a class="article-more-a" href="/2016/09/05/vue.js 组件入门（一）/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+  
+    <article id="post-node express实现" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/09/03/node express实现/">express实现</a>
+    </h1>
+  
+
+        
+        <a href="/2016/09/03/node express实现/" class="archive-article-date">
+  	<time datetime="2016-09-03T08:25:56.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-09-03</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>express是node里面一个十分常用的库，用它来搭建服务器，事半功倍，且小巧灵活，有足够多的特性，用来进行各种网页开发。</p>
+<p>我们先来看下express的使用的，毕竟知己知彼，百战不殆。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">//引入express，确保你的项目依赖了express库，否则的话先npm install一下</div><div class="line">var express = require(&apos;express&apos;);</div><div class="line">//执行express函数，</div><div class="line">var app = express();</div><div class="line">// 使用get方法，当请求的路由是hello时，返回hello</div><div class="line">app.get(&apos;/hello&apos;, function (req, res) &#123;</div><div class="line">  res.send(&apos;hello&apos;);</div><div class="line">&#125;);</div><div class="line">// 当请求的路由是world时，返回world</div><div class="line">app.get(&apos;/world&apos;, function (req, res) &#123;</div><div class="line">  res.send(&apos;world&apos;);</div><div class="line">&#125;);</div><div class="line">// 当请求的路由是其它时，返回“没有找到匹配的路径”</div><div class="line">app.get(&apos;*&apos;, function (req, res) &#123;</div><div class="line">	res.setHeader(&apos;content-type&apos;,&apos;text/plain;charset=utf8&apos;);</div><div class="line">	res.end(&apos;没有找到匹配的路径&apos;);</div><div class="line">&#125;);</div><div class="line">// 最后监听端口</div><div class="line">var server = app.listen(3000, function () &#123;</div><div class="line">  console.log(&apos;正在监听3000端口&apos;);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p>上面或许就是express最常见，也是最基本的使用吧，启动了一个服务器并且监听3000端口，对/hello的路由返回“hello”，对/world的路由返回“world”，对其他的路由返回“没有找到匹配的路径”。</p>
+<p>示例看完了，下面我们来看看具体的实现吧，在这之前，我想说一下http这个模块，毕竟express就是对http进行了一下封装，既然想看看express的内部，当然就离不开http了。</p>
+        
+          <a class="article-more-a" href="/2016/09/03/node express实现/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
   
     <article id="post-react es5还是es6 ？" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">

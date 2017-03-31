@@ -6,17 +6,24 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://wisdommm.github.io">
-  <title>Archives: 2017/1 | Wisdommm</title>
+  <title>震惊！大多数前端都不知道的知识 | Wisdommm</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="在梦想的道路上一路狂奔">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Wisdommm">
-<meta property="og:url" content="http://wisdommm.github.io/archives/2017/01/index.html">
+  <meta name="description" content="写在前面最近看了两篇不错的文章，都是和定时器（setTimeout）有关，所以我想写一篇博客，把那两篇文章能够融合、整理一下。至于标题，参照UC震惊部取的，笑一笑就好了。
+正文话不多说，直接进入正题吧，看下面一段代码，结果会输出什么：
+1234for (var i = 0; i &amp;lt; 5; i++) &amp;#123;  console.log(i);&amp;#125;console.log(i)">
+<meta property="og:type" content="article">
+<meta property="og:title" content="震惊！大多数前端都不知道的知识">
+<meta property="og:url" content="http://wisdommm.github.io/2017/03/24/震惊，大多数前端都还不知道这道题的答案/index.html">
 <meta property="og:site_name" content="Wisdommm">
-<meta property="og:description" content="在梦想的道路上一路狂奔">
+<meta property="og:description" content="写在前面最近看了两篇不错的文章，都是和定时器（setTimeout）有关，所以我想写一篇博客，把那两篇文章能够融合、整理一下。至于标题，参照UC震惊部取的，笑一笑就好了。
+正文话不多说，直接进入正题吧，看下面一段代码，结果会输出什么：
+1234for (var i = 0; i &amp;lt; 5; i++) &amp;#123;  console.log(i);&amp;#125;console.log(i)">
+<meta property="og:updated_time" content="2017-03-28T12:00:22.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Wisdommm">
-<meta name="twitter:description" content="在梦想的道路上一路狂奔">
+<meta name="twitter:title" content="震惊！大多数前端都不知道的知识">
+<meta name="twitter:description" content="写在前面最近看了两篇不错的文章，都是和定时器（setTimeout）有关，所以我想写一篇博客，把那两篇文章能够融合、整理一下。至于标题，参照UC震惊部取的，笑一笑就好了。
+正文话不多说，直接进入正题吧，看下面一段代码，结果会输出什么：
+1234for (var i = 0; i &amp;lt; 5; i++) &amp;#123;  console.log(i);&amp;#125;console.log(i)">
   
     <link rel="alternative" href="/atom.xml" title="Wisdommm" type="application/atom+xml">
   
@@ -160,49 +167,210 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-震惊，大多数前端都还不知道这道题的答案" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2017" class="archive-year">2017</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/01/16/redux源码解读/" class="archive-article-date">
-  	<time datetime="2017-01-16T10:01:41.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-01-16</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/01/16/redux源码解读/">redux源码解读</a>
+    <h1 class="article-title" itemprop="name">
+      震惊！大多数前端都不知道的知识
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
-          
+        
+        <a href="/2017/03/24/震惊，大多数前端都还不知道这道题的答案/" class="archive-article-date">
+  	<time datetime="2017-03-24T09:04:18.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-03-24</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h3><p>最近看了两篇不错的文章，都是和定时器（setTimeout）有关，所以我想写一篇博客，把那两篇文章能够融合、整理一下。至于标题，参照UC震惊部取的，笑一笑就好了。</p>
+<h3 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h3><p>话不多说，直接进入正题吧，看下面一段代码，结果会输出什么：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">for (var i = 0; i &lt; 5; i++) &#123;</div><div class="line">  console.log(i);</div><div class="line">&#125;</div><div class="line">console.log(i)</div></pre></td></tr></table></figure>
+<a id="more"></a>
+<p>当然是输出0，1，2，3，4，5呀，这么简单的东西也敢问人？</p>
+<p>好吧，我们再看看下面这段代码会输出什么：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">for (var i = 0; i &lt; 5; i++) &#123;</div><div class="line">  setTimeout(function() &#123;</div><div class="line">    console.log(i);</div><div class="line">  &#125;, 1000 );</div><div class="line">&#125;</div><div class="line">console.log(i);</div></pre></td></tr></table></figure>
+<p>其实如果你对定时器（setTimeout）有个基本的了解的话，你就会清楚的知道，会输出5，5，5，5，5，5，OK？</p>
+<p>那我想问下，这六个5输出的状态是怎样的，比如在输出时中间的时间间隔关系是怎样的？</p>
+<p>这里有三个选项：</p>
+<p>A.5-&gt;5-&gt;5-&gt;5-&gt;5-&gt;5，每个5之间都会间隔1秒。</p>
+<p>B.555555，所有5一起输出。</p>
+<p>C.5-&gt;55555，第一个5输出，等待1秒后后面5个5一起输出。</p>
+<p>好的，不卖关子，答案是C，这里面实际上就设计了比较多的知识点，比如同步和异步代码的区别，变量的作用域，闭包等概念，所以实际输出的时候，会先输出for循环外面的那个i，由于i经过了上面的for循环，所以此时i已经是5了，所以会先输出5，然后就是由于定时器的原因，for循环中定时器里有5个一样的console函数，它们都会等待一秒，然后会输出i，而这个时候的i，已经是循环之后的i了，所以会输出5，所以才会5个函数同时等待一秒后，5个5同时输出，这就是选C的原因。这就要求度js的定时器工作机制有基本的了解。</p>
+<h3 id="进阶"><a href="#进阶" class="headerlink" title="进阶"></a>进阶</h3><p>上面的代码，输出方式为5-&gt;55555，那么，如果我想上面代码的输出变为：5-&gt;01234，那么会怎样，这里就考验了同学对于闭包的熟悉程度，其代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">for(var i=0;i&lt;4;i++)&#123;</div><div class="line">	function(j)&#123;</div><div class="line">		setTimeout(function()&#123;</div><div class="line">			console.log(j)</div><div class="line">		&#125;,1000);</div><div class="line">	&#125;(i);</div><div class="line">&#125;</div><div class="line">console.log(i);</div></pre></td></tr></table></figure>
+<p>这里就是运用了IIFE来解决闭包造成的问题，其实我们可以把代码解藕一下，将IIFE函数提出来，就变成了下面这样：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">let func = function(j)&#123;</div><div class="line">				setTimeout(function()&#123;</div><div class="line">					console.log(j)</div><div class="line">				&#125;,1000);</div><div class="line">			&#125;</div><div class="line">for(var i=0;i&lt;5;i++)&#123;</div><div class="line">	func(i);</div><div class="line">&#125;</div><div class="line">console.log(i);</div></pre></td></tr></table></figure>
+<p>既然都到了这里，那么如果我想输出结果变成这样，5-&gt;0-&gt;1-&gt;2-&gt;3-&gt;4,代码应该怎么写？</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">let func = function(i)&#123;</div><div class="line">	setTimeout(function()&#123;</div><div class="line">		console.log(i)</div><div class="line">	&#125;,1000*i);</div><div class="line">&#125;</div><div class="line">for(var i=0;i&lt;5;i++)&#123;</div><div class="line">	func(i)</div><div class="line">&#125;</div><div class="line">console.log(i);</div></pre></td></tr></table></figure>
+<p>这里其实已经考察了闭包的灵活运用了，假设把func函数中的形参去掉，变成这样，结果会是怎样的？</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">let func = function(/*去掉这里的形参*/)&#123;</div><div class="line">	setTimeout(function()&#123;</div><div class="line">		console.log(i)</div><div class="line">	&#125;,1000*i);</div><div class="line">&#125;</div><div class="line">for(var i=0;i&lt;5;i++)&#123;</div><div class="line">	func(i);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这样的话，定时器函数的内部就没有保持对外部i的引用，就会变成5-&gt;5-&gt;5-&gt;5-&gt;5。</p>
+<p>好吧前面都是小大小闹，看看这里，假设定时器里面传入的不是函数，而是一个IIFE函数的话，结果会怎样？</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">for (var i = 0; i &lt; 5; i++) &#123;</div><div class="line">  setTimeout((function(i) &#123;</div><div class="line">    console.log(i);</div><div class="line">  &#125;)(i), i * 1000);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这就变成了传入一个IIFE函数进去，setTimeout可以接受一个函数或者字符串作为参数，可是这里的IIFE函数，会怎样呢？所以这里的定时器此时就没有任何的作用了，所以会直接一下子输出01234，不会有定时器功能。</p>
+<h4 id="ES6-Promise"><a href="#ES6-Promise" class="headerlink" title="ES6 Promise"></a>ES6 Promise</h4><p>完了吗？还早呢，这全是回调函数，ES6中的Promise现在已经用得比较广泛了，好吧，现在将上面的代码采用Promise来改写一下，应该怎么写？</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">const arr = []; // 这里存放异步操作的Promise</div><div class="line">var func = function(i)&#123;</div><div class="line">	new Promise((resolve,reject)=&gt;&#123;</div><div class="line">		setTimeout(()=&gt;&#123;</div><div class="line">			console.log(i);</div><div class="line">		&#125;,1000*i);</div><div class="line">	&#125;);</div><div class="line">&#125;</div><div class="line">for(var i=0;i&lt;5;i++)&#123;</div><div class="line">	arr.push(func(i));</div><div class="line">&#125;</div><div class="line">Promise.all(arr).then(()=&gt;&#123;</div><div class="line">	setTimeout(()=&gt;&#123;</div><div class="line">		console.log(i);</div><div class="line">	&#125;,1000);</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+<p>上面就是采用Promise来改写后的代码，这里考察了Promise的熟练运用和新技术的学习，虽然Promise不算什么新技术呢。。。</p>
+<h4 id="ES7-async-await"><a href="#ES7-async-await" class="headerlink" title="ES7 async/await"></a>ES7 async/await</h4><p>好吧，既然Promise不算什么新的技术，那我们来看看新的技术——acync/await函数。老规矩，将上面的异步代码用ES7中的async/await函数重写一下。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">const sleep = (time) =&gt; &#123;</div><div class="line">	return new Promise((resolve) =&gt; &#123;</div><div class="line">    	setTimeout(resolve, time);</div><div class="line">	&#125;);</div><div class="line">&#125;</div><div class="line"></div><div class="line">(async () =&gt; &#123;</div><div class="line">    for (var i = 0; i &lt; 5; i++) &#123;</div><div class="line">        await sleep(1000);</div><div class="line">        console.log(i);</div><div class="line">    &#125;</div><div class="line">&#125;)();</div></pre></td></tr></table></figure>
+<p>注意：await后面可以是一个异步函数也可以不是，我之前在sleep中的Promise忘了加上return，结果定时器就没有发生作用。。。无语。</p>
+<p>好了ES6的Promise和ES7的async/await函数都讲到了，下面来看下最后一道题：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">setTimeout(function() &#123;</div><div class="line">  console.log(1)</div><div class="line">&#125;, 0);</div><div class="line">new Promise(function executor(resolve) &#123;</div><div class="line">  console.log(2);</div><div class="line">  for( var i=0 ; i&lt;10000 ; i++ ) &#123;</div><div class="line">    i == 9999 &amp;&amp; resolve();</div><div class="line">  &#125;</div><div class="line">  console.log(3);</div><div class="line">&#125;).then(function() &#123;</div><div class="line">  console.log(4);</div><div class="line">&#125;);</div><div class="line">console.log(5);</div></pre></td></tr></table></figure>
+<p>这道题其实初看，还是挺难的，异步就有promise和setTimeout，还有for循环来分散你的注意力，也是危机四伏啊。</p>
+<p>其实没必要这么麻烦，我们可以先基本看一遍，知道其主要意思，就是让你去分一下异步与同步，同时还有两种异步来让你去分先后顺序；所以首先，我们需要来去分一下这段代码中的同步和异步先将同步与异步分开，首先来看，哪些是同步哪些是异步：按先后顺序来说，同步的有2，3，5；异步的是1和4。而且结果中，肯定是同步在前异步在后，所以结果应该是（2，3，5）（1，4），括号中的顺序可能会有改动，然后在来每个仔细分析一下，首先是同步，同步其实很简单，就是简单的按先后顺序输出，所以前面的2，3，5，顺序不用改变，这里有一些小陷阱，比如setTimeout的定时为0，其实这还是一个定时器，接下来就是有一个9999的循环，其实这个并不会影响什么，也不需要太在意这个；最后，再来看看异步，先是一个setTimeout的console.log(1)，然后是Promise的回调console.log(4)，假设是两个相同的异步，比如都是setTimeout或者都是Promise，那么也很简单，也将会是按先后顺序输出，现在问题来了，那么setTimeout和Promise这两种回调方法，有什么差异呢？如果在回调上没有差异，那么就是按先后顺序了，结果呢？Promise和setTimeout回调最大的区别在于，Promise的回调，会放在当前事件队列的末尾，但是setTimeout不是，它会放在下一个事件队列的头部，所以Promise比setTimeout会更快执行回调，所以是Promise的回调先输出，所以最终结果也就是2，3，5，4，1。</p>
 
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>thanks !<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="http://oatasl78l.bkt.clouddn.com/alipay pic.png">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="http://oatasl78l.bkt.clouddn.com/wx pic.png">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://wisdommm.github.io/2017/03/24/震惊，大多数前端都还不知道这道题的答案/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
+  
+    <a href="/2017/03/30/http cache/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          (no title)
+        
+      </div>
+    </a>
   
   
-    </div></section>
+    <a href="/2017/03/23/js事件机制/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">javascript事件机制</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+
+
+
+
+  
+  <div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="震惊，大多数前端都还不知道这道题的答案" data-title="震惊！大多数前端都不知道的知识" data-url="http://wisdommm.github.io/2017/03/24/震惊，大多数前端都还不知道这道题的答案/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"wisdommm"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
   
 
-    
+
 
 
           </div>
@@ -225,8 +393,8 @@
 	var yiliaConfig = {
 		mathjax: true,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: true,
