@@ -8,13 +8,13 @@
   <link rel="dns-prefetch" href="http://wisdommm.github.io">
   <title>redux 店铺装修 | Wisdommm</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="最近在做店铺装修，很很很麻烦的一个项目，刚好里面用到了redux，我发现店铺装修简化一下的话，简直是redux的十分好的一个示例啊，比官网上简单的示例要难，又比难的简单，而且条理结构什么的又很清楚，挺不错的啊。
+  <meta name="description" content="最近在看店铺装修相关的文档，很很很麻烦的一个项目，刚好里面用到了redux，我发现店铺装修简化一下的话，简直是redux的十分好的一个示例啊，比官网上简单的示例要难，又比难的简单，而且条理结构什么的又很清楚，挺不错的啊。
 我先上图吧。图1图2图3图4图5图6图7图8">
 <meta property="og:type" content="article">
 <meta property="og:title" content="redux 店铺装修">
 <meta property="og:url" content="http://wisdommm.github.io/2016/07/28/react demo/index.html">
 <meta property="og:site_name" content="Wisdommm">
-<meta property="og:description" content="最近在做店铺装修，很很很麻烦的一个项目，刚好里面用到了redux，我发现店铺装修简化一下的话，简直是redux的十分好的一个示例啊，比官网上简单的示例要难，又比难的简单，而且条理结构什么的又很清楚，挺不错的啊。
+<meta property="og:description" content="最近在看店铺装修相关的文档，很很很麻烦的一个项目，刚好里面用到了redux，我发现店铺装修简化一下的话，简直是redux的十分好的一个示例啊，比官网上简单的示例要难，又比难的简单，而且条理结构什么的又很清楚，挺不错的啊。
 我先上图吧。图1图2图3图4图5图6图7图8">
 <meta property="og:image" content="http://oatasl78l.bkt.clouddn.com/redux%20ex1.png">
 <meta property="og:image" content="http://oatasl78l.bkt.clouddn.com/redux%20ex2.png">
@@ -24,10 +24,10 @@
 <meta property="og:image" content="http://oatasl78l.bkt.clouddn.com/redux%20ex6.png">
 <meta property="og:image" content="http://oatasl78l.bkt.clouddn.com/redux%20ex7.png">
 <meta property="og:image" content="http://oatasl78l.bkt.clouddn.com/redux%20ex8.png">
-<meta property="og:updated_time" content="2017-01-24T09:08:10.000Z">
+<meta property="og:updated_time" content="2017-04-06T06:40:55.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="redux 店铺装修">
-<meta name="twitter:description" content="最近在做店铺装修，很很很麻烦的一个项目，刚好里面用到了redux，我发现店铺装修简化一下的话，简直是redux的十分好的一个示例啊，比官网上简单的示例要难，又比难的简单，而且条理结构什么的又很清楚，挺不错的啊。
+<meta name="twitter:description" content="最近在看店铺装修相关的文档，很很很麻烦的一个项目，刚好里面用到了redux，我发现店铺装修简化一下的话，简直是redux的十分好的一个示例啊，比官网上简单的示例要难，又比难的简单，而且条理结构什么的又很清楚，挺不错的啊。
 我先上图吧。图1图2图3图4图5图6图7图8">
 <meta name="twitter:image" content="http://oatasl78l.bkt.clouddn.com/redux%20ex1.png">
   
@@ -193,7 +193,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>最近在做店铺装修，很很很麻烦的一个项目，刚好里面用到了redux，我发现店铺装修简化一下的话，简直是redux的十分好的一个示例啊，比官网上简单的示例要难，又比难的简单，而且条理结构什么的又很清楚，挺不错的啊。</p>
+        <p>最近在看店铺装修相关的文档，很很很麻烦的一个项目，刚好里面用到了redux，我发现店铺装修简化一下的话，简直是redux的十分好的一个示例啊，比官网上简单的示例要难，又比难的简单，而且条理结构什么的又很清楚，挺不错的啊。</p>
 <p>我先上图吧。<br><img src="http://oatasl78l.bkt.clouddn.com/redux%20ex1.png" alt=""><br>图1<br><img src="http://oatasl78l.bkt.clouddn.com/redux%20ex2.png" alt=""><br>图2<br><img src="http://oatasl78l.bkt.clouddn.com/redux%20ex3.png" alt=""><br>图3<br><img src="http://oatasl78l.bkt.clouddn.com/redux%20ex4.png" alt=""><br>图4<br><img src="http://oatasl78l.bkt.clouddn.com/redux%20ex5.png" alt=""><br>图5<br><img src="http://oatasl78l.bkt.clouddn.com/redux%20ex6.png" alt=""><br>图6<br><img src="http://oatasl78l.bkt.clouddn.com/redux%20ex7.png" alt=""><br>图7<br><img src="http://oatasl78l.bkt.clouddn.com/redux%20ex8.png" alt=""><br>图8</p>
 <a id="more"></a>
 <p>好吧，这图截的也是够大的，将就看看吧。。。由图1可以看到，页面一共分为四部分：左，中上，中下，右，也就是氛围四个组件：Left，Top，Center，Right。接下来我说一下交互，如图2所示；我在左边的输入框中输入东西，然后点击增加，可以看到，刚刚新增的数据立马在右边下面部分显示了出来，展示的是刚才新增的数据和一个删除按钮，如图3所示；若你点击展示的数据，那么在右边，也就是编辑组件中会出现一个输入框和编辑按钮，你可以在这里对刚刚点击的数据进行修改然后保存，如图4，图5所示；保存过后就可以看到中间的显示模块对数据进行了更新，如图6所示；接下来是中间上方的保存模块，你点击保存按钮，这个模块同样也能取到当前的数据，这里就用一个弹窗代替好了，如图7所示；最后就是删除按钮，点击后删掉当前这一行的数据，如图8所示。</p>
