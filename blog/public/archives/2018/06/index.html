@@ -6,12 +6,12 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://wisdommm.github.io">
-  <title>Wisdommm</title>
+  <title>Archives: 2018/6 | Wisdommm</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="在梦想的道路上一路狂奔">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Wisdommm">
-<meta property="og:url" content="http://wisdommm.github.io/index.html">
+<meta property="og:url" content="http://wisdommm.github.io/archives/2018/06/index.html">
 <meta property="og:site_name" content="Wisdommm">
 <meta property="og:description" content="在梦想的道路上一路狂奔">
 <meta name="twitter:card" content="summary">
@@ -162,493 +162,47 @@
           <div id="js-content" class="content-ll">
             
   
-    <article id="post-ipfs" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
+  
     
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/06/08/ipfs/">ipfs：星际文件系统</a>
-    </h1>
-  
-
-        
-        <a href="/2018/06/08/ipfs/" class="archive-article-date">
+    
+      
+      
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/archives/2018" class="archive-year">2018</a>
+        </div>
+        <div class="archives">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      	<div class="article-meta">
+	      	<a href="/2018/06/08/ipfs/" class="archive-article-date">
   	<time datetime="2018-06-08T03:48:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-06-08</time>
 </a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h4 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h4><p>比特币（Bitcoin）是区块链中最火最大的一个项目，其原因就是因为去中心化（Centralization），或者我们可以认为，是“多中心化”，因为点对点（peer to peer）的操作，是任何一个点（peer），都成为了中心，当每点都成为了中心，也就可以粗略的认为没有了中心，因为中心太多了，也正是由于中心太多，所以这个项目不会受制与某一个人或某一个团体，不会被少部分人控制，大家的权利和义务都是一样的，保障了绝对的公平。<br>上面是比特币的特点，然后人们根据比特币的这个特点，从底层的技术中，提取出来了区块链（block chain）技术，也就造就了现在繁荣的区块链生态。</p>
-        
-          <a class="article-more-a" href="/2018/06/08/ipfs/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-  
-    <article id="post-react 16 新特性" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
+        </div>
+    	 
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/05/31/react 16 新特性/">react 16 新特性 说明</a>
+      <a class="archive-article-title" href="/2018/06/08/ipfs/">ipfs：星际文件系统</a>
     </h1>
   
 
-        
-        <a href="/2018/05/31/react 16 新特性/" class="archive-article-date">
-  	<time datetime="2018-05-31T08:07:45.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-31</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="context"><a href="#context" class="headerlink" title="context"></a>context</h3><p>说起context，就要从原生的react数据流说起。</p>
-<p>在以前，react的数据传递，都是通过父组件的prop，向子组件传递，当组件嵌套层级过多时，就需要一层一层的将prop传递下去，当组件嵌套的层级足够多时。。。那我只能说，代码给你，你来吧。</p>
-<p>这里就需要说一下context，在之前，官方是没有context api的，并且也一直不推荐使用，就像redux一样，如果你不知道该不该用，或者不熟悉该不该用，那就不要用。</p>
-<p>说了这么久，我们先来介绍下context是个什么东西吧，刚才说到，react的数据传递，都是通过父组件的prop，向子组件传递，当组件嵌套层级过多时，就需要一层一层的将prop传递下去，当组件嵌套的层级足够多时，就很蛋疼，所以就要解决啊，解决的思想是，将所有的数据，变成一个store，并且将这个store的位置提到最高，高于任何组件的，所以这个context，也就是指的“上下文环境”，让一个树状组件上所有组件都能访问同一个共同的对象</p>
-<p>具体如下代码：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 我们假设我们开发的组件叫App，为了给这个App加一个全局的一个数据仓库，在这外面再包一层Provider就好了，然后把你想要传递的数据，当作Provider的属性，这样就可以使数据变成一个全局的数据了。</span></div><div class="line">&lt;Provider store=&#123;store&#125;&gt;</div><div class="line">	&lt;App /&gt;</div><div class="line"> &lt;/Provider&gt;</div><div class="line"></div><div class="line"><span class="comment">// Provider.js </span></div><div class="line"><span class="comment">// 而Provider，里面就是直接返回他的子组件就好了，并且还有一个函数来获取当前的store</span></div><div class="line">getChildContext()&#123;</div><div class="line">	<span class="keyword">return</span> &#123;</div><div class="line">    	store: <span class="keyword">this</span>.props.store</div><div class="line">    &#125;;</div><div class="line">&#125;</div><div class="line">render() &#123;</div><div class="line">	<span class="keyword">return</span> <span class="keyword">this</span>.props.children;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// store.js</span></div><div class="line"><span class="comment">// 然后来看看这个store，这里的createStore是直接引用自redux，而这里的reducer，就是redux里面的reducer，需要自己接受state，action，然后根据你自己的业务需要，判断action.type，来返回新的state，且务必遵守纯函数的原则。</span></div><div class="line"><span class="keyword">const</span> initValues = &#123;</div><div class="line">    <span class="comment">// 初始化state数据</span></div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="keyword">const</span> store = createStore(reducer, initValues);</div></pre></td></tr></table></figure>
+        <div class="article-info info-on-right">
+          
+          
 
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
+        </div>
+        <div class="clearfix"></div>
+    </header>
   </div>
 </article>
-
-
-
-
-
   
-    <article id="post-2017总结" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
+  
+    </div></section>
+  
+
     
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/12/29/2017总结/">2017年总结 &amp;&amp; 2018年计划</a>
-    </h1>
-  
-
-        
-        <a href="/2017/12/29/2017总结/" class="archive-article-date">
-  	<time datetime="2017-12-29T11:40:22.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-12-29</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h3><p>占位符～～～～～～详细内容稍后再完善～～～～～～</p>
-<p>～～～～～～～～～～～～～～～～～～～～～～～～～～</p>
-<p>不知不觉，2017年又过完了，当然，是阳历，中国传统的农历2017年，也还剩一个月多点，所以说一个月后，我也就要离开本命年，走进狗年，开始25岁的征程了。</p>
-<p>去年就一个字吧，忙！</p>
-<p>从年初在忙着找房子，年中忙着找工作，年末忙着找bug，这一年糊里糊涂地就过去了，光阴荏苒，岁月流逝，虽然累虽然经历了不少的麻烦与困难，不过所幸，结局都还是不错的。</p>
-<p>年初的时候，一直舍不得家人，不知道为什么，和之前从重庆到杭州来的感觉不一样，这一次格外难过，可能是柯兰当时准备离职吧，毕竟我和柯兰在原公司过得都不怎么开心，不安的情绪也就一直在身边，所以心情比较down，感觉重庆有太多的舍不得，那一刻，我承认，我差点就打包行李回重庆或者成都了，想回去过悠闲的日子，可是还是没勇气，也割舍不下杭州的人和事，没办法，所以哭过了之后还是擦擦眼泪继续去上班，这算是2017年初的第一个小波折吧。</p>
-<p>接下来是换房子，之前那个地方我已经厌烦了，之前一直不喜欢合租，没办法，终于去找了合租，也是巧合，沉木刚好也在找室友，他是挖财的，也是搞笑，第一次租的时候，沉木租出去了，后来被放鸽子，又叫我们回来租，还浪费了我500元的定金，虽然这笔钱最后是沉木出了呢，所以还是和沉木一起合租了，对了，还有个蚂蚁金服的女生，这个女生也是不断刷新了我的三观，足够懒，足够不爱卫生（或者说不爱护公共区域的卫生，那就是素质问题了），反正我也是很无语拿她无可奈何，女的要是不爱卫生，比男生狂多了，我在她面前感觉就是一个洁癖患者，要不是看在金都新城那房子确实不错的前提上，我早就想搬走了，唉。。。</p>
-<p>房子的事解决了，就继续在mgj写代码，玩媛媛了。</p>
-<p>夏天的时候和公司一起去舟山outting，虽然有苦有泪脚上有水泡，不过确实蛮有意思的，第一次徒步那么久，那么多人，为了一个目标一起努力的情景，人生也是难得遇见几次，很荣幸我遇见了一次，就是从小白脸晒黑了。</p>
-<p>后面就是准备骑驴找马地换工作了，实话说，我在前公司的时候，没出来看看，一直还觉得不错，走出来看了就会发现，世界确实很大，可以说是众生万象，有很客气的大公司，也有很傲气的大公司，有很谦虚的小公司，也有很抠的小公司，在此，我还是要给滴滴道个歉，毕竟违约是我的错，甚感惭愧，滴滴的那个领导我也特别感激，说只要我以后想去，就算我被hr拉黑了他也会帮我，还跟我交流了很久，面试时谈得也十分nice，可是hr太厉害，我也深感无奈，也算巧合，刚好在我入职滴滴前的两周，又同时拿到了tmall的offer，工资倒是差不多，既然两个offer几乎没差别，但是我就找不到去北京滴滴的理由了啊～只能说时机真是妙。后面就是来了阿里，新零售供应链事业部下的零售终端技术部门，是天猫互动娱乐部门的原班人马，也就是寻微原来的部门，哦，寻微原来叫紫溪啊～～～阿里真是大啊，这是最直观的一个感觉，园区那么多，部门那么多，人数那么多，业务那么多，有好多东西需要学习的呢，就像你去图书馆一样，知识是免费的，但是需要自带容器。</p>
-<p>入职阿里是9月底，刚好赶上双十一的开发时间，不知道算不算幸运，立马就披挂上阵，项目最忙的时候，通宵也是常有的事，最开始以为11点，12点下班算比较晚的了，后面却接着是第一次第二次第三次通宵，算是应了那一句话吧，没有经历过双十一的阿里人，不是真正的阿里人，我也很好的秉承了每逢大促胖三斤的原则，没能抵住夜宵的攻势，基本毫无招架之力就投降了，双十一的时候，园区内的活动还是比较欢乐的，各种有意思的活动，参与一次双十一还是蛮不错的，算是一段很丰富的经历了吧。</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-  
-    <article id="post-md5算法解析" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/11/27/md5算法解析/">md5算法</a>
-    </h1>
-  
-
-        
-        <a href="/2017/11/27/md5算法解析/" class="archive-article-date">
-  	<time datetime="2017-11-27T11:56:23.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-11-27</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>好久没写过博客了，主要原因是平时工作太忙，难得有个休假也就想躺在床上看看电影听听歌，放松一下。。。最近突然看到某个公众号里的几篇和md5相关的文章，本来也不想看的，然后就想到了大学，想到了吴梃教授在离散数学课上和我们聊的md5。。。觉得不想把大学里的东西丢太多，所以还是好好看了下这几篇md5的文章，<a href="https://mp.weixin.qq.com/s?__biz=MzI1MTIzMzI2MA==&amp;mid=2650561400&amp;idx=1&amp;sn=4b70e39b1c30ccfddd148eeee50d9519&amp;chksm=f1feedfbc68964ed463d83e88bde0ed175077e113beaa582e6bd5968da3c39145c8cec2e7889&amp;scene=38#wechat_redirect">md5算法</a>，<a href="https://mp.weixin.qq.com/s?__biz=MzI1MTIzMzI2MA==&amp;mid=2650561437&amp;idx=1&amp;sn=518154774fb3d39284048289afcba861&amp;chksm=f1feed1ec6896408e2bb52ec1e8c8e033fedaa7d2e6776f343af46c75ae3a40cb986e0bfdc7d&amp;scene=38#wechat_redirect">破解md5</a>，然后自己仔做整理，沉淀下来。</p>
-        
-          <a class="article-more-a" href="/2017/11/27/md5算法解析/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-  
-    <article id="post-页面表单field后台配置化方案" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/08/07/页面表单field后台配置化方案/">页面表单后台配置化方案</a>
-    </h1>
-  
-
-        
-        <a href="/2017/08/07/页面表单field后台配置化方案/" class="archive-article-date">
-  	<time datetime="2017-08-07T10:25:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-08-07</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h3><p>又是好久没有写博客了，之前写了太多纯技术相关的文章，后来吧，发现技术是技术，可是学习技术的最终点，是要在业务中实现落地，会的技能再多，不能在具体的业务场景下得到结果得到产出，都是不是好的技术，毕竟，公司也好社会也罢，都是结果导向的。</p>
-        
-          <a class="article-more-a" href="/2017/08/07/页面表单field后台配置化方案/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-  
-    <article id="post-算法" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/08/07/算法/">几种常见的算法</a>
-    </h1>
-  
-
-        
-        <a href="/2017/08/07/算法/" class="archive-article-date">
-  	<time datetime="2017-08-07T10:24:32.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-08-07</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="起因"><a href="#起因" class="headerlink" title="起因"></a>起因</h3><p>前几天和后端联调的时候，在空闲时间闲聊，不知怎么就聊到了归并排序，然后就瞎扯了一通时间复杂度，空间复杂度什么的，最后说到了归并排序在实际的应用，就是内存有限的情况下，大文件的排序。然后我就觉得，有些东西还是挺有用挺值得牢记的，就算短时间用不到，最好也还是不要忘，虽然大学学的很多东西，好多都因为暂时没用，还给老师了呢，比如计算机组成原理，操作系统，计算机系统结构等，觉得很是惭愧，于是就趁着周末看了下箱底的书，温习了一遍以前的一些基本算法，后来觉得还是要做一个沉淀写成博客会比较好，所以我就写了这篇博客，来提醒自己不要忘记。</p>
-        
-          <a class="article-more-a" href="/2017/08/07/算法/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-  
-    <article id="post-react demo" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/05/04/react demo/">redux 店铺装修</a>
-    </h1>
-  
-
-        
-        <a href="/2017/05/04/react demo/" class="archive-article-date">
-  	<time datetime="2017-05-04T06:29:18.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-05-04</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>最近在到处乱看一些项目相关的文档，发现了很很很麻烦的一个项目，刚好里面用到了redux，我发现简化一下的话，简直是redux的十分好的一个示例啊，比官网上简单的示例要难，又比难的简单，而且条理结构什么的又很清楚，挺不错的啊。</p>
-<p>我先上图吧。<br><img src="http://oatasl78l.bkt.clouddn.com/redux%20ex1.png" alt=""><br>图1<br><img src="http://oatasl78l.bkt.clouddn.com/redux%20ex2.png" alt=""><br>图2<br><img src="http://oatasl78l.bkt.clouddn.com/redux%20ex3.png" alt=""><br>图3<br><img src="http://oatasl78l.bkt.clouddn.com/redux%20ex4.png" alt=""><br>图4<br><img src="http://oatasl78l.bkt.clouddn.com/redux%20ex5.png" alt=""><br>图5<br><img src="http://oatasl78l.bkt.clouddn.com/redux%20ex6.png" alt=""><br>图6<br><img src="http://oatasl78l.bkt.clouddn.com/redux%20ex7.png" alt=""><br>图7<br><img src="http://oatasl78l.bkt.clouddn.com/redux%20ex8.png" alt=""><br>图8</p>
-        
-          <a class="article-more-a" href="/2017/05/04/react demo/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-  
-    <article id="post-震惊，大多数前端都还不知道这道题的答案" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/04/11/震惊，大多数前端都还不知道这道题的答案/">震惊！大多数前端都不知道的知识</a>
-    </h1>
-  
-
-        
-        <a href="/2017/04/11/震惊，大多数前端都还不知道这道题的答案/" class="archive-article-date">
-  	<time datetime="2017-04-11T12:56:08.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-04-11</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h3><p>最近看了两篇不错的文章，都是和定时器（setTimeout）有关，所以我想写一篇博客，把那两篇文章能够融合、整理一下。至于标题，参照UC震惊部取的，笑一笑就好了。</p>
-<h3 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h3><p>话不多说，直接进入正题吧，看下面一段代码，结果会输出什么：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">for (var i = 0; i &lt; 5; i++) &#123;</div><div class="line">  console.log(i);</div><div class="line">&#125;</div><div class="line">console.log(i)</div></pre></td></tr></table></figure>
-        
-          <a class="article-more-a" href="/2017/04/11/震惊，大多数前端都还不知道这道题的答案/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-  
-    <article id="post-promise" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/04/06/promise/">promise 详解</a>
-    </h1>
-  
-
-        
-        <a href="/2017/04/06/promise/" class="archive-article-date">
-  	<time datetime="2017-04-06T06:41:48.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-04-06</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>虽然之前写了javascript异步编程，不过我发现周围的部分小伙伴，当然也包括我，对promise的认识还是只停留在基础是使用，类似于ajax这种的使用，或者会用<code>promise.then()</code>，对于原生的Promise对象只了解一点甚至不了解，我也是模模糊糊地了解，所以准备写一篇关于<code>promise</code>的博客，顺便也借此机会一举击破promise，不想再搞得模模糊糊的了，彻底得解决掉这个东西。</p>
-<p>在去年，准确的说是在2015年6月（我专门查了的，肯定没有错），ECMAScript6的正式版发布了。ECMAScript 是 JavaScript 语言的国际标准，JavaScript 是 ECMAScript 的实现。ES6 的目标，是使得 JavaScript 语言可以用来编写大型的复杂的应用程序，成为企业级开发语言。</p>
-<p>ES6的改变还是算不小的，其中就包含了提供Promise对象。</p>
-<p>Promise是什么？首先，它是一个对象，它的作用是用来进行异步操作，代表着某个异步进行的事件的结果。</p>
-<p>Promise对象有以下两个特点：</p>
-<p>（1），对象的状态不受外界的影线。Promise对象代表一个异步的操作，它包含了三种状态，分别是：Pending（进行中），Resolve（已完成），Reject（已失败）。而异步操作的结果，决定了它将会输出哪一种状态，任何其它操作都无法改变这个状态。这也是Promise名字的由来，也就是承诺的意思，代表一定会去做。</p>
-<p>（2），一旦状态改变，就不会再变。虽然Promise不受外界影响状态，不过状态是会在内部进行改变的，它有两种改变状态的可能，一种是从进行中变为已完成（Pending to Resolve），另一种是从进行中变为已失败（Pending to Reject）。除此之外，状态不会再发生其它的变化。</p>
-<p>有了 Promise 对象，就可以将异步操作以同步操作的流程表达出来，避免了层层嵌套的回调函数。此外，Promise 对象提供统一的接口，使得控制异步操作更加容易。</p>
-<h4 id="CODE"><a href="#CODE" class="headerlink" title="CODE"></a>CODE</h4><p>“talk is cheap,show me the code”.</p>
-<p>这是程序员界比较常见的一句话，上面很多概念啊这些死知识讲解完了，下面才开始进入正题，开始代码演示。</p>
-<p>由于Promise已经是JS原生对象了，所以直接打开浏览器的控制台，输入Promise，就可以看到一个function Promise，如果报错的话，说明你的浏览器该升级了。</p>
-        
-          <a class="article-more-a" href="/2017/04/06/promise/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-  
-    <article id="post-http cache" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/04/05/http cache/">http cache</a>
-    </h1>
-  
-
-        
-        <a href="/2017/04/05/http cache/" class="archive-article-date">
-  	<time datetime="2017-04-05T09:15:07.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-04-05</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>翻译：<a href="https://developers.google.com/web/fundamentals/performance/optimizing-content-efficiency/http-caching?hl=zh-cn#_2" target="_blank" rel="external">https://developers.google.com/web/fundamentals/performance/optimizing-content-efficiency/http-caching?hl=zh-cn#_2</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-  
-  
-    <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
-    </nav>
-  
 
 
           </div>
@@ -670,9 +224,9 @@
     <script>
 	var yiliaConfig = {
 		mathjax: true,
-		isHome: true,
+		isHome: false,
 		isPost: false,
-		isArchive: false,
+		isArchive: true,
 		isTag: false,
 		isCategory: false,
 		open_in_new: true,
