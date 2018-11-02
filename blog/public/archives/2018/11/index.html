@@ -6,12 +6,12 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://wisdommm.github.io">
-  <title>Wisdommm</title>
+  <title>Archives: 2018/11 | Wisdommm</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="在梦想的道路上一路狂奔">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Wisdommm">
-<meta property="og:url" content="http://wisdommm.github.io/page/3/index.html">
+<meta property="og:url" content="http://wisdommm.github.io/archives/2018/11/index.html">
 <meta property="og:site_name" content="Wisdommm">
 <meta property="og:description" content="在梦想的道路上一路狂奔">
 <meta name="twitter:card" content="summary">
@@ -162,413 +162,47 @@
           <div id="js-content" class="content-ll">
             
   
-    <article id="post-react无状态组件和高阶组件" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
+  
     
-      <header class="article-header">
-        
+    
+      
+      
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/archives/2018" class="archive-year">2018</a>
+        </div>
+        <div class="archives">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      	<div class="article-meta">
+	      	<a href="/2018/11/01/BlockChain 十年踪迹/" class="archive-article-date">
+  	<time datetime="2018-11-01T06:54:39.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-11-01</time>
+</a>
+        </div>
+    	 
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/01/24/react无状态组件和高阶组件/">react——无状态组件和高阶组件</a>
+      <a class="archive-article-title" href="/2018/11/01/BlockChain 十年踪迹/">BlockChain 十年踪迹（转）</a>
     </h1>
   
 
-        
-        <a href="/2017/01/24/react无状态组件和高阶组件/" class="archive-article-date">
-  	<time datetime="2017-01-24T09:09:29.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-01-24</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h4 id="无状态组件"><a href="#无状态组件" class="headerlink" title="无状态组件"></a>无状态组件</h4><p>先来说说无状态组件吧，顾名思义，无状态组件就是指的没有状态的组件，众所周知在react中，状态指的就是state，而没有state，会有什么好处和坏处呢？</p>
-<p>react中所有的数据，都是通过state和props来保存的，state主要是组件内部的数据交流，可以进行各种读写操作，而props主要是组件间的数据交流，一般针对props仅仅执行只读，不会做额外的操作。所以话说回来，无状态组件，没有state，那么内部的逻辑必将大大减少，编写react组件的方便性也将大大提高。</p>
-<p>下面是一个简单的无状态组件：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">function Hello(props&#123;</div><div class="line">  return &lt;div&gt;Hello&#123;props.name&#125;&lt;/div&gt;</div><div class="line">&#125;</div><div class="line">ReactDOM.render(&lt;Hello name=&quot;world&quot; /&gt;, mountNode)</div><div class="line"></div><div class="line">// 最后一句也可以这么写</div><div class="line">ReactDOM.render(Hello(&#123;&quot;name&quot;:&quot;world&quot;&#125;), mountNode)</div></pre></td></tr></table></figure>
-<p>通过这个简单的示例可以看到，原本需要写的<code>react</code>类定义（<code>React.createClass</code>或者<code>class Component extends React.Component</code>）来创建自己组件的定义，但是由于这仅仅是一个无状态组件（无状态函数），<code>react</code>在渲染的时候也省掉了奖<code>react</code>组件类实例化的过程。</p>
-<p>所以对于一些纯静态展示的功能模块，可以考虑作为无状态组件，而无状态组件用来实现服务端渲染也是比较方便的，只要避免去获取dom节点就可以了。</p>
-        
-          <a class="article-more-a" href="/2017/01/24/react无状态组件和高阶组件/#more">more >></a>
-        
-      
+        <div class="article-info info-on-right">
+          
+          
 
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
+        </div>
+        <div class="clearfix"></div>
+    </header>
   </div>
 </article>
-
-
-
-
-
   
-    <article id="post-react生命周期源码解读" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
+  
+    </div></section>
+  
+
     
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/01/24/react生命周期源码解读/">从源码看react生命周期</a>
-    </h1>
-  
-
-        
-        <a href="/2017/01/24/react生命周期源码解读/" class="archive-article-date">
-  	<time datetime="2017-01-24T09:09:19.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-01-24</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>React的主要思想，就是通过构建可复用的组件来构建页面，而每一个组件，就是一个有限的状态机，通过状态控制组件不同的渲染，从而得到不同的界面效果。每个组件都有生命周期，它规定了组件的一些自带方法需要在哪个阶段进行执行以及输出对应的结果。</p>
-<p>有限状态机，表示有限个状态，以及在这些状态之间的数据转移和动作方法的执行的行为模型，一般通过状态、事件、转换和动作来描述有限状态机。例如页面上的都个东西有显示和隐藏两种情况，那么一般情况下我们会设计两个方法：show()和hide()来实现显示与隐藏的切换，而react只需要设置某一个状态为true或false，就可以实现这个组件的隐藏和显示转换了。<br>同时，react还引入了组件的生命周期这个概念，通过它就可以实现组件的状态机控制，从而达到“生命周期－状态－组件”的和谐画面。</p>
-<h4 id="生命周期"><a href="#生命周期" class="headerlink" title="生命周期"></a>生命周期</h4><p>之前一篇博客就已经说到了一下生命周期，我在这里再赘述一下吧，react组件自带的一些函数方法，比如getDefaultProps、getInitialState等，会在什么时候执行。</p>
-<ul>
-<li><p>当首次装载组件时，按顺序执行 getDefaultProps、getInitialState、componentWillMount、render 和 componentDidMount；</p>
-</li>
-<li><p>当卸载组件时，执行 componentWillUnmount；</p>
-</li>
-<li><p>当重新装载组件时，此时按顺序执行 getInitialState、componentWillMount、render 和 componentDidMount，但并不执行 getDefaultProps；</p>
-</li>
-<li><p>当再次渲染组件时，组件接受到更新状态，此时按顺序执行 componentWillReceiveProps、shouldComponentUpdate、componentWillUpdate、render 和 componentDidUpdate.</p>
-</li>
-</ul>
-<p>然后具体的状态、属性改变，会触发什么方法，可以参考如下两张图，由于这篇博客重点不在于此，所以就不细细讲解了。<br><br><img src="http://oatasl78l.bkt.clouddn.com/react%20cycle1.png" alt=""><br><br><img src="http://oatasl78l.bkt.clouddn.com/react%20cycle2.jpg" alt=""><br></p>
-<p>疑问：</p>
-<ul>
-<li>为什么react会按照这样的方式来，这样的顺序来执行生命周期？</li>
-<li>为什么react多次render时，会执行生命周期的不同阶段。</li>
-<li>为什么getDefaultProps只执行了一次？</li>
-</ul>
-        
-          <a class="article-more-a" href="/2017/01/24/react生命周期源码解读/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-  
-    <article id="post-react es5还是es6 ？" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/01/24/react es5还是es6 ？/">react, es5 or es6 ?</a>
-    </h1>
-  
-
-        
-        <a href="/2017/01/24/react es5还是es6 ？/" class="archive-article-date">
-  	<time datetime="2017-01-24T09:07:35.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-01-24</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>随着es6的逐渐普及，新的语法糖，对我们以前写js的习惯也有着不小的冲击，比如说我好久都没写过function这个词语了，取而代之的是“=&gt;”箭头函数，var也基本不用了，现在用let，以及其他等等。</p>
-<p>但是对于写react，es5和es6的变化，还是稍微有一些不同的，“talk is cheap,show the code”。</p>
-<p>这是es5的写法：</p>
-        
-          <a class="article-more-a" href="/2017/01/24/react es5还是es6 ？/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-  
-    <article id="post-redux源码解读" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/01/24/redux源码解读/">redux源码解读</a>
-    </h1>
-  
-
-        
-        <a href="/2017/01/24/redux源码解读/" class="archive-article-date">
-  	<time datetime="2017-01-24T09:06:35.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-01-24</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>这是2017年的第一篇博客，上周参加完各种年会聚会，本来准备周末写的，可是周末又突然有事，所以一直拖到现在，而且这是2017的第一篇技术博客，所谓好的开始是成功的一半，希望新的一年，自己可以继续坚持，变得更好。</p>
-<h3 id="redux"><a href="#redux" class="headerlink" title="redux"></a>redux</h3><p>其实我工作项目中接触的redux并不多，应该说只有一两个项目用到了redux，要求也是基本的redux的使用，dispatch一个action这种程度，react-redux也还没有涉及到，可能是项目的复杂程度不够大吧，所以涉及到redux的相关技术现在都是靠自学（唉，现在公司PHP迁移到JAVA，业务压力这么重，哪有时间自学啊，连示例都没看完，囧2333～）。</p>
-<p>吐槽完毕，回到正题上来吧，学习一个库和框架最好的方法就是直接看源码，看源码好处有很多，不仅仅是学习API，还可以学习别人编写这个库（框架）的思想，这才是最为重要的，所以这次来写一篇redux源码相关的博客。</p>
-<h3 id="redux源码解读"><a href="#redux源码解读" class="headerlink" title="redux源码解读"></a>redux源码解读</h3><p>先把redux下载下来，发现很小，且没有依赖其他第三方库，简直是短小精悍啊，下面就让我好好见识下里面的思想。</p>
-<p>我们直接看到src文件夹下，发现下面一共有七个文件或文件夹，分别是utils，applyMiddleware.js，bindActionCreators.js，combineReducers.js，compose.js，createStore.js，index.js。我们分别来看看。</p>
-        
-          <a class="article-more-a" href="/2017/01/24/redux源码解读/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-  
-    <article id="post-redux example(1)" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/01/24/redux example(1)/">redux example(1)</a>
-    </h1>
-  
-
-        
-        <a href="/2017/01/24/redux example(1)/" class="archive-article-date">
-  	<time datetime="2017-01-24T09:06:24.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-01-24</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>最近在学习redux，看了不少相关的资料，发现这个<a href="http://cn.redux.js.org/docs/introduction/Examples.html">官方教程</a>的一些例子还是很不错的，由浅入深各个档次都有，所以我稍微看了下，准备有时间的话将示例都自己弄懂，然后分别写篇详细的解读出来，由于是临时起意，所以今天先写第一篇吧。</p>
-<h4 id="counter-vanilla"><a href="#counter-vanilla" class="headerlink" title="counter-vanilla"></a>counter-vanilla</h4><p>这是redux中的第一个示例，也就是说是最简单的一个例子，不多说了，先看看代码吧。</p>
-        
-          <a class="article-more-a" href="/2017/01/24/redux example(1)/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-  
-    <article id="post-vue todo" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/01/24/vue todo/">vue todo示例</a>
-    </h1>
-  
-
-        
-        <a href="/2017/01/24/vue todo/" class="archive-article-date">
-  	<time datetime="2017-01-24T09:06:12.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-01-24</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>最近抽空看了下vue，一个轻量级的前端框架（类库），它采用的mvvm模式，且数据双向绑定，刚好官方网站上有一个todo实例，我感觉和redux的todo实例很类似，所以准备将这两个框架的todo实例分别解读一下，来比较一下个中异同。</p>
-<p>这个代码就两部分，先是html：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">&lt;div id=&quot;app&quot;&gt;</div><div class="line">  &lt;input v-model=&quot;newTodo&quot; v-on:keyup.enter=&quot;addTodo&quot;&gt;</div><div class="line">  &lt;ul&gt;</div><div class="line">    &lt;li v-for=&quot;todo in todos&quot;&gt;</div><div class="line">      &lt;span&gt;&#123;&#123; todo.text &#125;&#125;&lt;/span&gt;</div><div class="line">      &lt;button v-on:click=&quot;removeTodo($index)&quot;&gt;X&lt;/button&gt;</div><div class="line">    &lt;/li&gt;</div><div class="line">  &lt;/ul&gt;</div><div class="line">&lt;/div&gt;</div></pre></td></tr></table></figure></p>
-        
-          <a class="article-more-a" href="/2017/01/24/vue todo/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-  
-    <article id="post-vue.js 组件入门（一）" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/01/24/vue.js 组件入门（一）/">vue.js 组件快速入门（一）</a>
-    </h1>
-  
-
-        
-        <a href="/2017/01/24/vue.js 组件入门（一）/" class="archive-article-date">
-  	<time datetime="2017-01-24T09:06:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-01-24</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>前几天读了一篇好文章，<a href="http://www.cnblogs.com/keepfool/p/5625583.html">vue组件化</a>，这篇算是我自己提炼出来的的归纳与总结吧。</p>
-<p>在前端开发中，以前我们会把常用的公共的方法（函数）提取出来，整合为一个库，最有名的当属jQ了吧，然后到了react出现，这些类库主要都是针对view层进行的操作与封装，我们又可以把view层面上的一些东西抽出来进行封装和整理，比如一个table，一个button，一个div等，也可以像曾经提取函数一样抽出来，写成公用的，在需要使用的地方直接引入就可以了，当然，也可以根据你实际运用的需要进行适当的自定义配置，而这些被抽出来共用的table，button，div这些，就叫做组件。</p>
-<p>上面是我自己瞎扯的，原文作者讲得比较繁琐，所以我就用自己的语言来概述了一下，虽然这篇文章是我转载的，不过我也参考了其它的文章／博客，知识点的相似度接近80%，但是语言基本上都是我自己重新组织的，所以加了很多自己的想法和思考，下面我们开始进入正题。</p>
-        
-          <a class="article-more-a" href="/2017/01/24/vue.js 组件入门（一）/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-  
-    <article id="post-D2总结（1）" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/01/24/D2总结（1）/">D2总结（Fusion Design）</a>
-    </h1>
-  
-
-        
-        <a href="/2017/01/24/D2总结（1）/" class="archive-article-date">
-  	<time datetime="2017-01-24T09:05:23.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-01-24</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>这周末去参加了D2前端技术论坛，听了这么多分享，发现有不少东西可以总结的，可是由于当天确实太累，所以没能及时整理出总结来，只好现在来慢慢回想，还好听分享时记了笔记的。</p>
-        
-          <a class="article-more-a" href="/2017/01/24/D2总结（1）/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-  
-  
-    <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/2/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span>
-    </nav>
-  
 
 
           </div>
@@ -590,9 +224,9 @@
     <script>
 	var yiliaConfig = {
 		mathjax: true,
-		isHome: true,
+		isHome: false,
 		isPost: false,
-		isArchive: false,
+		isArchive: true,
 		isTag: false,
 		isCategory: false,
 		open_in_new: true,

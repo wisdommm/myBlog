@@ -162,6 +162,106 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-promise" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/04/06/promise/">promise 详解</a>
+    </h1>
+  
+
+        
+        <a href="/2017/04/06/promise/" class="archive-article-date">
+  	<time datetime="2017-04-06T06:41:48.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-04-06</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>虽然之前写了javascript异步编程，不过我发现周围的部分小伙伴，当然也包括我，对promise的认识还是只停留在基础是使用，类似于ajax这种的使用，或者会用<code>promise.then()</code>，对于原生的Promise对象只了解一点甚至不了解，我也是模模糊糊地了解，所以准备写一篇关于<code>promise</code>的博客，顺便也借此机会一举击破promise，不想再搞得模模糊糊的了，彻底得解决掉这个东西。</p>
+<p>在去年，准确的说是在2015年6月（我专门查了的，肯定没有错），ECMAScript6的正式版发布了。ECMAScript 是 JavaScript 语言的国际标准，JavaScript 是 ECMAScript 的实现。ES6 的目标，是使得 JavaScript 语言可以用来编写大型的复杂的应用程序，成为企业级开发语言。</p>
+<p>ES6的改变还是算不小的，其中就包含了提供Promise对象。</p>
+<p>Promise是什么？首先，它是一个对象，它的作用是用来进行异步操作，代表着某个异步进行的事件的结果。</p>
+<p>Promise对象有以下两个特点：</p>
+<p>（1），对象的状态不受外界的影线。Promise对象代表一个异步的操作，它包含了三种状态，分别是：Pending（进行中），Resolve（已完成），Reject（已失败）。而异步操作的结果，决定了它将会输出哪一种状态，任何其它操作都无法改变这个状态。这也是Promise名字的由来，也就是承诺的意思，代表一定会去做。</p>
+<p>（2），一旦状态改变，就不会再变。虽然Promise不受外界影响状态，不过状态是会在内部进行改变的，它有两种改变状态的可能，一种是从进行中变为已完成（Pending to Resolve），另一种是从进行中变为已失败（Pending to Reject）。除此之外，状态不会再发生其它的变化。</p>
+<p>有了 Promise 对象，就可以将异步操作以同步操作的流程表达出来，避免了层层嵌套的回调函数。此外，Promise 对象提供统一的接口，使得控制异步操作更加容易。</p>
+<h4 id="CODE"><a href="#CODE" class="headerlink" title="CODE"></a>CODE</h4><p>“talk is cheap,show me the code”.</p>
+<p>这是程序员界比较常见的一句话，上面很多概念啊这些死知识讲解完了，下面才开始进入正题，开始代码演示。</p>
+<p>由于Promise已经是JS原生对象了，所以直接打开浏览器的控制台，输入Promise，就可以看到一个function Promise，如果报错的话，说明你的浏览器该升级了。</p>
+        
+          <a class="article-more-a" href="/2017/04/06/promise/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+  
+    <article id="post-http cache" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/04/05/http cache/">http cache</a>
+    </h1>
+  
+
+        
+        <a href="/2017/04/05/http cache/" class="archive-article-date">
+  	<time datetime="2017-04-05T09:15:07.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-04-05</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>翻译：<a href="https://developers.google.com/web/fundamentals/performance/optimizing-content-efficiency/http-caching?hl=zh-cn#_2" target="_blank" rel="external">https://developers.google.com/web/fundamentals/performance/optimizing-content-efficiency/http-caching?hl=zh-cn#_2</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+  
     <article id="post-js事件机制" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -524,122 +624,6 @@
 <p>示例看完了，下面我们来看看具体的实现吧，在这之前，我想说一下http这个模块，毕竟express就是对http进行了一下封装，既然想看看express的内部，当然就离不开http了。</p>
         
           <a class="article-more-a" href="/2017/01/24/node express实现/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-  
-    <article id="post-react无状态组件和高阶组件" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/01/24/react无状态组件和高阶组件/">react——无状态组件和高阶组件</a>
-    </h1>
-  
-
-        
-        <a href="/2017/01/24/react无状态组件和高阶组件/" class="archive-article-date">
-  	<time datetime="2017-01-24T09:09:29.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-01-24</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h4 id="无状态组件"><a href="#无状态组件" class="headerlink" title="无状态组件"></a>无状态组件</h4><p>先来说说无状态组件吧，顾名思义，无状态组件就是指的没有状态的组件，众所周知在react中，状态指的就是state，而没有state，会有什么好处和坏处呢？</p>
-<p>react中所有的数据，都是通过state和props来保存的，state主要是组件内部的数据交流，可以进行各种读写操作，而props主要是组件间的数据交流，一般针对props仅仅执行只读，不会做额外的操作。所以话说回来，无状态组件，没有state，那么内部的逻辑必将大大减少，编写react组件的方便性也将大大提高。</p>
-<p>下面是一个简单的无状态组件：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">function Hello(props&#123;</div><div class="line">  return &lt;div&gt;Hello&#123;props.name&#125;&lt;/div&gt;</div><div class="line">&#125;</div><div class="line">ReactDOM.render(&lt;Hello name=&quot;world&quot; /&gt;, mountNode)</div><div class="line"></div><div class="line">// 最后一句也可以这么写</div><div class="line">ReactDOM.render(Hello(&#123;&quot;name&quot;:&quot;world&quot;&#125;), mountNode)</div></pre></td></tr></table></figure>
-<p>通过这个简单的示例可以看到，原本需要写的<code>react</code>类定义（<code>React.createClass</code>或者<code>class Component extends React.Component</code>）来创建自己组件的定义，但是由于这仅仅是一个无状态组件（无状态函数），<code>react</code>在渲染的时候也省掉了奖<code>react</code>组件类实例化的过程。</p>
-<p>所以对于一些纯静态展示的功能模块，可以考虑作为无状态组件，而无状态组件用来实现服务端渲染也是比较方便的，只要避免去获取dom节点就可以了。</p>
-        
-          <a class="article-more-a" href="/2017/01/24/react无状态组件和高阶组件/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-  
-    <article id="post-react生命周期源码解读" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/01/24/react生命周期源码解读/">从源码看react生命周期</a>
-    </h1>
-  
-
-        
-        <a href="/2017/01/24/react生命周期源码解读/" class="archive-article-date">
-  	<time datetime="2017-01-24T09:09:19.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-01-24</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>React的主要思想，就是通过构建可复用的组件来构建页面，而每一个组件，就是一个有限的状态机，通过状态控制组件不同的渲染，从而得到不同的界面效果。每个组件都有生命周期，它规定了组件的一些自带方法需要在哪个阶段进行执行以及输出对应的结果。</p>
-<p>有限状态机，表示有限个状态，以及在这些状态之间的数据转移和动作方法的执行的行为模型，一般通过状态、事件、转换和动作来描述有限状态机。例如页面上的都个东西有显示和隐藏两种情况，那么一般情况下我们会设计两个方法：show()和hide()来实现显示与隐藏的切换，而react只需要设置某一个状态为true或false，就可以实现这个组件的隐藏和显示转换了。<br>同时，react还引入了组件的生命周期这个概念，通过它就可以实现组件的状态机控制，从而达到“生命周期－状态－组件”的和谐画面。</p>
-<h4 id="生命周期"><a href="#生命周期" class="headerlink" title="生命周期"></a>生命周期</h4><p>之前一篇博客就已经说到了一下生命周期，我在这里再赘述一下吧，react组件自带的一些函数方法，比如getDefaultProps、getInitialState等，会在什么时候执行。</p>
-<ul>
-<li><p>当首次装载组件时，按顺序执行 getDefaultProps、getInitialState、componentWillMount、render 和 componentDidMount；</p>
-</li>
-<li><p>当卸载组件时，执行 componentWillUnmount；</p>
-</li>
-<li><p>当重新装载组件时，此时按顺序执行 getInitialState、componentWillMount、render 和 componentDidMount，但并不执行 getDefaultProps；</p>
-</li>
-<li><p>当再次渲染组件时，组件接受到更新状态，此时按顺序执行 componentWillReceiveProps、shouldComponentUpdate、componentWillUpdate、render 和 componentDidUpdate.</p>
-</li>
-</ul>
-<p>然后具体的状态、属性改变，会触发什么方法，可以参考如下两张图，由于这篇博客重点不在于此，所以就不细细讲解了。<br><br><img src="http://oatasl78l.bkt.clouddn.com/react%20cycle1.png" alt=""><br><br><img src="http://oatasl78l.bkt.clouddn.com/react%20cycle2.jpg" alt=""><br></p>
-<p>疑问：</p>
-<ul>
-<li>为什么react会按照这样的方式来，这样的顺序来执行生命周期？</li>
-<li>为什么react多次render时，会执行生命周期的不同阶段。</li>
-<li>为什么getDefaultProps只执行了一次？</li>
-</ul>
-        
-          <a class="article-more-a" href="/2017/01/24/react生命周期源码解读/#more">more >></a>
         
       
 

@@ -162,6 +162,103 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-BlockChain 十年踪迹" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/11/01/BlockChain 十年踪迹/">BlockChain 十年踪迹（转）</a>
+    </h1>
+  
+
+        
+        <a href="/2018/11/01/BlockChain 十年踪迹/" class="archive-article-date">
+  	<time datetime="2018-11-01T06:54:39.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-11-01</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>2008年10月31日，一场社会实验开始，中本聪带着比特币和区块链出现。</p>
+<p>十年间，伴随着比特币和区块链发展的不同阶段，极客、矿工、投机者与小白不断涌入，留下暴富、神话、骗局、信仰、革命等关键词。</p>
+<p>十年后，比特币和区块链或已不再是中本聪的初衷，二者也不只是少数极客的玩具，而是俨然要掀起一场科技革命。</p>
+<p>回顾这场科技浪潮的各大事件节点，不只是为了纪念，更是以史为鉴，砥砺前行。</p>
+        
+          <a class="article-more-a" href="/2018/11/01/BlockChain 十年踪迹/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+  
+    <article id="post-Rxjs(一)" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/09/26/Rxjs(一)/">RxJS(一)</a>
+    </h1>
+  
+
+        
+        <a href="/2018/09/26/Rxjs(一)/" class="archive-article-date">
+  	<time datetime="2018-09-26T12:30:45.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-09-26</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>又是好久好久好久没有写技术文章了，主要是都在忙业务，唉，年初过个春节，然后搞了618，上半年就过去了，下半年中秋国庆一过，双十一忙到昏厥，一年也就这样过去了。。。作为阿里的程序员，有时候感觉时间过得真的好快，不知道自己又留下了些什么，可能确实留下了很多东西，比如每年的繁忙，业务的发展，技术的进阶，但是都是存在于深深的脑海里，好好想了想，还是想写下来，但是有的业务耦合太强的又不敢写，所以只好自己提炼一下纯技术的东西，放在博客里。今天这是RxJS的第一篇文章，后续会出多篇，变成一个完整的RxJS学习系列。</p>
+<h3 id="一，RxJS是什么？"><a href="#一，RxJS是什么？" class="headerlink" title="一，RxJS是什么？"></a>一，RxJS是什么？</h3><p>RxJS的全称叫做 Reactive Extension for JavaScript，Reactive Extension也可以简写为ReactiveX，至于Reactive Extension为什么要缩写为Rx而不是Re，我也不知道，总的意思就是JavaScript的Reactive Extension模式的实现，因为这只是一种实现的模式，和具体语言无关，所以除了RxJS，还有RxJava、Rx.NET、RxCpp、Rx.rb、RxPy等，这种。</p>
+<p>在介绍Reactive Extension编程模式之前，我想先介绍两种其他的编程模式，就是响应式编程和函数式编程。</p>
+<h5 id="1，函数式编程"><a href="#1，函数式编程" class="headerlink" title="1，函数式编程"></a>1，函数式编程</h5><p>说起函数式编程，大家应该都不会陌生，顾名思义，函数式编程就是使用函数来解决问题的一种编程方式。用过Redux的同学应该都会明白，Redux就是纯函数式的编程，我们可以归纳一下Redux的几个特点：不修改老的state，而是返回新的state；入参一定的时候，出参数也一定；使用声明式函数；其实这就是纯函数最大的三个特点：1，不可变数据；2，纯函数；3，声明式。这里我就不做过多介绍了，有兴趣的可以下去自己查下资料看看。</p>
+<h5 id="2，响应式编程（Reactive-Programming）"><a href="#2，响应式编程（Reactive-Programming）" class="headerlink" title="2，响应式编程（Reactive Programming）"></a>2，响应式编程（Reactive Programming）</h5><p>这个响应式编程呢，举个最简单的示例，就是excel函数，比如大家在使用excel的时候，需要计算一列数值的和，我们只需要选中这列之外的一个空白的区域，然后在公式部分输入“=”，再用鼠标选中你所想要计算的那一列或一部分的区域，那么你选中的这个区域里的数值，就会自动变成你想要计算的那一列的值了，与此同时，不管你这一列中，任意位置的值想要怎么变化，最终结果的值也是会同时进行改变的，这也就是说，结果区域的值会随着你那一列的区域中值的变化而作出“响应”，这就叫响应式编程。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+  
     <article id="post-ipfs" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -522,106 +619,6 @@
         
           <a class="article-more-a" href="/2017/04/11/震惊，大多数前端都还不知道这道题的答案/#more">more >></a>
         
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-  
-    <article id="post-promise" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/04/06/promise/">promise 详解</a>
-    </h1>
-  
-
-        
-        <a href="/2017/04/06/promise/" class="archive-article-date">
-  	<time datetime="2017-04-06T06:41:48.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-04-06</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>虽然之前写了javascript异步编程，不过我发现周围的部分小伙伴，当然也包括我，对promise的认识还是只停留在基础是使用，类似于ajax这种的使用，或者会用<code>promise.then()</code>，对于原生的Promise对象只了解一点甚至不了解，我也是模模糊糊地了解，所以准备写一篇关于<code>promise</code>的博客，顺便也借此机会一举击破promise，不想再搞得模模糊糊的了，彻底得解决掉这个东西。</p>
-<p>在去年，准确的说是在2015年6月（我专门查了的，肯定没有错），ECMAScript6的正式版发布了。ECMAScript 是 JavaScript 语言的国际标准，JavaScript 是 ECMAScript 的实现。ES6 的目标，是使得 JavaScript 语言可以用来编写大型的复杂的应用程序，成为企业级开发语言。</p>
-<p>ES6的改变还是算不小的，其中就包含了提供Promise对象。</p>
-<p>Promise是什么？首先，它是一个对象，它的作用是用来进行异步操作，代表着某个异步进行的事件的结果。</p>
-<p>Promise对象有以下两个特点：</p>
-<p>（1），对象的状态不受外界的影线。Promise对象代表一个异步的操作，它包含了三种状态，分别是：Pending（进行中），Resolve（已完成），Reject（已失败）。而异步操作的结果，决定了它将会输出哪一种状态，任何其它操作都无法改变这个状态。这也是Promise名字的由来，也就是承诺的意思，代表一定会去做。</p>
-<p>（2），一旦状态改变，就不会再变。虽然Promise不受外界影响状态，不过状态是会在内部进行改变的，它有两种改变状态的可能，一种是从进行中变为已完成（Pending to Resolve），另一种是从进行中变为已失败（Pending to Reject）。除此之外，状态不会再发生其它的变化。</p>
-<p>有了 Promise 对象，就可以将异步操作以同步操作的流程表达出来，避免了层层嵌套的回调函数。此外，Promise 对象提供统一的接口，使得控制异步操作更加容易。</p>
-<h4 id="CODE"><a href="#CODE" class="headerlink" title="CODE"></a>CODE</h4><p>“talk is cheap,show me the code”.</p>
-<p>这是程序员界比较常见的一句话，上面很多概念啊这些死知识讲解完了，下面才开始进入正题，开始代码演示。</p>
-<p>由于Promise已经是JS原生对象了，所以直接打开浏览器的控制台，输入Promise，就可以看到一个function Promise，如果报错的话，说明你的浏览器该升级了。</p>
-        
-          <a class="article-more-a" href="/2017/04/06/promise/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-  
-    <article id="post-http cache" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/04/05/http cache/">http cache</a>
-    </h1>
-  
-
-        
-        <a href="/2017/04/05/http cache/" class="archive-article-date">
-  	<time datetime="2017-04-05T09:15:07.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-04-05</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>翻译：<a href="https://developers.google.com/web/fundamentals/performance/optimizing-content-efficiency/http-caching?hl=zh-cn#_2" target="_blank" rel="external">https://developers.google.com/web/fundamentals/performance/optimizing-content-efficiency/http-caching?hl=zh-cn#_2</a></p>
-
       
 
       
