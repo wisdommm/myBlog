@@ -162,6 +162,123 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-零售终端测试技巧" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/12/09/零售终端测试技巧/">零售终端前端调试技巧</a>
+    </h1>
+  
+
+        
+        <a href="/2018/12/09/零售终端测试技巧/" class="archive-article-date">
+  	<time datetime="2018-12-09T06:39:05.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-12-09</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>现在的新零售包含了许多的硬件，并且线下环境将会因为各种硬件性能的不够成熟完善，再加上时好时坏的网络情况，都给线下带来了很多的不确定性与困难性，这也就给调试带来了不小的麻烦。</p>
+<p>比如一张拍照后经过后端各种处理的图片，本来应该展示的时候却没有展示，这时候就需要前端工程师来排查问题，毕竟显示层的所有问题都是属于前端的问题。</p>
+<p>如果你运气好或者线下经验比较多的话，你就会发现大多数图片相关的问题都是偶现，不是必现，有可能你重新来一次，问题就已经不会复现了，只不过说不定什么时候这个bug又会心情不好地出来，怎么解决呢？后面再说。</p>
+<p>既然出了问题当然就需要解决问题，我们就需要对这台设备进行调试。</p>
+<p>对这台设备进行调试前，我们首先需要做一些准备工作：</p>
+<ul>
+<li>你的电脑先要链接内网，然后起本地服务。</li>
+<li>你要调试的设备也要有内网环境，同时设备里已经安装了一个测试包。</li>
+<li><p>将你电脑的环境代理到调试设备上，花瓶可以，<a href="http://web.npm.alibaba-inc.com/package/@ali/zebra-proxy" target="_blank" rel="external">zebra-proxy</a>也可以，然后就可以在调试设备中访问你的本地项目页面了。</p>
+</li>
+<li><p>还有一些基本知识你也需要知道：比如你要知道mtop接口VConsole是抓取不到的，需要做降级处理；</p>
+</li>
+<li><p>https的数据在花瓶中抓到的也是乱码，你要先安装ssl证书；</p>
+</li>
+<li><p>还有一些特殊的接口，比如hybrid接口，除了将其console／alert输出来看，基本没有其他办法，并且打印出来看完了过后你还要记得clear，否则如果不小心带了一个alert上线，你就要哭死了（这个问题建议用一个全局的方法统一处理，或是在build的时候引入一些去debugger的插件）；</p>
+</li>
+<li><p>前端能检查到的接口种类是有限的，客户端直接对后端发起的请求前端是获取不到的；</p>
+</li>
+<li><p>一些静态资源的加载详细信息，前端都是拿不到的（除了图片加载的onerror和onload）。</p>
+</li>
+</ul>
+<p>都当前端完成了准备工作，经过了长时间检查后，如果还没找到问题，就要客户端／后端来检查了，毕竟不是每个接口都是前端能拿到的，比如客户端的网络请求，前端就拿不到，需要客户端同学代或后端看一下请求日志，这就更加麻烦了。</p>
+<p>以上的流程都是标准状态，如果你有持之以恒的信心完成了，那也是调试效率低下的表现，但是很多时候，我们零售终端的开发都是需要去线下场地的，也就是说我们不一定是在公司，毕竟电脑想变成内网环境，阿里郎可以很轻松解决，但是其他设备想连内网，就麻烦多了；同时根据我做线下的一点小小的经验，上线后的问题，80%主要是硬件和网络所引起的加载失败或者效果卡顿，点击偏移等等。</p>
+<p>首先说下网络，想了解网络情况，唯一的解决方法就是拿到当时请求和加载资源的详细信息，这就说明你必须有一个对项目内的所有请求和资源加载的监控，并且为了能够做到实时调试，所以就必须有一个地方能够实时查看这些数据。</p>
+<h4 id="零售终端日志列表"><a href="#零售终端日志列表" class="headerlink" title="零售终端日志列表"></a>零售终端日志列表</h4><p><img src="https://img.alicdn.com/tfs/TB1crCIu4jaK1RjSZKzXXXVwXXa-2724-1406.jpg" alt=""></p>
+<p>先来说如何获取这些数据。</p>
+<p>在业务层面来说，前端和客户端可以对自己所用到的接口等都做统计，尤其是接口响应时间和资源加载时间，这样我们才能知道某时某刻的具体网络情况是怎样的，业务层面搜集了数据然后集中上报到某个服务器（设备数量很多时，数据量可能会很大，要注意），但是这就有个问题，那么多接口，如果都在业务层面来做，工作量将会很大，并且对其他业务的接入的门槛也将会提高，所以这个就不能放在业务层面来做，这就需要放在零售终端底层统一做掉，客户端底层是可以对这个app内的所有请求／加载进行监控的，所以上面提到的各种接口，http／https、mtop、hybrid、静态资源加载，都可以获取到详细信息，包括但不仅限于入参、出参、起止时间等等，所以其他零售终端的业务也就统一静默接入了这个功能，他们唯一要做的就是打开这个监控数据的开关，真正做到了零成本，这是第一个好处；第二个好处就是客户端的本地存储功能，现在线下网络环境不好，所以我们一边在优化网络加载的情况下，另一边也是在不断降低网络波动对业务的影响，比如POS机，这是线下最重要的一个设备，直接涉及到钱的，不能因为网络差就让顾客买单失败或者产生其他错误，还有就是试妆镜子，也不能因为网络差就让顾客不能正常试妆，在零售终端这边现在都做到了不管网络怎么变化，这些功能都将可以正常使用，然后缓存在客户端本地，等网络变正常了，将会把一些订单信息或者试妆信息统一传输给服务器。</p>
+<h4 id="云端真机调试"><a href="#云端真机调试" class="headerlink" title="云端真机调试"></a>云端真机调试</h4><p>所以现在我们已经获取到了这些数据，后面就是展示出来，展示的地方刚好有现成的，就展示在零售终端平台中，后面的话，如果再遇到一些线下设备的异常情况，我们就可以直接在某个地方去实时查询异常时候的各种信息数据，而不是自己艰难的起服务来调试。</p>
+<p>到这里，这算是解决一个调试的大问题了，后面呢？线下零售终端设备有的特别庞大且笨重，有时候你要调试的时候，你手边却没有这些设备，这就很麻烦了，不像手机那么容易得到，所以此时就想到了云端真机调试，现在这种云端真机调试有许多，比如UC的<a href="http://irma.work.ucweb.local/#/remote/remote-control-devices" target="_blank" rel="external">IRMA</a>，淘宝的<a href="http://mds.alibaba-inc.com/" target="_blank" rel="external">磨刀石</a>，这里就不再缀诉了，目前天猫魔镜已经接入了磨刀石，每当有什么地方需要修改后，我本地改完了就可以通过磨刀石在云端真机调试，并且可以去终端管理平台上查看具体调试信息。</p>
+<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><p>和之前的调试方法相比，不管你想调试哪一台设备都可以设备的距离，并且让你可以实时查看任一台你想要查看的的接口和资源信息，这样就形成了从个人电脑到调试的设备再到设备日志的一个闭环，真正做到让你的线下设备调试效率大幅度上升。</p>
+<p><img src="https://img.alicdn.com/tfs/TB1PHiluW6qK1RjSZFmXXX0PFXa-1736-936.jpg" alt=""></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+  
+    <article id="post-threejs(1)" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/11/19/threejs(1)/">threejs(1)</a>
+    </h1>
+  
+
+        
+        <a href="/2018/11/19/threejs(1)/" class="archive-article-date">
+  	<time datetime="2018-11-19T03:17:48.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-11-19</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+  
     <article id="post-BlockChain 十年踪迹" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -523,101 +640,6 @@
         <h3 id="起因"><a href="#起因" class="headerlink" title="起因"></a>起因</h3><p>前几天和后端联调的时候，在空闲时间闲聊，不知怎么就聊到了归并排序，然后就瞎扯了一通时间复杂度，空间复杂度什么的，最后说到了归并排序在实际的应用，就是内存有限的情况下，大文件的排序。然后我就觉得，有些东西还是挺有用挺值得牢记的，就算短时间用不到，最好也还是不要忘，虽然大学学的很多东西，好多都因为暂时没用，还给老师了呢，比如计算机组成原理，操作系统，计算机系统结构等，觉得很是惭愧，于是就趁着周末看了下箱底的书，温习了一遍以前的一些基本算法，后来觉得还是要做一个沉淀写成博客会比较好，所以我就写了这篇博客，来提醒自己不要忘记。</p>
         
           <a class="article-more-a" href="/2017/08/07/算法/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-  
-    <article id="post-react demo" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/05/04/react demo/">redux 店铺装修</a>
-    </h1>
-  
-
-        
-        <a href="/2017/05/04/react demo/" class="archive-article-date">
-  	<time datetime="2017-05-04T06:29:18.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-05-04</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>最近在到处乱看一些项目相关的文档，发现了很很很麻烦的一个项目，刚好里面用到了redux，我发现简化一下的话，简直是redux的十分好的一个示例啊，比官网上简单的示例要难，又比难的简单，而且条理结构什么的又很清楚，挺不错的啊。</p>
-<p>我先上图吧。<br><img src="http://oatasl78l.bkt.clouddn.com/redux%20ex1.png" alt=""><br>图1<br><img src="http://oatasl78l.bkt.clouddn.com/redux%20ex2.png" alt=""><br>图2<br><img src="http://oatasl78l.bkt.clouddn.com/redux%20ex3.png" alt=""><br>图3<br><img src="http://oatasl78l.bkt.clouddn.com/redux%20ex4.png" alt=""><br>图4<br><img src="http://oatasl78l.bkt.clouddn.com/redux%20ex5.png" alt=""><br>图5<br><img src="http://oatasl78l.bkt.clouddn.com/redux%20ex6.png" alt=""><br>图6<br><img src="http://oatasl78l.bkt.clouddn.com/redux%20ex7.png" alt=""><br>图7<br><img src="http://oatasl78l.bkt.clouddn.com/redux%20ex8.png" alt=""><br>图8</p>
-        
-          <a class="article-more-a" href="/2017/05/04/react demo/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-  
-    <article id="post-震惊，大多数前端都还不知道这道题的答案" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/04/11/震惊，大多数前端都还不知道这道题的答案/">震惊！大多数前端都不知道的知识</a>
-    </h1>
-  
-
-        
-        <a href="/2017/04/11/震惊，大多数前端都还不知道这道题的答案/" class="archive-article-date">
-  	<time datetime="2017-04-11T12:56:08.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-04-11</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h3><p>最近看了两篇不错的文章，都是和定时器（setTimeout）有关，所以我想写一篇博客，把那两篇文章能够融合、整理一下。至于标题，参照UC震惊部取的，笑一笑就好了。</p>
-<h3 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h3><p>话不多说，直接进入正题吧，看下面一段代码，结果会输出什么：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">for (var i = 0; i &lt; 5; i++) &#123;</div><div class="line">  console.log(i);</div><div class="line">&#125;</div><div class="line">console.log(i)</div></pre></td></tr></table></figure>
-        
-          <a class="article-more-a" href="/2017/04/11/震惊，大多数前端都还不知道这道题的答案/#more">more >></a>
         
       
 
