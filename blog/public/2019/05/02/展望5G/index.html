@@ -6,24 +6,27 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://wisdommm.github.io">
-  <title>react生命周期解读 | Wisdommm</title>
+  <title>Wisdommm</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="前几天在工作中出现了一个比较怪异的bug，不过还好由于react的单向数据流，从最外层父组件一层一层地往里面找，在每一层都检查一下state和props的值是否正确，总会找到问题，只不过那个组件被前人嵌套了四五层，所以在定位问题的时候比较蛋疼，所以还是最好养成良好的习惯，组件嵌套层级不要太多，而且在开发的时候每一层就别忘了检测props和state，否则后来人会很累的。。。
-经过了long lon">
+  <meta name="description" content="展望 5G
+（本文仅针对5G在应用层面，对社会带来的改变，关于一些波长、波段、频率、基站、运营商等事情，这里不做介绍）
+2019年1月10日，工信部宣布发放5G临时牌照，拉开我国5G商用建网的大幕，2019年也是5G产业进入全面商用的关键一年，全球5G网络的部署已经启动，各个国家，各个运营商都在拼命竞争中。
+现在全世界都在转型数字化经济，而5G网络带来的改变，将会把世界拉入一个新的阶段，翻开新的篇">
 <meta property="og:type" content="article">
-<meta property="og:title" content="react生命周期解读">
-<meta property="og:url" content="http://wisdommm.github.io/2017/02/14/react生命周期/index.html">
+<meta property="og:title" content="Wisdommm">
+<meta property="og:url" content="http://wisdommm.github.io/2019/05/02/展望5G/index.html">
 <meta property="og:site_name" content="Wisdommm">
-<meta property="og:description" content="前几天在工作中出现了一个比较怪异的bug，不过还好由于react的单向数据流，从最外层父组件一层一层地往里面找，在每一层都检查一下state和props的值是否正确，总会找到问题，只不过那个组件被前人嵌套了四五层，所以在定位问题的时候比较蛋疼，所以还是最好养成良好的习惯，组件嵌套层级不要太多，而且在开发的时候每一层就别忘了检测props和state，否则后来人会很累的。。。
-经过了long lon">
-<meta property="og:image" content="http://oatasl78l.bkt.clouddn.com/react%20cycle1.png">
-<meta property="og:image" content="http://oatasl78l.bkt.clouddn.com/react%20cycle2.jpg">
-<meta property="og:updated_time" content="2017-02-14T12:54:04.000Z">
+<meta property="og:description" content="展望 5G
+（本文仅针对5G在应用层面，对社会带来的改变，关于一些波长、波段、频率、基站、运营商等事情，这里不做介绍）
+2019年1月10日，工信部宣布发放5G临时牌照，拉开我国5G商用建网的大幕，2019年也是5G产业进入全面商用的关键一年，全球5G网络的部署已经启动，各个国家，各个运营商都在拼命竞争中。
+现在全世界都在转型数字化经济，而5G网络带来的改变，将会把世界拉入一个新的阶段，翻开新的篇">
+<meta property="og:updated_time" content="2019-05-02T07:26:18.104Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="react生命周期解读">
-<meta name="twitter:description" content="前几天在工作中出现了一个比较怪异的bug，不过还好由于react的单向数据流，从最外层父组件一层一层地往里面找，在每一层都检查一下state和props的值是否正确，总会找到问题，只不过那个组件被前人嵌套了四五层，所以在定位问题的时候比较蛋疼，所以还是最好养成良好的习惯，组件嵌套层级不要太多，而且在开发的时候每一层就别忘了检测props和state，否则后来人会很累的。。。
-经过了long lon">
-<meta name="twitter:image" content="http://oatasl78l.bkt.clouddn.com/react%20cycle1.png">
+<meta name="twitter:title" content="Wisdommm">
+<meta name="twitter:description" content="展望 5G
+（本文仅针对5G在应用层面，对社会带来的改变，关于一些波长、波段、频率、基站、运营商等事情，这里不做介绍）
+2019年1月10日，工信部宣布发放5G临时牌照，拉开我国5G商用建网的大幕，2019年也是5G产业进入全面商用的关键一年，全球5G网络的部署已经启动，各个国家，各个运营商都在拼命竞争中。
+现在全世界都在转型数字化经济，而5G网络带来的改变，将会把世界拉入一个新的阶段，翻开新的篇">
   
     <link rel="alternative" href="/atom.xml" title="Wisdommm" type="application/atom+xml">
   
@@ -167,57 +170,25 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-react生命周期" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-展望5G" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 class="article-title" itemprop="name">
-      react生命周期解读
-    </h1>
-  
-
-        
-        <a href="/2017/02/14/react生命周期/" class="archive-article-date">
-  	<time datetime="2017-02-14T12:54:04.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-02-14</time>
-</a>
-        
-      </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>前几天在工作中出现了一个比较怪异的bug，不过还好由于react的单向数据流，从最外层父组件一层一层地往里面找，在每一层都检查一下state和props的值是否正确，总会找到问题，只不过那个组件被前人嵌套了四五层，所以在定位问题的时候比较蛋疼，所以还是最好养成良好的习惯，组件嵌套层级不要太多，而且在开发的时候每一层就别忘了检测props和state，否则后来人会很累的。。。</p>
-<p>经过了long long time，才在某一层组件中找到了问题，具体问题是父组件传入的props改变后子组件通过props来渲染的页面没有发生改变，有疑问吗？父组件传入的props改变，子组件的props不是会自动接收变化并且render吗？嗯，是的，为什么这里没有呢。。。原来有人在开发的时候在getInitialState函数中加了这么一句：this.state.xxx = this.props.xxx，通过这样，他就把props和state关联了起来，心中顿时有无数草泥马狂奔。。。怎么改呢？难道要我把和state关联了的props都取消关联？这个工作量不小。。。还好，react里有个监测props变化的函数：componentWillReceiveProps，然后我再在里面把更新后的props和state关联起来，让state等于新的props就好了，大功告成，这个怪异的问题就解决了。</p>
-<p>有人会觉得奇怪吗？为什么在getInitialState函数中使用了this.state.xxx = this.props.xxx，而在当props更新后传进来时，state依然等于原来的props，这就说到了本片文章的主要，就是react的生命周期。</p>
-<h4 id="react组件的详细说明和生命周期"><a href="#react组件的详细说明和生命周期" class="headerlink" title="react组件的详细说明和生命周期"></a>react组件的详细说明和生命周期</h4><p>先来说一下react场见的函数吧。</p>
-<a id="more"></a>
-<p>1，render</p>
-<p>重要的事情说三遍：render()方法是必须的！render()方法是必须的！！render()方法是必须的！！！</p>
-<p>当使用render方法的时候，它最终return一个单子级组件，这个意思就是说返回<strong>一个</strong>dom 组件，比如一个 div 节点，也可以是其他自定义的组件，有个要点就是一定只能 return 一个 dom 组件，当你有多个单独的dom节点或者单独的自定义组件要 return 的时候，必须要在外面包裹一层 div 才行。当然，你也可以返回 null 或者 false 来表明不需要渲染任何东西。在 return 前会干什么呢？return 的作用是渲染页面的，而渲染页面需要数据react 里的数据主要就是 props 和 state，所以在 render 方法中，它先会自动监测 props 和 state，render 方法有几个需要注意的点：1，render 函数中不能修改 state，所以 setState 方法是不能用的；2，render 并不是渲染真是的 dom ，而是 Virtual DOM，所以在这个方法中，你并不能对 dom 进行操作，this.getDOMNode()也去不到任何节点，只能得到 null。3，不和浏览器交互，例如通过使用 setTimeout。</p>
-<p>2，getInitialState</p>
-<p>这是初始化state的方法，仅仅在组件挂载之前调用一次！</p>
-<p>3，getDefaultProps</p>
-<p>在组件创建的时候调用一次，然后返回值被缓存下来。如果父组件没有指定 props 中的某个键，则此处返回的对象中的相应属性将会合并到 this.props，（可以使用 in 来检测属性）。该方法在实例创建之前调用，因此不能依赖于 this.props。</p>
-<p>4，componentWillMount</p>
-<p>这个方法会在初始化渲染完毕之前立即调用，仅执行一次。可以使用 setState 方法。</p>
-<p>5，componentDidMount</p>
-<p>这个方法会在初始化渲染完毕之后立即调用，仅执行一次。这个时候已经渲染完毕了，所以 Virtual DOM 已经成为了真实的 DOM，你可以使用 this.getDOMNode()方法，发送 ajax 请求，或者 setTimeout 等方法。</p>
-<p>6，componentWillReceiveProps</p>
-<p>该方法仅仅在组件接收到新的 props 的时候调用。所以初始化的时候不会调用这个方法，传入的参数将是即将接收到的新的 props，一般会通过新老 props 比较，然后再决定需不需要更新页面。</p>
-<p>7，shouldComponentUpdate</p>
-<p>当组件接收到了新的 props 或者 state 的时候，即将要渲染页面之前调用这个方法。按常规来说，组件 state 或 props 更新后，往往都是需要重新渲染一下页面的，当然，这不是百分之百，所以这个时候就需要在渲染之前，在判断一下，是否真的需要渲染，在这个方法中可以获得 nextProps 和 nextState，然后我们可以比较，看是不是真的需要渲染，如果需要渲染，就return true，不需要渲染就 return false，这个方法默认是会返回 true 的。这个方法存在的意义就是不该渲染的时候不渲染，节约时间优化性能，当然，组件少了也没什么实际意义，可是当组件数量成百上千的时候，或许就会很明显地感觉到优化的性能了。</p>
-<p>8，componentWillUpdate</p>
-<p>这个方法主要是在接收到新的 props 或者 state 之前立刻调用，使用该方法做一些更新之前的准备工作，此时不能更改 state。</p>
-<p>9，componentDidUpdate</p>
-<p>个人觉得和componentDidMount类似，只是一个在初始化渲染后调用，一个在更新渲染后调用。</p>
-<p>10，componentWillUnmount</p>
-<p>在组件从 DOM 中移除的时候立刻被调用，在该方法中执行任何清理，比如无效的定时器，或者清除在 componentDidMount 中创建的 DOM 元素。</p>
-<p>唉，好累，终于把这一大堆函数科普完了，我稍微归纳一下吧，方法大致有以下几类：初始化的时候执行的，初始化渲染前执行的，初始化渲染后执行的，接收更新时执行的，接收更新后渲染之前执行的，接收更新后渲染之后执行的，即将移除前执行的。这么多方法，都是和执行时间有关，并且一个方法后往往会执行另一系列的方法，这就是它的生命周期。</p>
-<p>所以回到上面的问题，当父组件的 props 更新后，子组件的 props 也会更新没错，但是这时并不会重新去执行一次 getInitialState 方法，因为这个方法仅仅在初始化的时候调用一次，所以最后 render 时还是用的之前的 state 来进行渲染，所以我做的就是加上 componentWillReceiveProps 来进行人为更新 state。</p>
-<h4 id="这篇文章到这里应该就可以结束了，不过我还有点意犹未尽，所以稍微多说一点吧。"><a href="#这篇文章到这里应该就可以结束了，不过我还有点意犹未尽，所以稍微多说一点吧。" class="headerlink" title="这篇文章到这里应该就可以结束了，不过我还有点意犹未尽，所以稍微多说一点吧。"></a>这篇文章到这里应该就可以结束了，不过我还有点意犹未尽，所以稍微多说一点吧。</h4><p><img src="http://oatasl78l.bkt.clouddn.com/react%20cycle1.png" alt=""></p>
-<p><img src="http://oatasl78l.bkt.clouddn.com/react%20cycle2.jpg" alt=""></p>
-<p>上面两张图分别是各个不同的变化会产生的不同的一系列的方法调用，，以及每个方法是否能够对 state 进行更新都做了说明，可以看到，初始化的时候，props 变化的时候，state 变化的时候，都会触发不同方法来进行处理，有的函数是可以不写的，因为它默认会执行，经过上次改bug的事情后，我觉得吧，层级多了的时候还是最好在每个层级里面对 props 和 state 进行控制监测一下，以免发生不必要的错误。</p>
+        <p>展望 5G</p>
+<p>（本文仅针对5G在应用层面，对社会带来的改变，关于一些波长、波段、频率、基站、运营商等事情，这里不做介绍）</p>
+<p>2019年1月10日，工信部宣布发放5G临时牌照，拉开我国5G商用建网的大幕，2019年也是5G产业进入全面商用的关键一年，全球5G网络的部署已经启动，各个国家，各个运营商都在拼命竞争中。</p>
+<p>现在全世界都在转型数字化经济，而5G网络带来的改变，将会把世界拉入一个新的阶段，翻开新的篇章。</p>
+<p>对用户端简单而言，就是用户体验的再一次飞跃，直接点说就是网络情况会更好，所以下面针对这个网速相关情况的优化（比如网速快、延时短、稳定性高等），来头脑风暴一下。</p>
+<p>我喜欢通过类比的方式来描述，以交通方式为例，我们从以前的骑马、马车，到近现代的自行车、船、火车，再到汽车、动车、高铁、飞机、火箭等，交通方式的不断发展，人类社会也在不断地进步；而到了现在数字化时代，互联网就是那一条信息道路，网速就是上面的交通工具，你用1G网络上网，就像你在道路上走路，2G网络上网，就像是骑自行车，3G就是汽车，4G就是火车，而即将到来的5G，很多人就认为其是飞机，可以做到你想去哪，立即就去。</p>
+<p>由于本人经历原因，只知道3G到4G时候的变化，可以先简单回想一下其中的改变然后再来展望4G到5G的进化。</p>
+<p>或许对于大多数互联网人来说，3G到4G时的变化都会很深刻，因为刚好促进了PC互联网社会转型到移动互联网社会，why？这中间有什么关系嘛？这里面关系可大着呢，以前流量又贵又慢，就像你在信息公路上开车，但是车速却不能超过20km/h，路还十分的拥堵，所以很多人还是喜欢去PC上，毕竟有线宽带的体验发展了这么几十年，效果还是不错的，但是有个问题，就是有线PC的缺点，价格贵、笨重、不灵活、PC门槛比手机高等，都是问题，所以导致有线网络的普及率一直不高，据新闻报道，2018年中国的智能机普及率就已经达到68%，而智能机普及率全球排名第一的韩国，居然高达94%，这是多么恐怖的一件事（不知道韩国的小康率达到94%没有，反正中国我估计是没有，高层说2020年中国彻底消灭贫困人口，进入全面小康，目测有点难。。。扯远了），我觉得这里面核心原因有两点：一是人与人的交流越来越多，每个人也都会选择更方便、灵活的方式，这是最基本的人性，以前写信的时候，一个月收到对方一封信，有了电脑的时候，可以天天给对方发邮件，但是现在有了手机，每分每秒你都可以和别人文字、语音、视频交流，只要你愿意的话；二是价格，不管是手机价格还是网络资费，都随着社会的发展，技术不断提升使得资费不断降低，作为我这个年纪的人，大家应该都不会忘记动感地带5元30m的流量套餐吧？如果放在现在，按照5元30m的标准，你耍抖音、快手，或是逛逛淘宝，打几局王者荣耀和吃鸡，少说也是几百m没了吧，轻轻松松一天消费好几十元的流量，所以抖音快手也是搭着4G无线化的福利，如果倒退好几年，我根本不敢用流量打开这些软件，而且现在只能手机的价格不断降低（或许苹果还是这么贵，不过你需要看的不是某一个品牌和某一款手机，你看看整体），几百块一千出头一个的智能手机到处都是，比如1000以下的红米，打王者荣耀等游戏毫无问题，但是电脑现在普遍还是好几千一台，价格门槛降低，也就提高了普及率，然后就造就了欣欣向荣的移动互联网行业，君不见移动互联网最火的2014年左右，好多公司靠着一个app就融资无数，还有更多的公司靠着ppt融资，现在靠着小程序容易的不也是这样吗？</p>
+<p>雷布斯有言道：站在风口上，猪都能飞起来。而我们需要做的，就是找到那个风口并且站过去。</p>
+<p>说了这么久3G到4G，现在我们来幻想一下5G的情况，也就是说在网络情况更上一个台阶的基础上，人们的生活，我们的社会又将会发生怎样的改变。毕竟谁都知道，这又将会是一个大的风口。</p>
+<p>从基础开始说吧，随着网速变快，人们信息交互的介质也在不断变化，从文字、语音、图片、视频影像等，以后会不会发明出更新的一种介质来作为信息交流的承载呢？同时在现有的上面优化这是完全可以确定的，比如从高清进化到超清，再到蓝光、原画等等，这已是毋庸置疑的未来， 所以我们可以畅想（不是幻想，未来正在来的路上）一下，假设某一天视频全部到了原画阶段且网络时延在1ms左右，社会会怎么变？天啊，我感觉我说十天十夜都说不完。首先，就在视频影像（包括ar、vr）阶段，以后打电话说不定都不是语音或者视频了，而是可以直接面对面全息影像进行沟通，虽然对方离你十万八千米，但是一个高精度的全息影响就站在你身边，除了你不能切实地抓到对方外，其他和真人毫无差别，你也不再需要坐在家里看电视环游世界了，这种高精度的还原，让你和真实的体验差别不断缩小。到时候我们的手机和电视电脑等，肯定全部都是可以展示全息影像的，这又将会是一个行业的巨变；同时，这将会是对整个社会的颠覆（颠覆一词可能短时间来看有点夸张，长时间来看绝对没问题），医疗、教育、安保、交通、工业等，将全部进行改革进化；医疗上，依托于高精度的全息影像，医生远程做手术将会变得可行，普通的病将不需要再去医院，医生直接通过全息影像就可以知道你是什么病，然后直接把要吃什么药告诉你就好了；教育上，现在公开课已经有不少了，如果以后，在你家里看公开课的感觉简直和就在哈佛大学的教室里听世界顶级教授上课的感觉一样，是不是学校也没必要了（或者教室可以变小，因为大多数人都会在家里直接上课）？在工业和安保上，将会更加智能化，很多难度高的事情，危险度高的事情，将会由机器代替人类来完成，比如拆弹，或者很多工业上的高精尖工作，甚至是交通上的开汽车开火车开飞机，都将会有人为远程控制+系统程序一起来完成（这些事情其实现在已经存在了，不过还没有大规模普及，里面涉及到网络、硬件、软件的综合发展）。</p>
+<p>再来说下和互联网有关的，网络速度快了，互联网绝对是第一收益的行业，就互联网从业人员来说，是不是以后就可以不用考虑网络优化了？？？比如在IE6、7时代，大多数程序员还要考虑兼容IE6，但是你看现在，还有几个程序员在兼容IE6？</p>
+<p>还有一点就是云服务，一切都将上云，现在的信息量，所有的手机/电脑存储已经很吃力了（用户端），如果网速再上一个台阶，普通用户的电脑/手机存储是远远不能满足的，且现在云服务大多是针对B端用户和一些C端的开发者使用的，对一些普通C端用户来说，根本不知道那是什么，所以云服务后面应该会有一波大的爆发，针对普通C端用户；我们甚至可以再想得极端一点，5G的理论速度是20Gbps，相当于20000m/s，以现有内存/硬盘/ssd来看，到那个时候全部报废，那个时候我从网上下载一部5000吗的电影只需要0.25秒，我从本地打开居然要3秒，所以要么那个时候的存储行业全部跟着革新换代，要么就是像柯达一样在历史的洪流中化为尘埃。当然，这只是理论速度，长期来看肯定会有达到的一天，至于全社会，整个国家上云后，所产生的其他隐私/安全问题，个人而言，国家应该会创办一个国家的公共云服务，或者对现在社会上企业的云服务进行强力监管，这里就先不深入讨论。</p>
+<p>最后，就是觉得社会瞬息万变，时代的洪流汹涌而来，有成王败寇，也有风口的猪，不由得想起三国演义的篇头词语：滚滚长江东逝水，浪花淘尽英雄。</p>
 
       
 
@@ -307,7 +278,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="http://s.jiathis.com/qrcode.php?url=http://wisdommm.github.io/2017/02/14/react生命周期/" alt="微信分享二维码">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://wisdommm.github.io/2019/05/02/展望5G/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -321,18 +292,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2017/03/20/ES6 TDZ/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          ES6中的暂时性死区（TDZ）
-        
-      </div>
-    </a>
   
-  
-    <a href="/2017/01/24/hexo-search/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">hexo博客增加搜索功能</div>
+    <a href="/2018/12/09/零售终端测试技巧/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">零售终端前端调试技巧</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -348,8 +310,8 @@
   <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
 <script>
   var cloudTieConfig = {
-    url: "http://wisdommm.github.io/2017/02/14/react生命周期/", 
-    sourceId: "react生命周期",
+    url: "http://wisdommm.github.io/2019/05/02/展望5G/", 
+    sourceId: "展望5G",
     productKey: "aafef0c8c11b4e329f06cb387dc8ba7e",
     target: "cloud-tie-wrapper"
   };

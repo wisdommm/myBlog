@@ -6,24 +6,17 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://wisdommm.github.io">
-  <title>react生命周期解读 | Wisdommm</title>
+  <title>Wisdommm</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="前几天在工作中出现了一个比较怪异的bug，不过还好由于react的单向数据流，从最外层父组件一层一层地往里面找，在每一层都检查一下state和props的值是否正确，总会找到问题，只不过那个组件被前人嵌套了四五层，所以在定位问题的时候比较蛋疼，所以还是最好养成良好的习惯，组件嵌套层级不要太多，而且在开发的时候每一层就别忘了检测props和state，否则后来人会很累的。。。
-经过了long lon">
-<meta property="og:type" content="article">
-<meta property="og:title" content="react生命周期解读">
-<meta property="og:url" content="http://wisdommm.github.io/2017/02/14/react生命周期/index.html">
+  <meta name="description" content="在梦想的道路上一路狂奔">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Wisdommm">
+<meta property="og:url" content="http://wisdommm.github.io/page/4/index.html">
 <meta property="og:site_name" content="Wisdommm">
-<meta property="og:description" content="前几天在工作中出现了一个比较怪异的bug，不过还好由于react的单向数据流，从最外层父组件一层一层地往里面找，在每一层都检查一下state和props的值是否正确，总会找到问题，只不过那个组件被前人嵌套了四五层，所以在定位问题的时候比较蛋疼，所以还是最好养成良好的习惯，组件嵌套层级不要太多，而且在开发的时候每一层就别忘了检测props和state，否则后来人会很累的。。。
-经过了long lon">
-<meta property="og:image" content="http://oatasl78l.bkt.clouddn.com/react%20cycle1.png">
-<meta property="og:image" content="http://oatasl78l.bkt.clouddn.com/react%20cycle2.jpg">
-<meta property="og:updated_time" content="2017-02-14T12:54:04.000Z">
+<meta property="og:description" content="在梦想的道路上一路狂奔">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="react生命周期解读">
-<meta name="twitter:description" content="前几天在工作中出现了一个比较怪异的bug，不过还好由于react的单向数据流，从最外层父组件一层一层地往里面找，在每一层都检查一下state和props的值是否正确，总会找到问题，只不过那个组件被前人嵌套了四五层，所以在定位问题的时候比较蛋疼，所以还是最好养成良好的习惯，组件嵌套层级不要太多，而且在开发的时候每一层就别忘了检测props和state，否则后来人会很累的。。。
-经过了long lon">
-<meta name="twitter:image" content="http://oatasl78l.bkt.clouddn.com/react%20cycle1.png">
+<meta name="twitter:title" content="Wisdommm">
+<meta name="twitter:description" content="在梦想的道路上一路狂奔">
   
     <link rel="alternative" href="/atom.xml" title="Wisdommm" type="application/atom+xml">
   
@@ -167,91 +160,34 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-react生命周期" class="article article-type-post " itemscope itemprop="blogPost">
+            
+  
+    <article id="post-D2总结（1）" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
-    <h1 class="article-title" itemprop="name">
-      react生命周期解读
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/01/24/D2总结（1）/">D2总结（Fusion Design）</a>
     </h1>
   
 
         
-        <a href="/2017/02/14/react生命周期/" class="archive-article-date">
-  	<time datetime="2017-02-14T12:54:04.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-02-14</time>
+        <a href="/2017/01/24/D2总结（1）/" class="archive-article-date">
+  	<time datetime="2017-01-24T09:05:23.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-01-24</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>前几天在工作中出现了一个比较怪异的bug，不过还好由于react的单向数据流，从最外层父组件一层一层地往里面找，在每一层都检查一下state和props的值是否正确，总会找到问题，只不过那个组件被前人嵌套了四五层，所以在定位问题的时候比较蛋疼，所以还是最好养成良好的习惯，组件嵌套层级不要太多，而且在开发的时候每一层就别忘了检测props和state，否则后来人会很累的。。。</p>
-<p>经过了long long time，才在某一层组件中找到了问题，具体问题是父组件传入的props改变后子组件通过props来渲染的页面没有发生改变，有疑问吗？父组件传入的props改变，子组件的props不是会自动接收变化并且render吗？嗯，是的，为什么这里没有呢。。。原来有人在开发的时候在getInitialState函数中加了这么一句：this.state.xxx = this.props.xxx，通过这样，他就把props和state关联了起来，心中顿时有无数草泥马狂奔。。。怎么改呢？难道要我把和state关联了的props都取消关联？这个工作量不小。。。还好，react里有个监测props变化的函数：componentWillReceiveProps，然后我再在里面把更新后的props和state关联起来，让state等于新的props就好了，大功告成，这个怪异的问题就解决了。</p>
-<p>有人会觉得奇怪吗？为什么在getInitialState函数中使用了this.state.xxx = this.props.xxx，而在当props更新后传进来时，state依然等于原来的props，这就说到了本片文章的主要，就是react的生命周期。</p>
-<h4 id="react组件的详细说明和生命周期"><a href="#react组件的详细说明和生命周期" class="headerlink" title="react组件的详细说明和生命周期"></a>react组件的详细说明和生命周期</h4><p>先来说一下react场见的函数吧。</p>
-<a id="more"></a>
-<p>1，render</p>
-<p>重要的事情说三遍：render()方法是必须的！render()方法是必须的！！render()方法是必须的！！！</p>
-<p>当使用render方法的时候，它最终return一个单子级组件，这个意思就是说返回<strong>一个</strong>dom 组件，比如一个 div 节点，也可以是其他自定义的组件，有个要点就是一定只能 return 一个 dom 组件，当你有多个单独的dom节点或者单独的自定义组件要 return 的时候，必须要在外面包裹一层 div 才行。当然，你也可以返回 null 或者 false 来表明不需要渲染任何东西。在 return 前会干什么呢？return 的作用是渲染页面的，而渲染页面需要数据react 里的数据主要就是 props 和 state，所以在 render 方法中，它先会自动监测 props 和 state，render 方法有几个需要注意的点：1，render 函数中不能修改 state，所以 setState 方法是不能用的；2，render 并不是渲染真是的 dom ，而是 Virtual DOM，所以在这个方法中，你并不能对 dom 进行操作，this.getDOMNode()也去不到任何节点，只能得到 null。3，不和浏览器交互，例如通过使用 setTimeout。</p>
-<p>2，getInitialState</p>
-<p>这是初始化state的方法，仅仅在组件挂载之前调用一次！</p>
-<p>3，getDefaultProps</p>
-<p>在组件创建的时候调用一次，然后返回值被缓存下来。如果父组件没有指定 props 中的某个键，则此处返回的对象中的相应属性将会合并到 this.props，（可以使用 in 来检测属性）。该方法在实例创建之前调用，因此不能依赖于 this.props。</p>
-<p>4，componentWillMount</p>
-<p>这个方法会在初始化渲染完毕之前立即调用，仅执行一次。可以使用 setState 方法。</p>
-<p>5，componentDidMount</p>
-<p>这个方法会在初始化渲染完毕之后立即调用，仅执行一次。这个时候已经渲染完毕了，所以 Virtual DOM 已经成为了真实的 DOM，你可以使用 this.getDOMNode()方法，发送 ajax 请求，或者 setTimeout 等方法。</p>
-<p>6，componentWillReceiveProps</p>
-<p>该方法仅仅在组件接收到新的 props 的时候调用。所以初始化的时候不会调用这个方法，传入的参数将是即将接收到的新的 props，一般会通过新老 props 比较，然后再决定需不需要更新页面。</p>
-<p>7，shouldComponentUpdate</p>
-<p>当组件接收到了新的 props 或者 state 的时候，即将要渲染页面之前调用这个方法。按常规来说，组件 state 或 props 更新后，往往都是需要重新渲染一下页面的，当然，这不是百分之百，所以这个时候就需要在渲染之前，在判断一下，是否真的需要渲染，在这个方法中可以获得 nextProps 和 nextState，然后我们可以比较，看是不是真的需要渲染，如果需要渲染，就return true，不需要渲染就 return false，这个方法默认是会返回 true 的。这个方法存在的意义就是不该渲染的时候不渲染，节约时间优化性能，当然，组件少了也没什么实际意义，可是当组件数量成百上千的时候，或许就会很明显地感觉到优化的性能了。</p>
-<p>8，componentWillUpdate</p>
-<p>这个方法主要是在接收到新的 props 或者 state 之前立刻调用，使用该方法做一些更新之前的准备工作，此时不能更改 state。</p>
-<p>9，componentDidUpdate</p>
-<p>个人觉得和componentDidMount类似，只是一个在初始化渲染后调用，一个在更新渲染后调用。</p>
-<p>10，componentWillUnmount</p>
-<p>在组件从 DOM 中移除的时候立刻被调用，在该方法中执行任何清理，比如无效的定时器，或者清除在 componentDidMount 中创建的 DOM 元素。</p>
-<p>唉，好累，终于把这一大堆函数科普完了，我稍微归纳一下吧，方法大致有以下几类：初始化的时候执行的，初始化渲染前执行的，初始化渲染后执行的，接收更新时执行的，接收更新后渲染之前执行的，接收更新后渲染之后执行的，即将移除前执行的。这么多方法，都是和执行时间有关，并且一个方法后往往会执行另一系列的方法，这就是它的生命周期。</p>
-<p>所以回到上面的问题，当父组件的 props 更新后，子组件的 props 也会更新没错，但是这时并不会重新去执行一次 getInitialState 方法，因为这个方法仅仅在初始化的时候调用一次，所以最后 render 时还是用的之前的 state 来进行渲染，所以我做的就是加上 componentWillReceiveProps 来进行人为更新 state。</p>
-<h4 id="这篇文章到这里应该就可以结束了，不过我还有点意犹未尽，所以稍微多说一点吧。"><a href="#这篇文章到这里应该就可以结束了，不过我还有点意犹未尽，所以稍微多说一点吧。" class="headerlink" title="这篇文章到这里应该就可以结束了，不过我还有点意犹未尽，所以稍微多说一点吧。"></a>这篇文章到这里应该就可以结束了，不过我还有点意犹未尽，所以稍微多说一点吧。</h4><p><img src="http://oatasl78l.bkt.clouddn.com/react%20cycle1.png" alt=""></p>
-<p><img src="http://oatasl78l.bkt.clouddn.com/react%20cycle2.jpg" alt=""></p>
-<p>上面两张图分别是各个不同的变化会产生的不同的一系列的方法调用，，以及每个方法是否能够对 state 进行更新都做了说明，可以看到，初始化的时候，props 变化的时候，state 变化的时候，都会触发不同方法来进行处理，有的函数是可以不写的，因为它默认会执行，经过上次改bug的事情后，我觉得吧，层级多了的时候还是最好在每个层级里面对 props 和 state 进行控制监测一下，以免发生不必要的错误。</p>
-
+        <p>这周末去参加了D2前端技术论坛，听了这么多分享，发现有不少东西可以总结的，可是由于当天确实太累，所以没能及时整理出总结来，只好现在来慢慢回想，还好听分享时记了笔记的。</p>
+        
+          <a class="article-more-a" href="/2017/01/24/D2总结（1）/#more">more >></a>
+        
       
 
-      
-        <div class="page-reward">
-          <a href="javascript:;" class="page-reward-btn tooltip-top">
-            <div class="tooltip tooltip-east">
-            <span class="tooltip-item">
-              赏
-            </span>
-            <span class="tooltip-content">
-              <span class="tooltip-text">
-                <span class="tooltip-inner">
-                  <p class="reward-p"><i class="icon icon-quo-left"></i>thanks !<i class="icon icon-quo-right"></i></p>
-                  <div class="reward-box">
-                    
-                    <div class="reward-box-item">
-                      <img class="reward-img" src="http://oatasl78l.bkt.clouddn.com/alipay pic.png">
-                      <span class="reward-type">支付宝</span>
-                    </div>
-                    
-                    
-                    <div class="reward-box-item">
-                      <img class="reward-img" src="http://oatasl78l.bkt.clouddn.com/21512357753_.pic.jpg">
-                      <span class="reward-type">微信</span>
-                    </div>
-                    
-                  </div>
-                </span>
-              </span>
-            </span>
-          </div>
-          </a>
-        </div>
       
     </div>
     <div class="article-info article-info-index">
@@ -262,103 +198,20 @@
       
 
       
-        
-<div class="share-btn share-icons tooltip-left">
-  <div class="tooltip tooltip-east">
-    <span class="tooltip-item">
-      <a href="javascript:;" class="share-sns share-outer">
-        <i class="icon icon-share"></i>
-      </a>
-    </span>
-    <span class="tooltip-content">
-      <div class="share-wrap">
-        <div class="share-icons">
-          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
-            <i class="icon icon-weibo"></i>
-          </a>
-          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
-            <i class="icon icon-weixin"></i>
-          </a>
-          <a class="qq share-sns" href="javascript:;" data-type="qq">
-            <i class="icon icon-qq"></i>
-          </a>
-          <a class="douban share-sns" href="javascript:;" data-type="douban">
-            <i class="icon icon-douban"></i>
-          </a>
-          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
-            <i class="icon icon-qzone"></i>
-          </a>
-          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
-            <i class="icon icon-facebook"></i>
-          </a>
-          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
-            <i class="icon icon-twitter"></i>
-          </a>
-          <a class="google share-sns" href="javascript:;" data-type="google">
-            <i class="icon icon-google"></i>
-          </a>
-        </div>
-      </div>
-    </span>
-  </div>
-</div>
-
-<div class="page-modal wx-share js-wx-box">
-    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <p>扫一扫，分享到微信</p>
-    <div class="wx-qrcode">
-      <img src="http://s.jiathis.com/qrcode.php?url=http://wisdommm.github.io/2017/02/14/react生命周期/" alt="微信分享二维码">
-    </div>
-</div>
-
-<div class="mask js-mask"></div>
-      
       <div class="clearfix"></div>
     </div>
   </div>
 </article>
 
-  
-<nav id="article-nav">
-  
-    <a href="/2017/03/20/ES6 TDZ/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          ES6中的暂时性死区（TDZ）
-        
-      </div>
-    </a>
-  
-  
-    <a href="/2017/01/24/hexo-search/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">hexo博客增加搜索功能</div>
-      <i class="icon-circle-right"></i>
-    </a>
-  
-</nav>
-
 
 
 
 
   
   
-  
-  <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
-<script>
-  var cloudTieConfig = {
-    url: "http://wisdommm.github.io/2017/02/14/react生命周期/", 
-    sourceId: "react生命周期",
-    productKey: "aafef0c8c11b4e329f06cb387dc8ba7e",
-    target: "cloud-tie-wrapper"
-  };
-</script>
-<script src="//img1.cache.netease.com/f2e/tie/yun/sdk/loader.js"></script>
-  
-
-  
-
+    <nav id="page-nav">
+      <a class="extend prev" rel="prev" href="/page/3/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span>
+    </nav>
   
 
 
@@ -381,8 +234,8 @@
     <script>
 	var yiliaConfig = {
 		mathjax: true,
-		isHome: false,
-		isPost: true,
+		isHome: true,
+		isPost: false,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,
