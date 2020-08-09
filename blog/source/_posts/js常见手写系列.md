@@ -1,4 +1,8 @@
-一，filter
+---
+title: js常见手写系列
+---
+```
+// 一，filter
 
 Array.prototype.newFilter = function(fn , context){
     if( !Array.isArray(this) ){
@@ -15,8 +19,10 @@ Array.prototype.newFilter = function(fn , context){
     }
     return res;
 }
-
-二，map
+```
+<!-- more -->
+```
+// 二，map
 
 Array.prototype.map = function(fn){
     if( !Array.isArray(this) ){
@@ -32,7 +38,7 @@ Array.prototype.map = function(fn){
     return res;
 }
 
-三，call/apply
+// 三，call/apply
 
 Function.prototype.newCall = function(obj , ...args){
     obj = obj || window;
@@ -50,7 +56,7 @@ Function.prototype.newApply = function(obj , arr){
     return res;
 }
 
-四，new
+// 四，new
 
 function newOption(fn,...args){
     if(typeof fn !== 'function'){
@@ -62,7 +68,7 @@ function newOption(fn,...args){
     return typeof res === 'object' ? res : obj;
 }
 
-五，bind
+// 五，bind
 
 Function.prototype.newBind = function(context , ...args1){
     let self = this;
@@ -75,7 +81,7 @@ Function.prototype.newBind = function(context , ...args1){
     return fBound;
 }
 
-六，防抖
+// 六，防抖
 // 简易版
 function debounce(fn , wait){
     let timer = null;
@@ -114,7 +120,7 @@ function debounce(fn , wait , immediate){
     }
 }
 
-七，节流
+// 七，节流
 
 // 简易版
 function throttle(fn , wait){
@@ -172,7 +178,7 @@ function throttle(func, wait, options) {
     return throttled;
 }
 
-八，deepClone深拷贝
+// 八，deepClone深拷贝
 
 function deepClone(obj){
     if(typeod obj !== 'object')return;
@@ -189,7 +195,7 @@ function deepClone(obj){
     return newObj;
 }
 
-九，数组flatten
+// 九，数组flatten
 
 function flatten(arr){
     if( Array.isArray(arr) )return;
@@ -204,7 +210,7 @@ function flatten(arr){
     return res;
 }
 
-十，实现一系列函数，能够达到如下调用：one(add(two())) 输出 3；two(add(one())) 输出 3。
+// 十，实现一系列函数，能够达到如下调用：one(add(two())) 输出 3；two(add(one())) 输出 3。
 
 function add(...args1){
     return function(...args2){
@@ -220,7 +226,7 @@ function two(fn){
     return fn ? fn(2) : 2;
 }
 
-十一，instanceof
+// 十一，instanceof
 
 function instanceof(left , right){
     left = left._proto_;
@@ -233,7 +239,7 @@ function instanceof(left , right){
     }
 }
 
-十二，实现一个EventEmitter，支持on、off、once、emit事件
+// 十二，实现一个EventEmitter，支持on、off、once、emit事件
 
 class EventEmitter{
     constructor(){
@@ -270,9 +276,9 @@ class EventEmitter{
     }
 }
 
-十三，数据双向绑定
+// 十三，数据双向绑定
 
-es5版，核心是对象描述符
+//es5版，核心是对象描述符
     Object.defineProperty(obj, "value", {
         get: function () {
           return value;
@@ -284,7 +290,7 @@ es5版，核心是对象描述符
         }
     });
 
-es6版，核心是proxy
+// es6版，核心是proxy
 let handler = {
     set(target , key , value){
         target[key] = value;
@@ -300,7 +306,7 @@ let handler = {
 let p = new Proxy({} , handler);
 // p.value = 123
 // p.a
-
+```
 
 
 
