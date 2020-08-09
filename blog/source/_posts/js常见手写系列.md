@@ -1,6 +1,7 @@
 ---
 title: js常见手写系列
 ---
+
 ```
 // 一，filter
 
@@ -20,7 +21,9 @@ Array.prototype.newFilter = function(fn , context){
     return res;
 }
 ```
+
 <!-- more -->
+
 ```
 // 二，map
 
