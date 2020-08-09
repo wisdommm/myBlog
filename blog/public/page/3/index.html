@@ -162,6 +162,103 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-ES6 TDZ" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/03/20/ES6 TDZ/">ES6中的暂时性死区（TDZ）</a>
+    </h1>
+  
+
+        
+        <a href="/2017/03/20/ES6 TDZ/" class="archive-article-date">
+  	<time datetime="2017-03-20T11:55:30.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-03-20</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="起因"><a href="#起因" class="headerlink" title="起因"></a>起因</h3><p>故事要从阮一峰老师的一条微博开始说起。。。</p>
+<p><img src="http://oatasl78l.bkt.clouddn.com/tdz.jpeg" alt=""></p>
+<p>这条微博下面有很多的评论，有的厉害的人一眼就指出了这是由于TDZ的原因，并不是什么V8的bug，TDZ是什么？下面我们就来慢慢揭开这层面纱。</p>
+        
+          <a class="article-more-a" href="/2017/03/20/ES6 TDZ/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+  
+    <article id="post-react生命周期" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/02/14/react生命周期/">react生命周期解读</a>
+    </h1>
+  
+
+        
+        <a href="/2017/02/14/react生命周期/" class="archive-article-date">
+  	<time datetime="2017-02-14T12:54:04.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-02-14</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>前几天在工作中出现了一个比较怪异的bug，不过还好由于react的单向数据流，从最外层父组件一层一层地往里面找，在每一层都检查一下state和props的值是否正确，总会找到问题，只不过那个组件被前人嵌套了四五层，所以在定位问题的时候比较蛋疼，所以还是最好养成良好的习惯，组件嵌套层级不要太多，而且在开发的时候每一层就别忘了检测props和state，否则后来人会很累的。。。</p>
+<p>经过了long long time，才在某一层组件中找到了问题，具体问题是父组件传入的props改变后子组件通过props来渲染的页面没有发生改变，有疑问吗？父组件传入的props改变，子组件的props不是会自动接收变化并且render吗？嗯，是的，为什么这里没有呢。。。原来有人在开发的时候在getInitialState函数中加了这么一句：this.state.xxx = this.props.xxx，通过这样，他就把props和state关联了起来，心中顿时有无数草泥马狂奔。。。怎么改呢？难道要我把和state关联了的props都取消关联？这个工作量不小。。。还好，react里有个监测props变化的函数：componentWillReceiveProps，然后我再在里面把更新后的props和state关联起来，让state等于新的props就好了，大功告成，这个怪异的问题就解决了。</p>
+<p>有人会觉得奇怪吗？为什么在getInitialState函数中使用了this.state.xxx = this.props.xxx，而在当props更新后传进来时，state依然等于原来的props，这就说到了本片文章的主要，就是react的生命周期。</p>
+<h4 id="react组件的详细说明和生命周期"><a href="#react组件的详细说明和生命周期" class="headerlink" title="react组件的详细说明和生命周期"></a>react组件的详细说明和生命周期</h4><p>先来说一下react场见的函数吧。</p>
+        
+          <a class="article-more-a" href="/2017/02/14/react生命周期/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+  
     <article id="post-hexo-search" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -549,100 +646,6 @@
 <p>我们直接看到src文件夹下，发现下面一共有七个文件或文件夹，分别是utils，applyMiddleware.js，bindActionCreators.js，combineReducers.js，compose.js，createStore.js，index.js。我们分别来看看。</p>
         
           <a class="article-more-a" href="/2017/01/24/redux源码解读/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-  
-    <article id="post-redux example(1)" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/01/24/redux example(1)/">redux example(1)</a>
-    </h1>
-  
-
-        
-        <a href="/2017/01/24/redux example(1)/" class="archive-article-date">
-  	<time datetime="2017-01-24T09:06:24.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-01-24</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>最近在学习redux，看了不少相关的资料，发现这个<a href="http://cn.redux.js.org/docs/introduction/Examples.html">官方教程</a>的一些例子还是很不错的，由浅入深各个档次都有，所以我稍微看了下，准备有时间的话将示例都自己弄懂，然后分别写篇详细的解读出来，由于是临时起意，所以今天先写第一篇吧。</p>
-<h4 id="counter-vanilla"><a href="#counter-vanilla" class="headerlink" title="counter-vanilla"></a>counter-vanilla</h4><p>这是redux中的第一个示例，也就是说是最简单的一个例子，不多说了，先看看代码吧。</p>
-        
-          <a class="article-more-a" href="/2017/01/24/redux example(1)/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-  
-    <article id="post-vue todo" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/01/24/vue todo/">vue todo示例</a>
-    </h1>
-  
-
-        
-        <a href="/2017/01/24/vue todo/" class="archive-article-date">
-  	<time datetime="2017-01-24T09:06:12.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-01-24</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>最近抽空看了下vue，一个轻量级的前端框架（类库），它采用的mvvm模式，且数据双向绑定，刚好官方网站上有一个todo实例，我感觉和redux的todo实例很类似，所以准备将这两个框架的todo实例分别解读一下，来比较一下个中异同。</p>
-<p>这个代码就两部分，先是html：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">&lt;div id=&quot;app&quot;&gt;</div><div class="line">  &lt;input v-model=&quot;newTodo&quot; v-on:keyup.enter=&quot;addTodo&quot;&gt;</div><div class="line">  &lt;ul&gt;</div><div class="line">    &lt;li v-for=&quot;todo in todos&quot;&gt;</div><div class="line">      &lt;span&gt;&#123;&#123; todo.text &#125;&#125;&lt;/span&gt;</div><div class="line">      &lt;button v-on:click=&quot;removeTodo($index)&quot;&gt;X&lt;/button&gt;</div><div class="line">    &lt;/li&gt;</div><div class="line">  &lt;/ul&gt;</div><div class="line">&lt;/div&gt;</div></pre></td></tr></table></figure></p>
-        
-          <a class="article-more-a" href="/2017/01/24/vue todo/#more">more >></a>
         
       
 

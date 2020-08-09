@@ -6,17 +6,21 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://wisdommm.github.io">
-  <title>Archives: 2020/7 | Wisdommm</title>
+  <title>Wisdommm</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="在梦想的道路上一路狂奔">
-<meta property="og:type" content="website">
+  <meta name="description" content="一，filter
+Array.prototype.newFilter = function(fn , context){    if( !Array.isArray(this) ){        throw Error(‘not array’);        return;    }    let res = [];    let arr = this;    for(let i = 0 ;">
+<meta property="og:type" content="article">
 <meta property="og:title" content="Wisdommm">
-<meta property="og:url" content="http://wisdommm.github.io/archives/2020/07/index.html">
+<meta property="og:url" content="http://wisdommm.github.io/2020/08/08/js常见手写系列/index.html">
 <meta property="og:site_name" content="Wisdommm">
-<meta property="og:description" content="在梦想的道路上一路狂奔">
+<meta property="og:description" content="一，filter
+Array.prototype.newFilter = function(fn , context){    if( !Array.isArray(this) ){        throw Error(‘not array’);        return;    }    let res = [];    let arr = this;    for(let i = 0 ;">
+<meta property="og:updated_time" content="2020-08-09T10:36:51.968Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Wisdommm">
-<meta name="twitter:description" content="在梦想的道路上一路狂奔">
+<meta name="twitter:description" content="一，filter
+Array.prototype.newFilter = function(fn , context){    if( !Array.isArray(this) ){        throw Error(‘not array’);        return;    }    let res = [];    let arr = this;    for(let i = 0 ;">
   
     <link rel="alternative" href="/atom.xml" title="Wisdommm" type="application/atom+xml">
   
@@ -160,70 +164,242 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-js常见手写系列" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>一，filter</p>
+<p>Array.prototype.newFilter = function(fn , context){<br>    if( !Array.isArray(this) ){<br>        throw Error(‘not array’);<br>        return;<br>    }<br>    let res = [];<br>    let arr = this;<br>    for(let i = 0 ; i &lt; arr.length ; i++){<br>        let tmp = fn.call(context , arr[i] , i);<br>        if(tmp){<br>            res.push(tmp);<br>        }<br>    }<br>    return res;<br>}</p>
+<p>二，map</p>
+<p>Array.prototype.map = function(fn){<br>    if( !Array.isArray(this) ){<br>        throw Error(‘not array’);<br>        return;<br>    }<br>    let res = [];<br>    let arr = this;<br>    for(let i = 0 ; i &lt; arr.length ; i++){<br>        let tmp = fn( arr[i] , i , arr);<br>        res.push(tmp);<br>    }<br>    return res;<br>}</p>
+<p>三，call/apply</p>
+<p>Function.prototype.newCall = function(obj , …args){<br>    obj = obj || window;<br>    bj.fn = this;<br>    let res = obj.fn(…args);<br>    delete obj.fn;<br>    return res;<br>}</p>
+<p>Function.prototype.newApply = function(obj , arr){<br>    obj = obj || window;<br>    bj.fn = this;<br>    let res = obj.fn(…arr);<br>    delete obj.fn;<br>    return res;<br>}</p>
+<p>四，new</p>
+<p>function newOption(fn,…args){<br>    if(typeof fn !== ‘function’){<br>        throw Error(‘not function’);<br>    }<br>    let obj = {};<br>    obj.<em>proto</em> = fn.prototype;<br>    let res = fn.apply(obj , args);<br>    return typeof res === ‘object’ ? res : obj;<br>}</p>
+<p>五，bind</p>
+<p>Function.prototype.newBind = function(context , …args1){<br>    let self = this;<br>    let fNOP = function(){}<br>    let fBound = function(…args2){<br>        self.apply( this instanceof fBound ? this : context , args1.concat(args2) );<br>    }<br>    fNop.prototype = this.prototype;<br>    fBound.prototype = new fNop();<br>    return fBound;<br>}</p>
+<p>六，防抖<br>// 简易版<br>function debounce(fn , wait){<br>    let timer = null;<br>    let context = this;<br>    return function(…args){<br>        clearTimeout(timer);<br>        setTimeout(()=&gt;{<br>            fn.apply(context , args);<br>        },wait)<br>    }<br>}</p>
+<p>// 完全版<br>function debounce(fn , wait , immediate){<br>    let timer;<br>    let result;<br>    let debounced = function(…args){<br>        let context = this;<br>        if(timer) clearTimeout(timer);<br>        if(immediate){<br>            let callNow = !timer;<br>            timer = setTimeout(()=&gt;{<br>                timer = null;<br>            },wait)<br>            if(callNow)result = fn.apply(context , args);<br>        }else{<br>            timer = setTimeout(()=&gt;{<br>                fn.apply(context , args);<br>            },wait);<br>        }<br>        return result;<br>    }<br>    debounced.cancel = function(){<br>        clearTimeout(timer);<br>        timer = null;<br>    }<br>}</p>
+<p>七，节流</p>
+<p>// 简易版<br>function throttle(fn , wait){<br>    let context = this;<br>    let prev = 0;<br>    let timer = null;<br>    return function(…args){<br>        clearTimeout(timer);<br>        let now = +new Date();<br>        if(now - prev &gt; wait){<br>            prev = now;<br>            fn.apply(context , args);<br>        } else {<br>            timer = setTimeout(fn, time);<br>        }<br>    }<br>}</p>
+<p>// 完全版<br>function throttle(func, wait, options) {<br>    var timeout, context, args, result;<br>    var previous = 0;<br>    if (!options) options = {};</p>
+<pre><code>var later = function() {
+    previous = options.leading === false ? 0 : new Date().getTime();
+    timeout = null;
+    func.apply(context, args);
+    if (!timeout) context = args = null;
+};
+
+var throttled = function() {
+    var now = new Date().getTime();
+    if (!previous &amp;&amp; options.leading === false) previous = now;
+    var remaining = wait - (now - previous);
+    context = this;
+    args = arguments;
+    if (remaining &lt;= 0 || remaining &gt; wait) {
+        if (timeout) {
+            clearTimeout(timeout);
+            timeout = null;
+        }
+        previous = now;
+        func.apply(context, args);
+        if (!timeout) context = args = null;
+    } else if (!timeout &amp;&amp; options.trailing !== false) {
+        timeout = setTimeout(later, remaining);
+    }
+};
+throttled.cancel = function() {
+    clearTimeout(timeout);
+    previous = 0;
+    timeout = null;
+};
+return throttled;
+</code></pre><p>}</p>
+<p>八，deepClone深拷贝</p>
+<p>function deepClone(obj){<br>    if(typeod obj !== ‘object’)return;<br>    let newObj = obj instanceof Array ? [] : {};<br>    for(let i in obj){<br>        if( obj.hasOwnProperty(i) ){<br>            // shallowClone<br>            // newObj[key] = obj[key];</p>
+<pre><code>        // deepClone
+        newObj[i] = typeof obj[i] === &apos;object&apos; ? deepClone(obj[i]) : obj[i];
+    }
+}
+return newObj;
+</code></pre><p>}</p>
+<p>九，数组flatten</p>
+<p>function flatten(arr){<br>    if( Array.isArray(arr) )return;<br>    let res = [];<br>    for(let i in arr){<br>        if(arr[i] instanceof Array){<br>            res = res.concat( flatten( arr[i] ) );<br>        }else{<br>            res.push(arr[i]);<br>        }<br>    }<br>    return res;<br>}</p>
+<p>十，实现一系列函数，能够达到如下调用：one(add(two())) 输出 3；two(add(one())) 输出 3。</p>
+<p>function add(…args1){<br>    return function(…args2){<br>        return args1.concat(args2).reduce((a,b)=&gt;a+b);<br>    }<br>}</p>
+<p>function one(fn){<br>    return fn ? fn(1) : 1;<br>}</p>
+<p>function two(fn){<br>    return fn ? fn(2) : 2;<br>}</p>
+<p>十一，instanceof</p>
+<p>function instanceof(left , right){<br>    left = left.<em>proto</em>;<br>    let prototype = right.prototype;<br>    while(true){<br>        // 核心原理是，在实例对象上不断通过<em>proto</em>在原型链上查找，看是否能找到原型的prototype<br>        if(!left)return false;<br>        if(left === prototype)return true;<br>        left = left.<em>proto</em>;<br>    }<br>}</p>
+<p>十二，实现一个EventEmitter，支持on、off、once、emit事件</p>
+<p>class EventEmitter{<br>    constructor(){<br>        this.list = {};<br>    }</p>
+<pre><code>on(name , fn){
+    if(!this.list[name])this.list[name] = [fn];
+    this.list[name].push(fn);
+}
+
+off(name , fn){
+    if( this.list[name] ){
+        let index = this.list[name].indexOf(fn);
+        index &gt; -1 ? this.list[name].splice(index , 1) : null;
+    }
+}
+
+once(name , fn){
+    let self = this;
+    this.on(name , one);
+    function one(...args){
+        fn.call(self , ...args)
+        self.off(name, one);
+    }
+}
+
+emit(name , ...args){
+    if(this.list[name]){
+        this.list[name].forEach(fn=&gt;{
+            fn.call(this , ...args);
+        });
+    }
+}
+</code></pre><p>}</p>
+<p>十三，数据双向绑定</p>
+<p>es5版，核心是对象描述符<br>    Object.defineProperty(obj, “value”, {<br>        get: function () {<br>          return value;<br>        },<br>        set: function (newValue) {<br>          value = newValue;<br>          // 当数据进行改变，触发对应的响应事件<br>          // 。。。<br>        }<br>    });</p>
+<p>es6版，核心是proxy<br>let handler = {<br>    set(target , key , value){<br>        target[key] = value;<br>        // Reflect写法<br>        Reflect.set(target, key, value)；<br>    },<br>    get(target , key){<br>        return target[key];<br>        // Reflect写法<br>        return Reflect.get(target, key);<br>    }<br>}<br>let p = new Proxy({} , handler);<br>// p.value = 123<br>// p.a</p>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>thanks !<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="http://oatasl78l.bkt.clouddn.com/alipay pic.png">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="http://oatasl78l.bkt.clouddn.com/21512357753_.pic.jpg">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
       
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2020" class="archive-year">2020</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/07/29/用户增长这几年/" class="archive-article-date">
-  	<time datetime="2020-07-29T03:45:39.225Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-07-29</time>
-</a>
-        </div>
-    	 
-        <div class="article-info info-on-right">
-          
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://wisdommm.github.io/2020/08/08/js常见手写系列/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/07/01/AI浪潮来临，拥抱智能化/" class="archive-article-date">
-  	<time datetime="2020-07-01T05:25:22.744Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-07-01</time>
-</a>
-        </div>
-    	 
+<nav id="article-nav">
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/07/01/AI浪潮来临，拥抱智能化/">AI智能化</a>
-    </h1>
+  
+    <a href="/2020/07/29/用户增长这几年/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title"></div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+
+
+
+  
+  
+  
+  <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
+<script>
+  var cloudTieConfig = {
+    url: "http://wisdommm.github.io/2020/08/08/js常见手写系列/", 
+    sourceId: "js常见手写系列",
+    productKey: "aafef0c8c11b4e329f06cb387dc8ba7e",
+    target: "cloud-tie-wrapper"
+  };
+</script>
+<script src="//img1.cache.netease.com/f2e/tie/yun/sdk/loader.js"></script>
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
   
 
-    
+  
 
 
           </div>
@@ -246,8 +422,8 @@
 	var yiliaConfig = {
 		mathjax: true,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: true,
