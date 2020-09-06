@@ -162,6 +162,101 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-ipfs" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/06/08/ipfs/">ipfs：星际文件系统</a>
+    </h1>
+  
+
+        
+        <a href="/2018/06/08/ipfs/" class="archive-article-date">
+  	<time datetime="2018-06-08T03:48:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-06-08</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h4><p>比特币（Bitcoin）是区块链中最火最大的一个项目，其原因就是因为去中心化（Centralization），或者我们可以认为，是“多中心化”，因为点对点（peer to peer）的操作，是任何一个点（peer），都成为了中心，当每点都成为了中心，也就可以粗略的认为没有了中心，因为中心太多了，也正是由于中心太多，所以这个项目不会受制与某一个人或某一个团体，不会被少部分人控制，大家的权利和义务都是一样的，保障了绝对的公平。<br>上面是比特币的特点，然后人们根据比特币的这个特点，从底层的技术中，提取出来了区块链（block chain）技术，也就造就了现在繁荣的区块链生态。</p>
+        
+          <a class="article-more-a" href="/2018/06/08/ipfs/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+  
+    <article id="post-react 16 新特性" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/05/31/react 16 新特性/">react 16 新特性 说明</a>
+    </h1>
+  
+
+        
+        <a href="/2018/05/31/react 16 新特性/" class="archive-article-date">
+  	<time datetime="2018-05-31T08:07:45.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-31</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="context"><a href="#context" class="headerlink" title="context"></a>context</h3><p>说起context，就要从原生的react数据流说起。</p>
+<p>在以前，react的数据传递，都是通过父组件的prop，向子组件传递，当组件嵌套层级过多时，就需要一层一层的将prop传递下去，当组件嵌套的层级足够多时。。。那我只能说，代码给你，你来吧。</p>
+<p>这里就需要说一下context，在之前，官方是没有context api的，并且也一直不推荐使用，就像redux一样，如果你不知道该不该用，或者不熟悉该不该用，那就不要用。</p>
+<p>说了这么久，我们先来介绍下context是个什么东西吧，刚才说到，react的数据传递，都是通过父组件的prop，向子组件传递，当组件嵌套层级过多时，就需要一层一层的将prop传递下去，当组件嵌套的层级足够多时，就很蛋疼，所以就要解决啊，解决的思想是，将所有的数据，变成一个store，并且将这个store的位置提到最高，高于任何组件的，所以这个context，也就是指的“上下文环境”，让一个树状组件上所有组件都能访问同一个共同的对象</p>
+<p>具体如下代码：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 我们假设我们开发的组件叫App，为了给这个App加一个全局的一个数据仓库，在这外面再包一层Provider就好了，然后把你想要传递的数据，当作Provider的属性，这样就可以使数据变成一个全局的数据了。</span></div><div class="line">&lt;Provider store=&#123;store&#125;&gt;</div><div class="line">	&lt;App /&gt;</div><div class="line"> &lt;/Provider&gt;</div><div class="line"></div><div class="line"><span class="comment">// Provider.js </span></div><div class="line"><span class="comment">// 而Provider，里面就是直接返回他的子组件就好了，并且还有一个函数来获取当前的store</span></div><div class="line">getChildContext()&#123;</div><div class="line">	<span class="keyword">return</span> &#123;</div><div class="line">    	store: <span class="keyword">this</span>.props.store</div><div class="line">    &#125;;</div><div class="line">&#125;</div><div class="line">render() &#123;</div><div class="line">	<span class="keyword">return</span> <span class="keyword">this</span>.props.children;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// store.js</span></div><div class="line"><span class="comment">// 然后来看看这个store，这里的createStore是直接引用自redux，而这里的reducer，就是redux里面的reducer，需要自己接受state，action，然后根据你自己的业务需要，判断action.type，来返回新的state，且务必遵守纯函数的原则。</span></div><div class="line"><span class="keyword">const</span> initValues = &#123;</div><div class="line">    <span class="comment">// 初始化state数据</span></div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="keyword">const</span> store = createStore(reducer, initValues);</div></pre></td></tr></table></figure>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+  
     <article id="post-2017总结" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -527,98 +622,6 @@
       
         <p>翻译：<a href="https://developers.google.com/web/fundamentals/performance/optimizing-content-efficiency/http-caching?hl=zh-cn#_2" target="_blank" rel="external">https://developers.google.com/web/fundamentals/performance/optimizing-content-efficiency/http-caching?hl=zh-cn#_2</a></p>
 
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-  
-    <article id="post-js事件机制" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/03/31/js事件机制/">javascript事件机制</a>
-    </h1>
-  
-
-        
-        <a href="/2017/03/31/js事件机制/" class="archive-article-date">
-  	<time datetime="2017-03-31T10:18:12.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-03-31</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="js事件基础"><a href="#js事件基础" class="headerlink" title="js事件基础"></a>js事件基础</h3><p>先简单介绍一下js的事件吧，其就是你通过一些工具（鼠标，键盘，触摸板，手指等）在网站进行的一系列操作，滚动，点击，触摸，移动等，我们在代码中先定义了这些事件，然后当对应的事件发生的时候，我们所定义的事件就会被自动触发，执行；这就是js的事件，可是这内部的核心机制是什么呢，占个坑，以后有心情了再来补上。</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-  
-    <article id="post-fastClick" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/03/23/fastClick/">fastClick 基本解读</a>
-    </h1>
-  
-
-        
-        <a href="/2017/03/23/fastClick/" class="archive-article-date">
-  	<time datetime="2017-03-23T06:57:59.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-03-23</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="fast-click诞生背景与使用"><a href="#fast-click诞生背景与使用" class="headerlink" title="fast click诞生背景与使用"></a>fast click诞生背景与使用</h3><p>做过移动端前端的同学，应该都知道“点击延迟”，意思就是原生js的click事件在移动浏览器上会有300毫秒的延迟，这样就会让用户觉得卡顿，影响用户体验。为什么会有延迟呢？因为移动浏览器都是支持双击的，比如双击缩放或双击滚动，所以当用户第一次点击屏幕后，浏览器并不知道你是单击还是双击，因此所有的浏览器都效仿了Safari的做法，那就是等待300毫秒。</p>
-<p>现在移动端大行其道，已经占据了主流。最显著的一个例子就是，天猫双十一的时候，超过百分之八十的订单都来自于移动端，这也就说明了移动端现在的火热程度。在这个前提下，你移动端的每个点击事件都有300毫秒的延迟，那是绝对不允许的。</p>
-<p>后面也出现了很多的解决办法，比如Zepto的tab事件(会引发击穿tab的bug)，fastClick.js等等，所以现在我就准备来好好讲解一下fastClick。</p>
-        
-          <a class="article-more-a" href="/2017/03/23/fastClick/#more">more >></a>
-        
       
 
       

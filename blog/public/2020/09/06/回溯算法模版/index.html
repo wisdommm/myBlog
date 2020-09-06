@@ -6,17 +6,18 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://wisdommm.github.io">
-  <title>Archives | Wisdommm</title>
+  <title>遍历&amp;&amp;回溯算法模板 | Wisdommm</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="在梦想的道路上一路狂奔">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Wisdommm">
-<meta property="og:url" content="http://wisdommm.github.io/archives/page/4/index.html">
+  <meta name="description" content="自从大二因为数学建模比赛的原因，在杭电oj平台上ac了一段时间后，当大三开始前端实习生的工作后，就基本再也没刷过算法题了，并且之前是带着数学建模的强烈目的来刷算法的，所以其实并没有感受到多少的乐趣，更多的是功利性。谁又层想到，毕业4年后的我，又开始慢慢地刷起了leetcode，并且还越刷越有意思，哈哈哈，最近刷了不少递归&amp;amp;&amp;amp;回溯相关的题目，所以我觉得是需要有一些总结和沉淀的，这样才">
+<meta property="og:type" content="article">
+<meta property="og:title" content="遍历&&回溯算法模板">
+<meta property="og:url" content="http://wisdommm.github.io/2020/09/06/回溯算法模版/index.html">
 <meta property="og:site_name" content="Wisdommm">
-<meta property="og:description" content="在梦想的道路上一路狂奔">
+<meta property="og:description" content="自从大二因为数学建模比赛的原因，在杭电oj平台上ac了一段时间后，当大三开始前端实习生的工作后，就基本再也没刷过算法题了，并且之前是带着数学建模的强烈目的来刷算法的，所以其实并没有感受到多少的乐趣，更多的是功利性。谁又层想到，毕业4年后的我，又开始慢慢地刷起了leetcode，并且还越刷越有意思，哈哈哈，最近刷了不少递归&amp;amp;&amp;amp;回溯相关的题目，所以我觉得是需要有一些总结和沉淀的，这样才">
+<meta property="og:updated_time" content="2020-09-06T07:41:55.890Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Wisdommm">
-<meta name="twitter:description" content="在梦想的道路上一路狂奔">
+<meta name="twitter:title" content="遍历&&回溯算法模板">
+<meta name="twitter:description" content="自从大二因为数学建模比赛的原因，在杭电oj平台上ac了一段时间后，当大三开始前端实习生的工作后，就基本再也没刷过算法题了，并且之前是带着数学建模的强烈目的来刷算法的，所以其实并没有感受到多少的乐趣，更多的是功利性。谁又层想到，毕业4年后的我，又开始慢慢地刷起了leetcode，并且还越刷越有意思，哈哈哈，最近刷了不少递归&amp;amp;&amp;amp;回溯相关的题目，所以我觉得是需要有一些总结和沉淀的，这样才">
   
     <link rel="alternative" href="/atom.xml" title="Wisdommm" type="application/atom+xml">
   
@@ -160,187 +161,160 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-回溯算法模版" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      遍历&amp;&amp;回溯算法模板
+    </h1>
+  
+
+        
+        <a href="/2020/09/06/回溯算法模版/" class="archive-article-date">
+  	<time datetime="2020-09-06T07:23:29.093Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-09-06</time>
+</a>
+        
+      </header>
     
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>自从大二因为数学建模比赛的原因，在杭电oj平台上ac了一段时间后，当大三开始前端实习生的工作后，就基本再也没刷过算法题了，并且之前是带着数学建模的强烈目的来刷算法的，所以其实并没有感受到多少的乐趣，更多的是功利性。<br>谁又层想到，毕业4年后的我，又开始慢慢地刷起了leetcode，并且还越刷越有意思，哈哈哈，最近刷了不少递归&amp;&amp;回溯相关的题目，所以我觉得是需要有一些总结和沉淀的，这样才能真正地成为自己的能力，做到知行合一，否则就是知道做不到，等于不知道，所以写这篇文章，想把回溯算法整理一下，并且抽象出一套算法模版来，简化其内部的复杂逻辑，下面的题都是来自leetcode，可能会有其他很多解法，但是我写的这些解法，肯定都是十分符合这个算法模版的，这样后面遇到了类似题，就可以直接套模版了。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div><div class="line">147</div><div class="line">148</div><div class="line">149</div><div class="line">150</div><div class="line">151</div><div class="line">152</div><div class="line">153</div><div class="line">154</div><div class="line">155</div><div class="line">156</div><div class="line">157</div><div class="line">158</div><div class="line">159</div><div class="line">160</div><div class="line">161</div><div class="line">162</div><div class="line">163</div><div class="line">164</div><div class="line">165</div><div class="line">166</div><div class="line">167</div><div class="line">168</div><div class="line">169</div><div class="line">170</div><div class="line">171</div><div class="line">172</div><div class="line">173</div><div class="line">174</div><div class="line">175</div><div class="line">176</div><div class="line">177</div><div class="line">178</div><div class="line">179</div><div class="line">180</div><div class="line">181</div><div class="line">182</div><div class="line">183</div><div class="line">184</div><div class="line">185</div><div class="line">186</div><div class="line">187</div><div class="line">188</div><div class="line">189</div><div class="line">190</div><div class="line">191</div><div class="line">192</div><div class="line">193</div><div class="line">194</div><div class="line">195</div><div class="line">196</div><div class="line">197</div><div class="line">198</div><div class="line">199</div><div class="line">200</div><div class="line">201</div><div class="line">202</div><div class="line">203</div><div class="line">204</div><div class="line">205</div><div class="line">206</div><div class="line">207</div><div class="line">208</div><div class="line">209</div><div class="line">210</div><div class="line">211</div><div class="line">212</div><div class="line">213</div><div class="line">214</div><div class="line">215</div><div class="line">216</div><div class="line">217</div><div class="line">218</div><div class="line">219</div><div class="line">220</div><div class="line">221</div><div class="line">222</div><div class="line">223</div><div class="line">224</div><div class="line">225</div><div class="line">226</div><div class="line">227</div><div class="line">228</div><div class="line">229</div><div class="line">230</div><div class="line">231</div><div class="line">232</div><div class="line">233</div><div class="line">234</div><div class="line">235</div><div class="line">236</div><div class="line">237</div><div class="line">238</div><div class="line">239</div><div class="line">240</div><div class="line">241</div><div class="line">242</div><div class="line">243</div><div class="line">244</div><div class="line">245</div><div class="line">246</div><div class="line">247</div><div class="line">248</div><div class="line">249</div><div class="line">250</div><div class="line">251</div><div class="line">252</div><div class="line">253</div><div class="line">254</div><div class="line">255</div><div class="line">256</div><div class="line">257</div><div class="line">258</div><div class="line">259</div><div class="line">260</div><div class="line">261</div><div class="line">262</div><div class="line">263</div><div class="line">264</div><div class="line">265</div><div class="line">266</div><div class="line">267</div><div class="line">268</div><div class="line">269</div><div class="line">270</div><div class="line">271</div><div class="line">272</div><div class="line">273</div><div class="line">274</div><div class="line">275</div><div class="line">276</div><div class="line">277</div><div class="line">278</div><div class="line">279</div><div class="line">280</div><div class="line">281</div><div class="line">282</div><div class="line">283</div><div class="line">284</div><div class="line">285</div></pre></td><td class="code"><pre><div class="line">leetcode 39</div><div class="line">输入: candidates = [2,3,6,7], target = 7,</div><div class="line">说明</div><div class="line">所有数字（包括 target）都是正整数。</div><div class="line">解集不能包含重复的组合。 </div><div class="line">输出:</div><div class="line">[</div><div class="line">  [7],</div><div class="line">  [2,2,3]</div><div class="line">]</div><div class="line"></div><div class="line">var combinationSum = function (candidates, target) &#123;</div><div class="line">    let res = [];</div><div class="line">    let n = candidates.length;</div><div class="line">    candidates.sort((a,b)=&gt;a-b);</div><div class="line">    check(target , [] , 0);</div><div class="line">    function check(now , arr , index)&#123;</div><div class="line">        if(now === 0)&#123;</div><div class="line">            res.push([...arr]);</div><div class="line">            return;</div><div class="line">        &#125;</div><div class="line">        </div><div class="line">        if(now &lt; candidates[0])return;</div><div class="line">        </div><div class="line">        for(let i = index ; i &lt; n ; i++)&#123;</div><div class="line"></div><div class="line">            arr.push(candidates[i]);</div><div class="line"></div><div class="line">            check(now - candidates[i] , arr  , i);</div><div class="line"></div><div class="line">            arr.pop();</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    return res;</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line">leetcode 40</div><div class="line">输入: candidates = [10,1,2,7,6,1,5], target = 8,</div><div class="line">输出:</div><div class="line">[</div><div class="line">  [1, 7],</div><div class="line">  [1, 2, 5],</div><div class="line">  [2, 6],</div><div class="line">  [1, 1, 6]</div><div class="line">]</div><div class="line"></div><div class="line">var combinationSum2 = function(candidates, target) &#123;</div><div class="line">    candidates.sort((a,b)=&gt;a-b);</div><div class="line">    let n = candidates.length;</div><div class="line">    let res = [];</div><div class="line">    check(target , [] , 0);</div><div class="line">    function check(now , path , index)&#123;</div><div class="line">        if(now === 0)&#123;</div><div class="line">            res.push([...path]);</div><div class="line">            return;</div><div class="line">        &#125;</div><div class="line">        </div><div class="line">        if(now &lt; candidates[index])return;</div><div class="line"></div><div class="line">        for(let i = index ; i &lt; n ; i++)&#123;</div><div class="line">            // 剪枝</div><div class="line">            if( i &gt; index &amp;&amp; candidates[i-1] === candidates[i] )continue;</div><div class="line"></div><div class="line">            path.push(candidates[i]);</div><div class="line">            check(now - candidates[i] , path , i+1);</div><div class="line">            path.pop();</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    return res;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"></div><div class="line">leetcode 46</div><div class="line">输入: [1,2,3]</div><div class="line">输出:</div><div class="line">[</div><div class="line">  [1,2,3],</div><div class="line">  [1,3,2],</div><div class="line">  [2,1,3],</div><div class="line">  [2,3,1],</div><div class="line">  [3,1,2],</div><div class="line">  [3,2,1]</div><div class="line">]</div><div class="line"></div><div class="line">// 基本回溯模板，两种剪枝方案</div><div class="line">function permute(arr)&#123;</div><div class="line">    // 边界&amp;&amp;特殊情况判断</div><div class="line">    if(arr.length &lt; 2)return arr;</div><div class="line">    // 初始化最终输出结果</div><div class="line">    let res = [];</div><div class="line">    // 回溯初始化状态</div><div class="line">    check([]);</div><div class="line">    // 回溯函数</div><div class="line">    function check(now)&#123;</div><div class="line">        // 一条链路走到尽头时，存储本次的最终结果，且return，开始回溯到上一个状态</div><div class="line">        if(arr.length === now.length)&#123;</div><div class="line">            // 存储结果的时候，引用对象要注意清除引用关系</div><div class="line">            res.push([...now]);</div><div class="line">            return;</div><div class="line">        &#125;</div><div class="line">        // 若还有分支可以走，则继续遍历走下去</div><div class="line">        for(let i = 0 ; i &lt; arr.length ; i++)&#123;</div><div class="line">            // 若当前已包含此因素，则跳过</div><div class="line">            if( now.includes(arr[i]) ) continue;</div><div class="line">            // 若当前未包含此因素，加进当前结果中</div><div class="line">            now.push(arr[i]);</div><div class="line">            // 更新当前结果，走到下一个分之</div><div class="line">            check(now);</div><div class="line">            // 上一个链路走完，return后到这里，去除本次循环更新的数据，然后继续i++后的for遍历</div><div class="line">            now.pop();</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    // 返回输出结果</div><div class="line">    return res;</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line">leetcode 47（一）</div><div class="line">输入: [1,1,2]</div><div class="line">输出:</div><div class="line">[</div><div class="line">  [1, 1, 2],</div><div class="line">  [1, 2, 1],</div><div class="line">  [1, 1, 2],</div><div class="line">  [1, 2, 1],</div><div class="line">  [2, 1, 1],</div><div class="line">  [2, 1, 1]</div><div class="line">]</div><div class="line"></div><div class="line">function permute(arr)&#123;</div><div class="line">    if(arr.length &lt; 2)return arr;</div><div class="line">    let res = [];</div><div class="line">    let obj = &#123;&#125;;</div><div class="line">    check([]);</div><div class="line">    function check(now)&#123;</div><div class="line">        debugger</div><div class="line">        if(arr.length === now.length)&#123;</div><div class="line">            res.push([...now]);</div><div class="line">            return;</div><div class="line">        &#125;</div><div class="line">        for(let i = 0 ; i &lt; arr.length ; i++)&#123;</div><div class="line">            if( obj[ i ] ) continue;</div><div class="line">            obj[ i ] = 1;</div><div class="line">            now.push(arr[i]);</div><div class="line">            check(now);</div><div class="line">            now.pop();</div><div class="line">            obj[ i ] = 0;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    return res;</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line">leetcode 47（二）</div><div class="line">输入: [1,1,2]</div><div class="line">输出:</div><div class="line">[</div><div class="line">  [1, 1, 2],</div><div class="line">  [1, 2, 1],</div><div class="line">  [2, 1, 1]</div><div class="line">]</div><div class="line"></div><div class="line">function permute(arr)&#123;</div><div class="line">    if(arr.length &lt; 2)return arr;</div><div class="line">    let res = [];</div><div class="line">    // 先排序，把大小相同的放一起，为下面 i &gt; 0 &amp;&amp; !obj[i-1] &amp;&amp; arr[i-1] === arr[i] 做铺垫</div><div class="line">    arr = arr.sort((a,b) =&gt; &#123;return a - b&#125;);</div><div class="line">    let obj = &#123;&#125;;</div><div class="line">    check([]);</div><div class="line">    function check(now)&#123;</div><div class="line">        if(arr.length === now.length)&#123;</div><div class="line">            res.push([...now]);</div><div class="line">            return;</div><div class="line">        &#125;</div><div class="line">        for(let i = 0 ; i &lt; arr.length ; i++)&#123;</div><div class="line">            // [1,1,2]可以视为三次大的遍历，每一次大遍历完后hash所有值都会为false,所以就有了!hash[i-1] &amp;&amp; arr[i-1] == arr[i]，然后再加上数组下标条件i &gt; 0，合起来就如题所示</div><div class="line">            if( obj[ i ] || i &gt; 0 &amp;&amp; !obj[i-1] &amp;&amp; arr[i-1] === arr[i] ) continue;</div><div class="line">            obj[ i ] = 1;</div><div class="line">            now.push(arr[i]);</div><div class="line">            check(now);</div><div class="line">            now.pop();</div><div class="line">            obj[ i ] = 0;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    return res;</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line">leetcode 77</div><div class="line">给定两个整数 n 和 k，返回 1 ... n 中所有可能的 k 个数的组合。</div><div class="line">输入: n = 4, k = 3</div><div class="line">输出:</div><div class="line">[</div><div class="line">  [1,2,3],</div><div class="line">  [2,3,4]</div><div class="line">]</div><div class="line"></div><div class="line">var combine = function(n, k) &#123;</div><div class="line">    let res = [];</div><div class="line">    check([] , 0);</div><div class="line">    function check(now , index)&#123;</div><div class="line">        let len = now.length;</div><div class="line">        if(len === k)&#123;</div><div class="line">            res.push([...now]);</div><div class="line">            return;</div><div class="line">        &#125;</div><div class="line">        // 重点！！！</div><div class="line">        // n = 6 , k = 4时，只需要遍历到3（1 =&gt; 4 , 2 =&gt; 5 , 3 =&gt; 6）就可以结束了</div><div class="line">        // 所以结束条件 n 需要回退 ( k - now.length ) + 1</div><div class="line">        for(let i = index + 1 ; i &lt;= n - ( k - len ) + 1 ; i++)&#123;</div><div class="line">            now.push(i);</div><div class="line">            check(now , i);</div><div class="line">            now.pop();</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    return res;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"></div><div class="line">leetcode 78</div><div class="line">数组所有可能的子集</div><div class="line">输入: nums = [1,2,3]</div><div class="line">输出:</div><div class="line">[</div><div class="line">  [3],</div><div class="line">  [1],</div><div class="line">  [2],</div><div class="line">  [1,3],</div><div class="line">  [2,3],</div><div class="line">  [1,2],</div><div class="line">  [],</div><div class="line">  [1,2,3]</div><div class="line">]</div><div class="line"></div><div class="line">var subsets = function(nums) &#123;</div><div class="line">    </div><div class="line">    let res = [];</div><div class="line"></div><div class="line">    result([] , nums);</div><div class="line">    </div><div class="line">    function result(path , arr)&#123;</div><div class="line">        res.push(path);</div><div class="line">        for(let i = 0 ; i &lt; arr.length ; i++)&#123;</div><div class="line">            path.push(arr[i]);</div><div class="line">            let tmp = arr.slice();</div><div class="line">            tmp.splice(0 , i+1);</div><div class="line">            result([...path] , tmp);</div><div class="line">            path.pop();</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    return res;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"></div><div class="line">leetcode 90</div><div class="line">返回该数组所有可能的子集，解集不能包含重复的子集。</div><div class="line">输入: nums = [1,2,2]</div><div class="line">输出:</div><div class="line">[</div><div class="line">  [2],</div><div class="line">  [1],</div><div class="line">  [],</div><div class="line">  [2,2],</div><div class="line">  [1,2],</div><div class="line">  [1,2,2]</div><div class="line">]</div><div class="line"></div><div class="line">var subsetsWithDup = function(nums) &#123;</div><div class="line">    nums.sort((a,b)=&gt;a-b);</div><div class="line">    let res = [];</div><div class="line">    result();</div><div class="line">    function result(path = [] , index = 0)&#123;</div><div class="line">        res.push(path);</div><div class="line">        for(let i = index ; i &lt; nums.length ; i++)&#123;</div><div class="line">            if(i &gt; index &amp;&amp; nums[i] === nums[i-1])continue;</div><div class="line">            path.push(nums[i]);</div><div class="line">            result([...path] , i+1);</div><div class="line">            path.pop();</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    return res;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>thanks !<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="http://oatasl78l.bkt.clouddn.com/alipay pic.png">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="http://oatasl78l.bkt.clouddn.com/21512357753_.pic.jpg">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
       
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2017" class="archive-year">2017</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/01/24/react es5还是es6 ？/" class="archive-article-date">
-  	<time datetime="2017-01-24T09:07:35.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-01-24</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/01/24/react es5还是es6 ？/">react, es5 or es6 ?</a>
-    </h1>
-  
+      
 
-        <div class="article-info info-on-right">
-          
-          
+      
 
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://wisdommm.github.io/2020/09/06/回溯算法模版/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/01/24/redux源码解读/" class="archive-article-date">
-  	<time datetime="2017-01-24T09:06:35.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-01-24</time>
-</a>
-        </div>
-    	 
+<nav id="article-nav">
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/01/24/redux源码解读/">redux源码解读</a>
-    </h1>
+  
+    <a href="/2020/08/28/Symbol Proxy Reflect/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Symbol Proxy Reflect解读</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+
+
+
+  
+  
+  
+  <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
+<script>
+  var cloudTieConfig = {
+    url: "http://wisdommm.github.io/2020/09/06/回溯算法模版/", 
+    sourceId: "回溯算法模版",
+    productKey: "aafef0c8c11b4e329f06cb387dc8ba7e",
+    target: "cloud-tie-wrapper"
+  };
+</script>
+<script src="//img1.cache.netease.com/f2e/tie/yun/sdk/loader.js"></script>
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/01/24/redux example(1)/" class="archive-article-date">
-  	<time datetime="2017-01-24T09:06:24.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-01-24</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/01/24/redux example(1)/">redux example(1)</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/01/24/vue todo/" class="archive-article-date">
-  	<time datetime="2017-01-24T09:06:12.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-01-24</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/01/24/vue todo/">vue todo示例</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/01/24/vue.js 组件入门（一）/" class="archive-article-date">
-  	<time datetime="2017-01-24T09:06:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-01-24</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/01/24/vue.js 组件入门（一）/">vue.js 组件快速入门（一）</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/01/24/D2总结（1）/" class="archive-article-date">
-  	<time datetime="2017-01-24T09:05:23.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-01-24</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/01/24/D2总结（1）/">D2总结（Fusion Design）</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
-    
-    <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/archives/page/3/">&laquo; Prev</a><a class="page-number" href="/archives/">1</a><a class="page-number" href="/archives/page/2/">2</a><a class="page-number" href="/archives/page/3/">3</a><span class="page-number current">4</span>
-    </nav>
   
 
 
@@ -364,8 +338,8 @@
 	var yiliaConfig = {
 		mathjax: true,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: true,
